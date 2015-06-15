@@ -1,10 +1,10 @@
 <?php
-require_once 'Conexion.php';
+require_once 'conexion.php';
 class Administrador{
 
    private static $instancia;
    private $con;
-   private $idAdministrado;
+   private $idAdministrador;
    private $nombre;
    private $a_paterno;
    private $a_materno;
@@ -18,7 +18,7 @@ class Administrador{
    }
 
    public function set_administrador($idAdministrador, $nombre, $a_paterno, $a_materno, $password, $idPrivilegios){
-      $this->idAdministrado = $idAdministrador;
+      $this->idAdministrador = $idAdministrador;
       $this->nombre = $nombre;
       $this->a_paterno = $a_paterno;
       $this->a_materno = $a_materno;
@@ -31,8 +31,7 @@ class Administrador{
          $sql ="SELECT * FROM administrador WHERE idadministrador =? and password = ?";
          $consulta = $this->con->prepare($sql);
          $consulta->bindParam(1 , $idAdministrador);
-         $md5 = md5($password);
-         $consulta->bindParam(2 , $md5);
+         $consulta->bindParam(2 , $password);
          $consulta->execute();
          $this->con = null;
 
@@ -74,8 +73,9 @@ class Administrador{
       }  
    }
 
-   public function add_administrador(){
+   public function update_administrador(){
       try {
+         
          if($this->idAdministrador == null){
             $sql = "INSERT INTO administrador(idadministrador, nombre, a_paterno, a_materno, password, idprivilegios) VALUES (NULL, ?, ?, ?, ?, ?)";
          }else{
@@ -91,10 +91,11 @@ class Administrador{
 
          if($this->idAdministrador != null){
             $consulta->bindParam(6, $this->idAdministrador);
-         }
-
+         } 
+         
          if($consulta->execute()){
             return TRUE;
+            echo $sql;
          }  else {
             return False;
          }
@@ -104,6 +105,32 @@ class Administrador{
          print "Error:". $e->getMessge();
       }
    }
+   
+   public function add_administrador(){
+      try {
+            $sql = "INSERT INTO administrador(idadministrador, nombre, a_paterno, a_materno, password, idprivilegios) VALUES (?, ?, ?, ?, ?, ?)";
+         
+         $consulta = $this->con->prepare($sql);
+         $consulta->bindParam(1, $this->idAdministrador);
+         $consulta->bindParam(2, $this->nombre);
+         $consulta->bindParam(3, $this->a_paterno);
+         $consulta->bindParam(4, $this->a_materno);
+         $consulta->bindParam(5, $this->password);
+         $consulta->bindParam(6, $this->idPrivilegios);
+         
+         if($consulta->execute()){
+            return TRUE;
+            echo $sql;
+         }  else {
+            return False;
+         }
+         $this->con = null;
+
+      } catch (PDOExeption $e) {
+         print "Error:". $e->getMessge();
+      }
+   }
+
 
    public function del_administrador($idAdministrador) {
       try {
@@ -120,4 +147,46 @@ class Administrador{
          print "Error:". $e->getMessge();
       }
    }
+   
+   public function max_administrador(){
+      $sql = "SELECT MAX(idadministrador) AS id FROM administrador";
+      $consulta = $this->con->prepare($sql);
+      $consulta->execute();
+      return $consulta;
+   }
+   
+    /* ------------------ ADD NO FUNCIONAL ----------------
+    
+    public function add_administrador(){
+      try {
+         
+         if($this->idAdministrador == null){
+            $sql = "INSERT INTO administrador(idadministrador, nombre, a_paterno, a_materno, password, idprivilegios) VALUES (NULL, ?, ?, ?, ?, ?)";
+         }else{
+            $sql = "UPDATE administrador SET nombre=? ,a_paterno=? ,a_materno=? ,password=? ,idprivilegios=?  WHERE idadministrador = ?";
+         }
+
+         $consulta = $this->con->prepare($sql);
+         $consulta->bindParam(1, $this->nombre);
+         $consulta->bindParam(2, $this->a_paterno);
+         $consulta->bindParam(3, $this->a_materno);
+         $consulta->bindParam(4, $this->password);
+         $consulta->bindParam(5, $this->idPrivilegios);         
+
+         if($this->idAdministrador != null){
+            $consulta->bindParam(6, $this->idAdministrador);
+         } 
+         
+         if($consulta->execute()){
+            return TRUE;
+            echo $sql;
+         }  else {
+            return False;
+         }
+         $this->con = null;
+
+      } catch (PDOExeption $e) {
+         print "Error:". $e->getMessge();
+      }
+   }*/
 }

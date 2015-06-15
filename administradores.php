@@ -1,3 +1,18 @@
+<?php
+
+//  -------- Inicio de sesión --------
+session_start();
+if(!isset($_SESSION['login'])){
+   header("Location: login.php");
+}
+
+//  -------- Get administradores --------
+include_once 'Administrador.php';
+$admin = new Administrador();
+$datos = $admin->get_administrador(null);
+
+
+?>
 <!DOCTYPE html>
 <html lang="es">
    <head>
@@ -14,9 +29,10 @@
       <link href="css/style.css" rel="stylesheet">
       <link href="css/pages/dashboard.css" rel="stylesheet">
 
+
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
-      
+
    </head> 
    <body>
 
@@ -53,7 +69,7 @@ MENU SECUNDARIO
       <!-- /navbar -->
 
       <!-- ==================================================
-                     MENU PRINCIPAL 
+MENU PRINCIPAL 
 =================================================== --> 
       <div class="subnavbar">
          <div class="subnavbar-inner">
@@ -75,7 +91,7 @@ MENU SECUNDARIO
       <!-- /subnavbar -->
 
       <!-- ==================================================
-                  CONTENIDO 
+CONTENIDO 
 ==================================================== -->
 
       <div class="main">
@@ -87,84 +103,160 @@ MENU SECUNDARIO
                   <div class="span12">
                      <div class="widget">
                         <div class="widget-header"> <i class="icon-user"></i>
-                           <h3>Alumno</h3>
+                           <h3>Administradores</h3>
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
                            <div class="shortcuts"> 
-                              <a href="frm_alumno.php" class="shortcut">
-                                 <i class="shortcut-icon icon-plus"></i><span class="shortcut-label">Nuevo Alumno</span> </a>
-                              <a href="javascript:;" class="shortcut">
-                                 <i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Editar Alumno</span> </a>
-                              <a href="javascript:;" class="shortcut">
-                                 <i class="shortcut-icon icon-trash"></i> <span class="shortcut-label">Eliminar Alumno</span></a>
-                              <a href="javascript:;" class="shortcut">
-                                 <i class="shortcut-icon icon-search"></i> <span class="shortcut-label">Buscar Alumno</span></a>                              </div>
+                              <a href="frm_administrador.php" class="shortcut">
+                                 <i class="shortcut-icon icon-plus"></i><span class="shortcut-label">Nuevo Administrador</span> </a>
+                              <a href="javascript:;" class="shortcut" data-toggle="modal" data-target="#matricula_editar">
+                                 <i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Editar Administrador</span> </a>
+                              <a href="javascript:;" class="shortcut" data-toggle="modal" data-target="#matricula_eliminar">
+                                 <i class="shortcut-icon icon-trash" ></i> <span class="shortcut-label">Eliminar Administrador</span></a>
+                              <a href="javascript:;" class="shortcut" data-toggle="modal" data-target="#matricula_ver">
+                                 <i class="shortcut-icon icon-search"></i> <span class="shortcut-label">Buscar Administrador</span></a>
+                           </div>
                            <!-- /shortcuts --> 
                         </div>
                         <!-- /widget-content --> 
                      </div>
                      <!-- /span12 --> 
+                  </div>                                    
+                  
+                  <!-- ============== MODAL EDITAR ADMINISTRADORES ============== -->
+                  <div class="modal fade" id="matricula_editar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
+                              <h4 class="modal-title" id="myModalLabel">Editar Administrador</h4>
+                           </div>
+                           <form action="frm_administrador.php" method="get" >
+                           <div class="modal-body">                             
+                                <label>Inserte la matricula del Administrador</label>
+                                <input type="text" name="idadministrador">  
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Editar</button>
+                           </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  
+                  <!-- ============== MODAL ELIMINAR ADMINISTRADORES ============== -->
+                  <div class="modal fade" id="matricula_eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
+                              <h4 class="modal-title" id="myModalLabel">Eliminar Administrador</h4>
+                           </div>
+                           <form action="del_administradro.php" method="get" >
+                           <div class="modal-body">                             
+                                <label>Inserte la matricula del Administrador</label>
+                                <input type="text" name="idadministrador">  
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Eliminar</button>
+                           </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <!-- ============== MODAL VER MAS ADMINISTRADORES ============== -->
+                  <div class="modal fade" id="matricula_ver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
+                              <h4 class="modal-title" id="myModalLabel">Buscar Administrador</h4>
+                           </div>
+                           <form action="frm_administrador.php" method="get" >
+                           <div class="modal-body">                             
+                                <label>Inserte la matricula del Administrador</label>
+                                <input type="text" name="idadministrador">
+                                <input type="hidden" name="ver" value="ver">
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Buscar</button>
+                           </div>
+                           </form>
+                        </div>
+                     </div>
                   </div>
 
-
+                  <!-- ============== TABLA DE ADMINISTRADORES ============== -->               
                   <div class="span12">
                      <!-- /widget -->                     
                      <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-th-list"></i>
-                           <h3>Lista de Alumnos</h3>
+                           <h3>Lista de Administradores</h3>
+
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
-                           <table class="table table-striped table-bordered get_table">
+                           <table class="table table-striped table-bordered get_table"  id="">
                               <thead>
                                  <tr>
                                     <th> Matricula </th>
                                     <th> Nombre </th>
-                                    <th> Ciclo </th>
-                                    <th> Grado </th>
-                                    <th> Escolaridad </th>
-                                    <th> Beca</th>
-                                    <th class="td-actions"> </th>
+                                    <th> Password </th>
+                                    <th> Privilegios </th>
+                                    <th class="td-actions">Acciones </th>
                                  </tr>
                               </thead>
                               <tbody>
+                                 <?php
+while ($row = $datos->fetchObject()){
+                                 ?>
                                  <tr>
-                                    <td> 12002039</td>
-                                    <td> José Alejandro Téllez Aguilera</td>
-                                    <td> 9</td>
-                                    <td> A</td>
-                                    <td> Ingenieria</td>
-                                    <td> Manutencion</td>
+                                    <td><?php echo $row->idadministrador;?></td>
+                                    <td><?php echo $row->nombre," ", $row->a_paterno," ", $row->a_materno;?></td>
+                                    <td><?php echo $row->password;?></td>
+                                    <td><?php echo $row->idprivilegios;?></td>
                                     <td class="td-actions">
-                                       <a href="javascript:;" class="btn btn-small btn-invert">
-                                          <i class="btn-icon-only icon-zoom-in"> </i></a>
-                                       <a href="javascript:;" class="btn btn-small btn-invert">
-                                          <i class="btn-icon-only icon-pencil"> </i></a>
-                                       <a href="javascript:;" class="btn btn-small btn-invert">
-                                          <i class="btn-icon-only icon-trash"> </i></a>
-                                    </td>
+                                       <!-- Ver mas -->
+                                       <a class="btn btn-small btn-invert" href="frm_administrador.php?idadministrador=<?php echo $row->idadministrador;?>&ver=ver" title="Ver mas"><i class="btn-icon-only icon-zoom-in"> </i></a>
+                                       <!-- Editar -->
+                                       <a class="btn btn-small btn-invert" href="frm_administrador.php?idadministrador=<?php echo $row->idadministrador;?>" title="Editar"><i class="btn-icon-only icon-pencil"> </i></a>
+                                       <!-- Eliminar -->
+                                       <a class="btn btn-small btn-invert" href="del_administradro.php?idadministrador=<?php echo $row->idadministrador;?>" title="eliminar"><i class="btn-icon-only icon-trash"> </i></a>
                                  </tr>
+                                 <?php
+}
+                                 ?>
+
+
+
                               </tbody>
                            </table>
-                           <div class="row">
-                              <div>
-                                 <nav>
-                              <ul class="pagination">
-                                 <li><a href="">&laquo;</a></li>
-                                 <li><a href="">1</a></li>
-                                 <li><a href="">2</a></li>
-                                 <li><a href="">3</a></li>
-                                 <li><a href="">4</a></li>
-                                 <li><a href="">5</a></li>
-                                 <li><a href="">&raquo;</a></li>
-                              </ul>
-                           </nav> 
-                              </div>
-                           </div>
-                             
-                        
-                              
+                           <!-- ============== PAGINACION 
+<div class="row">
+<div>
+<nav>
+<ul class="pagination">
+<li><a href="">&laquo;</a></li>
+<li><a href="">1</a></li>
+<li><a href="">2</a></li>
+<li><a href="">3</a></li>
+<li><a href="">4</a></li>
+<li><a href="">5</a></li>
+<li><a href="">&raquo;</a></li>
+</ul>
+</nav> 
+</div>
+</div>
+============== -->
+
+
+
                         </div>
                         <!-- /widget-content --> 
                      </div>
@@ -256,8 +348,7 @@ FOOTER
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
 
-      
+
 
    </body>
 </html>
-

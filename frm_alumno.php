@@ -13,6 +13,9 @@
       <link href="css/font-awesome.css" rel="stylesheet">
       <link href="css/style.css" rel="stylesheet">
       <link href="css/pages/dashboard.css" rel="stylesheet">
+      
+      <!---------- Style de AAA y Asociados ---------->
+      <link href="css/styleAAA.css" rel="stylesheet">
 
    </head> 
    <body>
@@ -84,7 +87,7 @@ CONTENIDO
                         <div class="widget-header">
                            <i class="icon-user"></i>
                            <h3>Nuevo Usuario</h3>
-                           <a href="alumnos.php"></a><h3><span class="glyphicon glyphicon-remove"></span></h3>
+                           <a href="alumnos.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
                         </div> <!-- /widget-header -->					
                         <div class="widget-content">
 
