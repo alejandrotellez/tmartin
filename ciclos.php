@@ -5,19 +5,6 @@
    if(!isset($_SESSION['login'])){
       header("Location: login.php");
    }
-
-   //  -------- DATOS PARA UPDATE --------
-   if(isset($_GET['idadministrador'])){
-        $idAdministrador = $_GET['idadministrador'];
-        include_once 'Administrador.php';
-        $admin = new Administrador();
-        $datos = $admin->get_administrador($idAdministrador);
-        $row = $datos->fetchObject();
-      }
-   
-   if(isset($_GET['ver'])){
-        $ver = $_GET['ver'];
-      }
    
 ?>
 <!DOCTYPE html>
@@ -87,8 +74,8 @@ MENU SECUNDARIO
                   <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
                   <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
-                  <li class="active"><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <li class="active"><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <li><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
                </ul>
             </div>
             <!-- /container --> 
@@ -111,97 +98,56 @@ MENU SECUNDARIO
                      <div class="widget ">
                         <div class="widget-header">
                            <i class="icon-user"></i>
-                           <h3>Nuevo Administrador</h3>
-                           <a href="administradores.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
+                           <h3>Nuevo Ciclo Escolar</h3>
+                           <a href="index.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
                         </div> <!-- /widget-header -->					
                         <div class="widget-content">
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal" action="<?php 
-if(isset($ver)){echo "frm_administrador.php";}else{echo "agregar_admin.php";}
-                                    ?>" method="<?php 
-if(isset($ver)){echo "get";}else{echo "post";}
-                                    ?>">
+                                 <form id="edit-profile" class="form-horizontal" action="agregar_ciclo.php" method="post">
                                     <fieldset>                          
-                                       <h6 class="bigstats">Información Personal del Administrador</h6>
+                                       <h6 class="bigstats">Agregar un nuevo ciclo escolar</h6>
                                        <div id="big_stats" class="cf">
-                                          <?php if(isset($idAdministrador)){
-                echo '<input type="hidden" name="idAdministrador" value="'.$row->idadministrador.'">';}
-if(isset($ver)){
-                echo '<input type="hidden" name="idadministrador" value="'.$row->idadministrador.'">';
-
-   echo "<div class='control-group'><label class='control-label' for='matricula'>Matricula</label><div class='controls'><input type='text' class='span6 disabled' disabled='disabled' name='matricula' id='matricula' value = '$row->idadministrador'></div> <!-- /controls --></div> <!-- /control-group -->";
-}?>                        
                                           <div class="control-group">											
-                                             <label class="control-label" for="nombre">Nombre</label>
+                                             <label class="control-label" for="ciclo">Ciclo</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" name="nombre" id="nombre" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->nombre.'"';}
-if(isset($ver)){echo "disabled='disabled'";}?>>
+                                                <input type="text" class="span6 disabled" name="ciclo" id="ciclo" value="Agosto-Junio" >
+                                                <p class="help-block">El ciclo por defaul es Agosto-Junio</p>
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
-                                             <label class="control-label" for="a_paterno">Apellido Paterno</label>
+                                             <label class="control-label" for="year">Año</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_paterno" name="a_paterno" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->a_paterno.'"';}
-if(isset($ver)){echo "disabled='disabled'";}?>>
+                                                <input type="number" class="span6" id="year" name="year" value="<?php echo date('Y'); ?>">
+                                                <p class="help-block">El año por defaul es el año actual</p>
                                              </div> <!-- /controls -->				
+                                          </div> <!-- /control-group -->                
+                                          <div class="control-group">											
+                                             <label class="control-label" for="radiobtns">Grado</label>
+                                             <div class="controls">
+                                                <select class="form-control" name="grado">
+                                                   <option value="1" >1</option>
+                                                   <option value="2" >2</option>
+                                                   <option value="3" >3</option>
+                                                   <option value="4" >4</option>
+                                                   <option value="5" >5</option>
+                                                   <option value="6" >6</option>
+                                                   </select>
+                                             </div>	<!-- /controls -->			
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
-                                             <label class="control-label" for="a_materno">Apellido Materno</label>
+                                             <label class="control-label" for="radiobtns">Grupo</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_materno" name="a_materno" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->a_materno.'"';}
-if(isset($ver)){echo "disabled='disabled'";}?>>
-                                             </div> <!-- /controls -->				
-                                          </div> <!-- /control-group -->
-                                          <div class="control-group">											
-                                             <label class="control-label" for="password">Password</label>
-                                             <div class="controls">
-                                                <input type="password" class="span6" id="password" name="password" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->password.'"';}
-if(isset($ver)){echo "disabled='disabled'";}?>>
-                                             </div> <!-- /controls -->				
-                                          </div> <!-- /control-group -->                                
-                                          <div class="control-group">											
-                                             <label class="control-label" for="radiobtns">Privilegios</label>
-                                             <div class="controls">
-                                                <select class="form-control" name="idPrivilegios" <?php
-if(isset($ver)){echo "disabled='disabled'";}?>>
-                                                   <option value="1" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 1){
-         echo "selected";
-      }
-          }?>>1</option>
-                                                   <option value="2" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 2){
-         echo "selected";
-      }
-          }?>>2</option>
-                                                   <option value="3" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 3){
-         echo "selected";
-      }
-          }?>>3</option>
+                                                <select class="form-control" name="grupo">
+                                                   <option value="a" >A</option>
+                                                   <option value="b" >B</option>
+                                                   <option value="c" >C</option>                                                   
                                                    </select>
                                              </div>	<!-- /controls -->			
                                           </div> <!-- /control-group -->
                                        <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary">
-                                          <?php 
-if(isset($ver)){
-   echo "Editar";}else{
-   if(isset($idAdministrador)){
-                    echo "Actualizar";
-                }  else {
-                    echo "Guardar";
-                }
-}
-
-                                             ?>
-                                         </button> 
+                                          <button type="submit" class="btn btn-primary">Guardar</button> 
                                           <button class="btn">Cancelar</button>
                                        </div> <!-- /form-actions -->
                                        </div> <!-- /big_stats -->

@@ -75,13 +75,13 @@ MENU PRINCIPAL
          <div class="subnavbar-inner">
             <div class="container">
                <ul class="mainnav">
-                  <li class="active"><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
+                  <li><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
                   <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
                   <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
                   <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
-                  <li><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <li class="active"><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
                </ul>
             </div>
             <!-- /container --> 

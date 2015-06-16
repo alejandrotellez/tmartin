@@ -1,3 +1,25 @@
+<?php
+
+   //  -------- Inicio de sesión --------
+   session_start();
+   if(!isset($_SESSION['login'])){
+      header("Location: login.php");
+   }
+
+   //  -------- DATOS PARA UPDATE --------
+   /*if(isset($_GET['idadministrador'])){
+        $idAdministrador = $_GET['idadministrador'];
+        include_once 'Administrador.php';
+        $admin = new Administrador();
+        $datos = $admin->get_administrador($idAdministrador);
+        $row = $datos->fetchObject();
+      }
+   
+   if(isset($_GET['ver'])){
+        $ver = $_GET['ver'];
+      }*/
+   
+?>
 <!DOCTYPE html>
 <html lang="es">
    <head>
@@ -59,8 +81,8 @@ MENU PRINCIPAL
          <div class="subnavbar-inner">
             <div class="container">
                <ul class="mainnav">
-                  <li class="active"><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
-                  <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
+                  <li><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
+                  <li class="active"><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
                   <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
@@ -98,28 +120,28 @@ CONTENIDO
                                        <h6 class="bigstats">Información Personal del Alumno</h6>
                                        <div id="big_stats" class="cf">
                                           <div class="control-group">											
-                                             <label class="control-label" for="username">Matricula</label>
+                                             <!--label class="control-label" for="username">Matricula</label>
                                              <div class="controls">
                                                 <input type="text" class="span6 disabled" id="matricula" value="12002039" disabled>
                                                 <p class="help-block">Dato no modificable</p>
-                                             </div> <!-- /controls -->				
+                                             </div--> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="username">Nombre</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" id="nombre" value="Jose" >
+                                                <input type="text" class="span6 disabled" id="nombre" value="" >
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="firstname">Apellido Paterno</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_paterno" value="Tellez">
+                                                <input type="text" class="span6" id="a_paterno" value="">
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="lastname">Apellido Materno</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_materno" value="Aguilera">
+                                                <input type="text" class="span6" id="a_materno" value="">
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
@@ -136,23 +158,23 @@ CONTENIDO
                                           <div class="control-group">											
                                              <label class="control-label" for="radiobtns">Grado</label>
                                              <div class="controls">
-                                                <select class="form-control">
-                                                   <option>1</option>
-                                                   <option>2</option>
-                                                   <option>3</option>
-                                                   <option>4</option>
-                                                   <option>5</option>
-                                                   <option>6</option>
+                                                <select class="form-control" name="grado">
+                                                   <option value="1">1</option>
+                                                   <option value="2">2</option>
+                                                   <option value="3">3</option>
+                                                   <option value="4">4</option>
+                                                   <option value="5">5</option>
+                                                   <option value="6">6</option>
                                                 </select>
                                              </div>	<!-- /controls -->			
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="radiobtns">Grupo</label>
                                              <div class="controls">
-                                                <select class="form-control">
-                                                   <option>A</option>
-                                                   <option>B</option>
-                                                   <option>C</option>
+                                                <select class="form-control" name="grupo">
+                                                   <option value="a">A</option>
+                                                   <option value="b">B</option>
+                                                   <option value="c">C</option>
                                                 </select>
                                              </div>	<!-- /controls -->			
                                           </div> <!-- /control-group -->
@@ -171,12 +193,12 @@ CONTENIDO
                                              <label class="control-label" for="radiobtns">Beca</label>
                                              <div class="controls">
                                                 <select class="form-control" name="beca">
-                                                   <option>10%</option>
-                                                   <option>20%</option>
-                                                   <option>50%</option>
-                                                   <option>60%</option>
-                                                   <option>80%</option>
-                                                   <option>100%</option>
+                                                   <option value="10">10%</option>
+                                                   <option value="20">20%</option>
+                                                   <option value="50">50%</option>
+                                                   <option value="60">60%</option>
+                                                   <option value="80">80%</option>
+                                                   <option value="100">100%</option>
                                                 </select>
                                              </div>	<!-- /controls -->			
                                           </div> <!-- /control-group -->                                          

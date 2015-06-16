@@ -1,24 +1,33 @@
 <?php
 
-   //  -------- Inicio de sesión --------
-   session_start();
-   if(!isset($_SESSION['login'])){
-      header("Location: login.php");
-   }
+//  -------- Inicio de sesión --------
+session_start();
+if(!isset($_SESSION['login'])){
+   header("Location: login.php");
+}
 
-   //  -------- DATOS PARA UPDATE --------
-   if(isset($_GET['idadministrador'])){
-        $idAdministrador = $_GET['idadministrador'];
-        include_once 'Administrador.php';
-        $admin = new Administrador();
-        $datos = $admin->get_administrador($idAdministrador);
+//  -------- DATOS PARA UPDATE --------
+   if(isset($_GET['idBeca'])){
+        $idBeca = $_GET['idBeca'];
+        include_once 'Beca.php';
+        $beca = new Beca();
+        $datos = $beca->get_beca($idBeca, null);
         $row = $datos->fetchObject();
       }
-   
+
+//  -------- DATOS PARA UPDATE --------
+   if(isset($_GET['nombre'])){
+        $idBeca = $_GET['nombre'];
+        include_once 'Beca.php';
+        $beca = new Beca();
+        $datos = $beca->get_beca(null, $idBeca);
+        $row = $datos->fetchObject();
+      }
+
    if(isset($_GET['ver'])){
         $ver = $_GET['ver'];
       }
-   
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,8 +44,8 @@
       <link href="css/font-awesome.css" rel="stylesheet">
       <link href="css/style.css" rel="stylesheet">
       <link href="css/pages/dashboard.css" rel="stylesheet">
-      
-      
+
+
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
 
@@ -76,7 +85,7 @@ MENU SECUNDARIO
       <!-- /navbar -->
 
       <!-- ==================================================
-                     MENU PRINCIPAL 
+MENU PRINCIPAL 
 =================================================== --> 
       <div class="subnavbar">
          <div class="subnavbar-inner">
@@ -86,9 +95,9 @@ MENU SECUNDARIO
                   <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li class="active"><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
                   <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
-                  <li class="active"><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <li><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
                </ul>
             </div>
             <!-- /container --> 
@@ -98,7 +107,7 @@ MENU SECUNDARIO
       <!-- /subnavbar -->
 
       <!-- ==================================================
-                  CONTENIDO 
+CONTENIDO 
 ==================================================== -->
 
       <div class="main">
@@ -106,118 +115,65 @@ MENU SECUNDARIO
             <div class="container">
                <div class="row">
 
-                  <!-- ============== FORMULARIO DE NUEVO ADMINISTRADOR ============== -->                
+                  <!-- ============== FORMULARIO DE NUEVO BECA ============== -->                
                   <div class="span12"> 
                      <div class="widget ">
                         <div class="widget-header">
                            <i class="icon-user"></i>
-                           <h3>Nuevo Administrador</h3>
-                           <a href="administradores.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
+                           <h3>Nuevo Beca</h3>
+                           <a href="becas.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
                         </div> <!-- /widget-header -->					
                         <div class="widget-content">
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal" action="<?php 
-if(isset($ver)){echo "frm_administrador.php";}else{echo "agregar_admin.php";}
-                                    ?>" method="<?php 
-if(isset($ver)){echo "get";}else{echo "post";}
-                                    ?>">
+                                 <form id="edit-profile" class="form-horizontal" action="agregar_beca.php" method="post">
                                     <fieldset>                          
-                                       <h6 class="bigstats">Información Personal del Administrador</h6>
+                                       <h6 class="bigstats">Información sobre la Beca</h6>
                                        <div id="big_stats" class="cf">
-                                          <?php if(isset($idAdministrador)){
-                echo '<input type="hidden" name="idAdministrador" value="'.$row->idadministrador.'">';}
-if(isset($ver)){
-                echo '<input type="hidden" name="idadministrador" value="'.$row->idadministrador.'">';
-
-   echo "<div class='control-group'><label class='control-label' for='matricula'>Matricula</label><div class='controls'><input type='text' class='span6 disabled' disabled='disabled' name='matricula' id='matricula' value = '$row->idadministrador'></div> <!-- /controls --></div> <!-- /control-group -->";
-}?>                        
+                                         <?php if(isset($idBeca)){
+                echo '<input type="hidden" name="idBeca" value="'.$row->idbeca.'">';}
+?>             
                                           <div class="control-group">											
                                              <label class="control-label" for="nombre">Nombre</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" name="nombre" id="nombre" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->nombre.'"';}
-if(isset($ver)){echo "disabled='disabled'";}?>>
+                                                <input type="text" class="span6 disabled" name="nombre" id="nombre" <?php if(isset($idBeca)){
+                echo "value='".$row->nombre."'";}
+?>             >
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
-                                             <label class="control-label" for="a_paterno">Apellido Paterno</label>
+                                             <label class="control-label" for="descuento">Descuento</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_paterno" name="a_paterno" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->a_paterno.'"';}
-if(isset($ver)){echo "disabled='disabled'";}?>>
+                                                <span>%</span>
+                                                <input type="text" class="span6" id="descuento" name="descuento" <?php if(isset($idBeca)){
+               $descuento= $row->descuento*100;
+                echo "value='".$descuento."'";}
+?> >
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
-                                          <div class="control-group">											
-                                             <label class="control-label" for="a_materno">Apellido Materno</label>
-                                             <div class="controls">
-                                                <input type="text" class="span6" id="a_materno" name="a_materno" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->a_materno.'"';}
-if(isset($ver)){echo "disabled='disabled'";}?>>
-                                             </div> <!-- /controls -->				
-                                          </div> <!-- /control-group -->
-                                          <div class="control-group">											
-                                             <label class="control-label" for="password">Password</label>
-                                             <div class="controls">
-                                                <input type="password" class="span6" id="password" name="password" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->password.'"';}
-if(isset($ver)){echo "disabled='disabled'";}?>>
-                                             </div> <!-- /controls -->				
-                                          </div> <!-- /control-group -->                                
-                                          <div class="control-group">											
-                                             <label class="control-label" for="radiobtns">Privilegios</label>
-                                             <div class="controls">
-                                                <select class="form-control" name="idPrivilegios" <?php
-if(isset($ver)){echo "disabled='disabled'";}?>>
-                                                   <option value="1" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 1){
-         echo "selected";
-      }
-          }?>>1</option>
-                                                   <option value="2" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 2){
-         echo "selected";
-      }
-          }?>>2</option>
-                                                   <option value="3" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 3){
-         echo "selected";
-      }
-          }?>>3</option>
-                                                   </select>
-                                             </div>	<!-- /controls -->			
-                                          </div> <!-- /control-group -->
-                                       <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary">
-                                          <?php 
-if(isset($ver)){
-   echo "Editar";}else{
-   if(isset($idAdministrador)){
-                    echo "Actualizar";
-                }  else {
-                    echo "Guardar";
-                }
-}
-
-                                             ?>
-                                         </button> 
-                                          <button class="btn">Cancelar</button>
-                                       </div> <!-- /form-actions -->
+                                          <div class="form-actions">
+                                             <button type="submit" class="btn btn-primary"> <?php if(isset($idBeca)){
+               echo "Actualizar";}
+else{
+   echo "Guardar";}
+?> </button> 
+                                             <button class="btn">Cancelar</button>
+                                          </div> <!-- /form-actions -->
                                        </div> <!-- /big_stats -->
                                     </fieldset>
                                  </form>
-                                 
+
                               </div>								
                            </div>
 
                         </div> <!-- /widget-content -->
                      </div> <!-- /widget -->
                   </div> <!-- /span12 -->
-                  
-                  
+
+
                   <!-- ============== TABLA DE ADMINISTRADORES ============== -->               
-                  
+
                   <!-- /span12 --> 
                </div>
                <!-- /row --> 
@@ -304,7 +260,7 @@ FOOTER
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
 
-      
+
 
    </body>
 </html>

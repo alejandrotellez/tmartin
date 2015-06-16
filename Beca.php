@@ -19,18 +19,30 @@ class Beca{
       $this->descuento= $descuento;
    }
 
-   public function get_beca($idBeca = null){
-      try {          
-         $sql = "SELECT * FROM beca";
-
+   public function get_beca($idBeca = null, $nombre = null){
+      try { 
+         
+        if ($nombre != null){
+            $sql = " SELECT idbeca FROM beca";
+         }else{
+           $sql = "SELECT * FROM beca";
+        }       
+         
          if ($idBeca != null){
             $sql .= " WHERE idbeca = ?";
+         }
+         
+         if ($nombre != null){
+            $sql .= " WHERE nombre = ?";
          }
 
          $consulta = $this->con->prepare($sql);
 
          if ($idBeca != null){
             $consulta->bindParam(1, $idBeca);
+         }
+         if ($nombre != null){
+            $consulta->bindParam(1, $nombre);
          }
 
          $consulta->execute();

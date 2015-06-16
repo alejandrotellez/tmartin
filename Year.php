@@ -17,18 +17,18 @@ class Year{
       $this->year= $year;
    }
 
-   public function get_year($idYear = null){
+   public function get_year($year = null){
       try {          
          $sql = "SELECT * FROM year";
 
-         if ($idYear != null){
-            $sql .= " WHERE idyear = ?";
+         if ($year != null){
+            $sql .= " WHERE year = ?";
          }
 
          $consulta = $this->con->prepare($sql);
 
-         if ($idYear != null){
-            $consulta->bindParam(1, $idYear);
+         if ($year != null){
+            $consulta->bindParam(1, $year);
          }
 
          $consulta->execute();

@@ -1,6 +1,6 @@
 <?php
 require_once 'Conexion.php';
-require_once 'Year.php'
+require_once 'Year.php';
    
 class Ciclo{
 
@@ -21,20 +21,21 @@ class Ciclo{
       $this->idYear= $idYear;
    }
 
-   public function get_ciclo($idCiclo = null){
+   public function get_ciclo($ciclo = null, $idYear = null){
       try {          
          $sql = "SELECT * FROM ciclo";
 
-         if ($idCiclo != null){
-            $sql .= " WHERE idciclo = ?";
-         }
+         if ($ciclo != null){
+            $sql .= " WHERE ciclo = ? AND idyear = ?";            
+         }   
 
          $consulta = $this->con->prepare($sql);
 
-         if ($idCiclo != null){
-            $consulta->bindParam(1, $idCiclo);
+         if ($ciclo != null){
+            $consulta->bindParam(1, $ciclo);
+            $consulta->bindParam(2, $idYear);
          }
-
+         
          $consulta->execute();
          $this->con = null;
 
@@ -52,24 +53,24 @@ class Ciclo{
 
    public function add_ciclo(){
       try {
-         if($this->idCiclo == null){
-            $sql = "INSERT INTO ciclo (idciclo, ciclo, idyear) VALUES (NULL, ?, ?)";
-         }else{
+         //if($this->idCiclo == null){
+            $sql = "INSERT INTO ciclo VALUES (null,?,?)";
+         /*}else{
             $sql = "UPDATE ciclo SET ciclo = ?, idyear = ? WHERE idciclo = ?";
-         }
+         }*/
          
          $consulta = $this->con->prepare($sql);
-         $consulta->bindParam(1, $this->ciclo);
-         $consulta->bindParam(2, $this->idYear);
+         $consulta->bindParam(1, $$this->ciclo);
+         $consulta->bindParam(2, $$this->idYear);
 
          if($this->idCiclo != null){
             $consulta->bindParam(3, $this->idciclo);
          }
 
          if($consulta->execute()){
-             return TRUE;
+             return $sql;
          }  else {
-             return False;
+             return FALSE;
          }
          $this->con = null;
     
