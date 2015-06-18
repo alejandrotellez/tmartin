@@ -1,5 +1,5 @@
 <?php
-require_once 'Conexion.php';
+require_once 'conexion.php';
 class Alumno{
 
    private static $instancia;
@@ -15,13 +15,15 @@ class Alumno{
    private $idEscolaridad;
    private $idTutor;
    private $idBeca;
+   private $idGrado;
+   private $idGrupo;
 
    public function __construct()
    {
       $this->con = Conexion::singleton_conexion();   
    }
 
-   public function set_alumno($matricula, $a_paterno, $a_materno, $nombre, $idSexo, $idEstatus, $idGg, $idEscolaridad, $idTutor, $idBeca){
+   public function set_alumno($matricula, $a_paterno, $a_materno, $nombre, $idSexo, $idEstatus, $idGg, $idEscolaridad, $idTutor, $idBeca, $idGrado, $idGrupo){
       $this->matricula= $matricula;
       $this->a_paterno= $a_paterno;       
       $this->a_materno= $a_materno;
@@ -33,6 +35,8 @@ class Alumno{
       $this->idEscolaridad= $idEscolaridad;
       $this->idTutor= $idTutor;
       $this->idBeca= $idBeca;
+      $this->idGrado = $idGrado;
+      $this->idGrupo = $idGrupo;
    }
 
    public function get_alumno($matricula = null){
@@ -50,11 +54,10 @@ class Alumno{
          }
 
          $consulta->execute();
-         $this->con = null;
-
+         
          if($consulta->rowCount() > 0){
             return $consulta;
-            echo $sql;
+            //echo $sql;
          } else {
             return FALSE;
          }
@@ -66,10 +69,10 @@ class Alumno{
 
    public function add_alumno(){
       try {
-         if($this->matricul == null){
-            $sql = "INSERT INTO alumno (matricula, a_paterno, a_materno, nombre, idsexo, idestatus, idgg, idescolaridad, idtutor, idbeca) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+         if($this->matricula == null){
+            $sql = "INSERT INTO alumno (matricula, a_paterno, a_materno, nombre, idsexo, idestatus, idgg, idescolaridad, idtutor, idbeca, idgrupo, idgrado) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
          }else{
-            $sql = "UPDATE alumno SET a_paterno=?, a_materno=?, nombre=?, idsexo=?, idestatus=?, idgg=?, idescolaridad=?, idtutor=?, idbeca=? WHERE matricula = ?";
+            $sql = "UPDATE alumno SET a_paterno=?, a_materno=?, nombre=?, idsexo=?, idestatus=?, idgg=?, idescolaridad=?, idtutor=?, idbeca=?, idgrupo=?, idgrado=? WHERE matricula = ?";
          }
          
          $consulta = $this->con->prepare($sql);
@@ -82,18 +85,20 @@ class Alumno{
          $consulta->bindParam(7, $this->idEscolaridad);
          $consulta->bindParam(8, $this->idTutor);
          $consulta->bindParam(9, $this->idBeca);
+         $consulta->bindParam(10, $this->idGrado);
+         $consulta->bindParam(11, $this->idGrupo);
+         
 
          if($this->matricula != null){
-            $consulta->bindParam(10, $this->matricula);
+            $consulta->bindParam(12, $this->matricula);
          }
 
-         if($consulta->execute()){
+         if($consulta->execute($sql)){
              return TRUE;
          }  else {
              return False;
          }
-         $this->con = null;
-    
+             
       } catch (PDOExeption $e) {
          print "Error:". $e->getMessge();
       }
@@ -109,9 +114,40 @@ class Alumno{
             }  else {
                 return False;
             }
-            $this->con = null;
+           
        } catch (PDOException $ex) {
            print "Error:". $e->getMessge();
+       }
+   }
+   
+   public function max_alumno(){
+      $sql = "SELECT MAX(matricula) AS id FROM alumno";
+      $consulta = $this->con->prepare($sql);
+      $consulta->execute();
+      return $consulta;
+   }
+   
+   public function add_alumno1($matricula, $a_paterno, $a_materno, $nombre, $idSexo, $idEstatus, $idGg, $idEscolaridad, $idTutor3, $idBeca,$idGrado, $idGrupo){
+      try{
+         $sql = "INSERT INTO alumno (matricula, a_paterno, a_materno, nombre, idsexo, idestatus, idgg, idescolaridad, idtutor, idbeca, idgrado, idgrupo) VALUES (:matricula, :a_paterno, :a_materno, :nombre, :idsexo, :idestatus, :idgg, :idescolaridad, :idtutor, :idbeca, :idgrado, :idgrupo)";
+         $consulta = $this->con->prepare($sql);
+         $consulta->bindParam(':matricula', $matricula, PDO::PARAM_INT);
+         $consulta->bindParam(':a_paterno', $a_paterno, PDO::PARAM_STR);
+         $consulta->bindParam(':a_materno', $a_materno, PDO::PARAM_STR);
+         $consulta->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+         $consulta->bindParam(':idsexo', $idSexo, PDO::PARAM_INT);
+         $consulta->bindParam(':idestatus', $idEstatus, PDO::PARAM_INT);
+         $consulta->bindParam(':idgg', $idGg, PDO::PARAM_INT);
+         $consulta->bindParam(':idescolaridad', $idEscolaridad, PDO::PARAM_INT);
+         $consulta->bindParam(':idtutor', $idTutor3, PDO::PARAM_INT);
+         $consulta->bindParam(':idbeca', $idBeca, PDO::PARAM_INT);
+         $consulta->bindParam(':idgrado', $idGrado, PDO::PARAM_INT);
+         $consulta->bindParam(':idgrupo', $idGrupo, PDO::PARAM_STR);
+                  
+         $consulta->execute();         
+         
+      }catch (PDOException $ex) {
+           print "Error:". $e->getMessage();
        }
    }
 }

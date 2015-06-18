@@ -26,22 +26,32 @@ class Tutor{
       $this->telefono = $telefono;
    }
 
-   public function get_tutor($idTutor = null){
-      try {          
-         $sql = "SELECT * FROM tutor";
+   public function get_tutor($idTutor = null, $email=null){
+      try { 
+         if($email == null){
+            $sql = "SELECT * FROM tutor";
+         }else{
+            $sql = "SELECT idtutor FROM tutor";
+         }
+         
 
-         if ($idTutor != null){
+         if ($idTutor != null and $email == null){
             $sql .= " WHERE idtutor = ?";
+         }
+         if ($email != null and $idTutor == null){
+            $sql .= " WHERE email = ?";
          }
 
          $consulta = $this->con->prepare($sql);
 
-         if ($idTutor != null){
+         if ($idTutor != null and $email == null){
             $consulta->bindParam(1, $idTutor);
+         }
+         if ($email != null and $idTutor == null){
+            $consulta->bindParam(1, $email);
          }
 
          $consulta->execute();
-         $this->con = null;
 
          if($consulta->rowCount() > 0){
             return $consulta;
@@ -79,7 +89,6 @@ class Tutor{
          }  else {
             return False;
          }
-         $this->con = null;
 
       } catch (PDOExeption $e) {
          print "Error:". $e->getMessge();
@@ -96,7 +105,7 @@ class Tutor{
          }  else {
             return False;
          }
-         $this->con = null;
+         
       } catch (PDOException $ex) {
          print "Error:". $e->getMessge();
       }

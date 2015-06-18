@@ -33,7 +33,7 @@ class Administrador{
          $consulta->bindParam(1 , $idAdministrador);
          $consulta->bindParam(2 , $password);
          $consulta->execute();
-         $this->con = null;
+         
 
          if($consulta->rowCount()== 1){
             return TRUE;
@@ -59,7 +59,7 @@ class Administrador{
          }
 
          $consulta->execute();
-         $this->con = null;
+         
 
          if($consulta->rowCount() > 0){
             return $consulta;
@@ -99,7 +99,7 @@ class Administrador{
          }  else {
             return False;
          }
-         $this->con = null;
+         
 
       } catch (PDOExeption $e) {
          print "Error:". $e->getMessge();
@@ -124,7 +124,7 @@ class Administrador{
          }  else {
             return False;
          }
-         $this->con = null;
+         
 
       } catch (PDOExeption $e) {
          print "Error:". $e->getMessge();
@@ -142,7 +142,7 @@ class Administrador{
          }  else {
             return False;
          }
-         $this->con = null;
+         
       } catch (PDOException $ex) {
          print "Error:". $e->getMessge();
       }

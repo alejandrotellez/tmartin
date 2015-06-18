@@ -14,7 +14,7 @@ if(isset($_GET['matricula'])){
    $alumno = new Alumno();
    $datos = $alumno->get_alumno($matricula);
    $row = $datos->fetchObject();
-   var_dump ($row);
+   //var_dump ($row);
 }
 
 
@@ -116,7 +116,7 @@ CONTENIDO
                            <form action="pagos.php" method="get" >
                               <div class="modal-body">                             
                                  <label>Inserte la matricula del alumno</label>
-                                 <input type="text" name="matricula">  
+                                 <input type="text" class="span5 disabled" id="matricula" name="matricula">  
                               </div>
                               <div class="modal-footer">
                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -133,71 +133,131 @@ CONTENIDO
                         <div class="widget-header">
                            <i class="icon-user"></i>
                            <h3>Nuevo Pago</h3>
-                           <a href="alumnos.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
+                           <a href="index.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
                         </div> <!-- /widget-header -->					
                         <div class="widget-content">
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal">
+                                 <form id="edit-profile" class="form-horizontal" <?php if(isset($matricula)){
+   echo "action='agregar_pago.php' method='post'";
+}else{
+   echo "action='pagos.php' method='get'";}?> >
                                     <fieldset>
-                                     <div class="container">
-               <div class="row">
-                                      <div class="span6">
-                                         <h6 class="bigstats">Información Personal del Alumno</h6>
-                                       <div id="big_stats" class="cf">
-                                          <div class="control-group">		
-                                             <label class='control-label' for='matricula'>Matricula</label>
-                                             <div class='controls'>
-                                                <p class="form-control-static"><?php echo $row->matricula?></p>
-                                             </div> <!-- /controls -->
-                                          </div> <!-- /control-group -->
-                                          <div class="control-group">		
-                                             <label class='control-label' for='nombre'>Nombre</label>
-                                             <div class='controls'>
-                                                <p class="form-control-static"><?php echo $row->nombre." ".$row->a_paterno." ".$row->a_materno?></p>
-                                             </div> <!-- /controls -->
-                                          </div> <!-- /control-group -->
-                                          <div class="control-group">		
-                                             <label class='control-label' for='nombre'>Salón</label>
-                                             <div class='controls'>
-                                                <p class="form-control-static"><?php echo $row->idgg." ".$row->idescolaridad?></p>
-                                             </div> <!-- /controls -->
-                                          </div> <!-- /control-group -->
-                                          <div class="control-group">		
-                                             <label class='control-label' for='nombre'>Beca</label>
-                                             <div class='controls'>
-                                                <p class="form-control-static"><?php echo $row->idbeca?></p>
-                                             </div> <!-- /controls -->
-                                          </div> <!-- /control-group -->
-                                      </div></div>   
-                                                             
-                                       <div class="span6">
-                                          <h6 class="bigstats">Pagos a realizar</h6>
-                                          <div class="control-group">
-                                       <div id="big_stats" class="cf">
-                                       <div class="checkbox">
-                                             <label>
-                                                <input type="checkbox" value="1">
-                                                Inscripción
-                                             </label>
-                                          </div>
-                                          <div class="checkbox disabled">
-                                             <label>
-                                                <input type="checkbox" value="2">
-                                               Enero
-                                             </label>
-                                          </div>
-                                          </div>
-                                       </div>
-                                       </div>
+                                       <div class="container">
+                                          <div class="row">
+                                             <div class="span6">
+                                                <h6 class="bigstats">Información Personal del Alumno</h6>
+                                                <div id="big_stats" class="cf">
+                                                   <div class="control-group">		
+                                                      <label class='control-label' for='matricula'>Matricula</label>
+                                                      <div class='controls'>
+                                                         <?php if(isset($matricula)){
+   echo "<p class='form-control-static'>".$row->matricula."</p><input type='hidden' name='matricula' value='".$row->matricula."'>";
+}else{
+   echo "<input type='text' class='span4 disabled' name='matricula' id='matricula'><p class='help-block'>Inserte Matricula</p>";}?>
+                                                      </div> <!-- /controls -->
+                                                   </div> <!-- /control-group -->
+                                                   <div class="control-group">		
+                                                      <label class='control-label' for='nombre'>Nombre</label>
+                                                      <div class='controls'>
+                                                         <p class="form-control-static"><?php if(isset($matricula)){echo $row->nombre." ".$row->a_paterno." ".$row->a_materno;}?></p>
+                                                         
+                                                      </div> <!-- /controls -->
+                                                   </div> <!-- /control-group -->
+                                                   <div class="control-group">		
+                                                      <label class='control-label' for='nombre'>Salón</label>
+                                                      <div class='controls'>
+                                                         <p class="form-control-static"><?php if(isset($matricula)){echo $row->idgg." ".$row->idescolaridad;}?></p>
+                                                      </div> <!-- /controls -->
+                                                   </div> <!-- /control-group -->
+                                                   <div class="control-group">		
+                                                      <label class='control-label' for='nombre'>Beca</label>
+                                                      <div class='controls'>
+                                                         <p class="form-control-static"><?php if(isset($matricula)){echo $row->idbeca;}?></p>
+                                                      </div> <!-- /controls -->
+                                                   </div> <!-- /control-group -->
+                                                </div></div>   
 
-                                       </div> <!-- /big_stats -->
-                                       <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary">Pagar</button> 
-                                          <button class="btn">Cancelar</button>
-                                       </div> <!-- /form-actions -->
-                                    </div>
+                                             <div class="span6">
+                                                <h6 class="bigstats">Pagos a realizar</h6>
+                                                <div class="control-group">
+                                                   <div id="big_stats" class="cf pagos">
+                                                      <div class="checkbox  disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="inscripcion">Inscripción
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="agosto">Agosto
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="septiembre">Septiembre
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="octubre">Octubre
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="noviembre">Noviembre
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="diciembre">Diciembre
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="reinscripcion">Reinscripcion
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="enero">Enero
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="febrero">Febrero
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="marzo">Marzo
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="abril">Abril
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="mayo">Mayo
+                                                         </label>
+                                                      </div>
+                                                      <div class="checkbox disabled">
+                                                         <label>
+                                                            <input type="checkbox" name="mes[]" value="junio">Junio
+                                                         </label>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+
+                                          </div> <!-- /big_stats -->
+                                          <div class="form-actions">
+                                             <button type="submit" class="btn btn-primary">Pagar</button> 
+                                             <button class="btn">Cancelar</button>
+                                          </div> <!-- /form-actions -->
+                                       </div>
                                     </fieldset>
                                  </form>                                 
                               </div>								
@@ -294,7 +354,7 @@ FOOTER
 
       <?php
 
-   if(!isset($_GET['matricula'])){
+if(!isset($_GET['matricula'])){
    echo "<script>
          $(document).ready(function(){
             $('#matricula').modal({

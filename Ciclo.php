@@ -1,6 +1,5 @@
 <?php
 require_once 'Conexion.php';
-require_once 'Year.php';
    
 class Ciclo{
 
@@ -36,8 +35,7 @@ class Ciclo{
             $consulta->bindParam(2, $idYear);
          }
          
-         $consulta->execute();
-         $this->con = null;
+         $consulta->execute();         
 
          if($consulta->rowCount() > 0){
             return $consulta;
@@ -60,8 +58,8 @@ class Ciclo{
          }*/
          
          $consulta = $this->con->prepare($sql);
-         $consulta->bindParam(1, $$this->ciclo);
-         $consulta->bindParam(2, $$this->idYear);
+         $consulta->bindParam(1, $this->ciclo);
+         $consulta->bindParam(2, $this->idYear);
 
          if($this->idCiclo != null){
             $consulta->bindParam(3, $this->idciclo);
@@ -72,8 +70,7 @@ class Ciclo{
          }  else {
              return FALSE;
          }
-         $this->con = null;
-    
+             
       } catch (PDOExeption $e) {
          print "Error:". $e->getMessge();
       }
@@ -89,7 +86,7 @@ class Ciclo{
             }  else {
                 return False;
             }
-            $this->con = null;
+            
        } catch (PDOException $ex) {
            print "Error:". $e->getMessge();
        }

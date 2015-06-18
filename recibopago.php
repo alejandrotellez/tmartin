@@ -7,14 +7,9 @@ if(!isset($_SESSION['login'])){
 }
 
 //  -------- Get administradores --------
-include_once 'Alumno.php';
-$alumno = new Alumno();
-$datos = $alumno->get_alumno(null);
-
-//var_dump ($datos);
-
 
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
    <head>
@@ -33,7 +28,7 @@ $datos = $alumno->get_alumno(null);
 
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
-      
+
    </head> 
    <body>
 
@@ -46,14 +41,14 @@ MENU SECUNDARIO
                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                </a>
-               <a class="brand" href="index.php">TERESA MARTIN </a>
+               <a class="brand" href="index.html">TERESA MARTIN </a>
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
-                           <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
+                           <li><a href="login.html"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
                         </ul>
                      </li>
                   </ul>
@@ -70,15 +65,15 @@ MENU SECUNDARIO
       <!-- /navbar -->
 
       <!-- ==================================================
-                     MENU PRINCIPAL 
+MENU PRINCIPAL 
 =================================================== --> 
       <div class="subnavbar">
          <div class="subnavbar-inner">
             <div class="container">
                <ul class="mainnav">
                   <li><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
-                  <li class="active"><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
-                  <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
+                  <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
+                  <li class="active"><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
                   <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
                   <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
@@ -92,79 +87,49 @@ MENU SECUNDARIO
       <!-- /subnavbar -->
 
       <!-- ==================================================
-                  CONTENIDO 
+CONTENIDO 
 ==================================================== -->
 
       <div class="main">
          <div class="main-inner">
             <div class="container">
                <div class="row">
-
-                  <!-- ============== ACCIONES ============== -->                
-                  <div class="span12">
-                     <div class="widget">
-                        <div class="widget-header"> <i class="icon-user"></i>
-                           <h3>Alumno</h3>
-                        </div>
-                        <!-- /widget-header -->
-                        <div class="widget-content">
-                           <div class="shortcuts"> 
-                              <a href="frm_alumno.php" class="shortcut">
-                                 <i class="shortcut-icon icon-plus"></i><span class="shortcut-label">Nuevo Alumno</span> </a>
-                              <a href="javascript:;" class="shortcut">
-                                 <i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Editar Alumno</span> </a>
-                              <a href="javascript:;" class="shortcut">
-                                 <i class="shortcut-icon icon-trash"></i> <span class="shortcut-label">Eliminar Alumno</span></a>
-                              <a href="javascript:;" class="shortcut">
-                                 <i class="shortcut-icon icon-search"></i> <span class="shortcut-label">Buscar Alumno</span></a>                              </div>
-                           <!-- /shortcuts --> 
-                        </div>
-                        <!-- /widget-content --> 
-                     </div>
-                     <!-- /span12 --> 
-                  </div>
-
-<!-- ============== TABLA DE ALUMNOS ============== -->    
+                  <!-- ============== TABLA DE RECIBO ============== -->    
                   <div class="span12">
                      <!-- /widget -->                     
                      <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-th-list"></i>
-                           <h3>Lista de Alumnos</h3>
+                           <h3>Lista de Becas</h3>
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
+                          
+                          
+                          
                            <table class="table table-striped table-bordered get_table">
                               <thead>
                                  <tr>
-                                    <th> Matricula </th>
                                     <th> Nombre </th>
-                                    <th> Ciclo </th>
-                                    <th> Grado </th>
-                                    <th> Escolaridad </th>
-                                    <th> Beca</th>
-                                    <th class="td-actions"> </th>
+                                    <th> Descuento </th>
+                                    <th class="td-actions"> Acciones </th>
                                  </tr>
                               </thead>
                               <tbody>
                                 <?php
 while ($row = $datos->fetchObject()){
                                  ?>
-                                 <tr>
-                                    <td><?php echo $row->matricula;?></td>
-                                    <td><?php echo $row->nombre," ", $row->a_paterno," ", $row->a_materno;?></td>
-                                    <td><?php echo $row->idgg;?></td>
-                                    <td><?php echo $row->idgg;?></td>
-                                    <td><?php echo $row->idescolaridad;?></td>
-                                    <td><?php echo $row->idbeca;?></td>
+                                 <tr>                                    
+                                    <td><?php echo $row->nombre;?></td>
+                                    <td>% <?php $descuento= $row->descuento*100; echo $descuento;?></td>
                                     <td class="td-actions">
-                                      <!------------- VER MAS ------------->
-                                       <a href="frm_alumno.php?matricula=<?php echo $row->matricula;?>&ver=ver" class="btn btn-small btn-invert" title="Ver mas">
-                                          <i class="btn-icon-only icon-zoom-in"> </i></a>
-                                          <!------------- EDITAR ------------->
-                                       <a href="frm_alumno.php?matricula=<?php echo $row->matricula;?>" class="btn btn-small btn-invert" title="Editar">
+                                      <!-- Asignar becas -->
+                                       <!--a href="javascript:;" class="btn btn-small btn-invert" title="Asignar">
+                                          <i class="btn-icon-only icon-zoom-in"> </i></a-->
+                                          <!-- Editar Becas -->
+                                       <a href="frm_beca.php?idBeca=<?php echo $row->idbeca;?>" class="btn btn-small btn-invert" title="Editar">
                                           <i class="btn-icon-only icon-pencil"> </i></a>
-                                          <!------------- ELIMINAR ------------->
-                                       <a href="javascript:;" class="btn btn-small btn-invert" title="Eliminar">
+                                          <!-- Eliminar Becas -->
+                                       <a href="del_beca.php?idBeca=<?php echo $row->idbeca;?>" class="btn btn-small btn-invert" title="Eliminar">
                                           <i class="btn-icon-only icon-trash"> </i></a>
                                     </td>
                                  </tr>
@@ -173,32 +138,13 @@ while ($row = $datos->fetchObject()){
                                  ?>
                               </tbody>
                            </table>
-                           
-                           <!-- ============== PAGINACION
-                           <div class="row">
-                              <div>
-                                 <nav>
-                              <ul class="pagination">
-                                 <li><a href="">&laquo;</a></li>
-                                 <li><a href="">1</a></li>
-                                 <li><a href="">2</a></li>
-                                 <li><a href="">3</a></li>
-                                 <li><a href="">4</a></li>
-                                 <li><a href="">5</a></li>
-                                 <li><a href="">&raquo;</a></li>
-                              </ul>
-                           </nav> 
-                              </div>
-                           </div>
-                             ============== -->
-                        
-                              
                         </div>
                         <!-- /widget-content --> 
                      </div>
                      <!-- /widget --> 
                   </div>
-                  <!-- /span12 --> 
+                  <!-- /span12 -->
+
                </div>
                <!-- /row --> 
             </div>
@@ -220,7 +166,7 @@ ANTE FOOTER
                      <h4>
                         Teresa Martin</h4>
                      <ul>
-                        <li><a href="alumnos.php">Alumnos</a></li>
+                        <li><a href="alumnos.html">Alumnos</a></li>
                         <li><a href="#">Pagos</a></li>
                         <li><a href="#">Reportes</a></li>
                         <li><a href="#">Becas</a></li>
@@ -283,8 +229,6 @@ FOOTER
 <script src="js/chart.min.js" type="text/javascript"></script--> 
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
-
-      
 
    </body>
 </html>

@@ -1,24 +1,30 @@
 <?php
 
-   //  -------- Inicio de sesión --------
-   session_start();
-   if(!isset($_SESSION['login'])){
-      header("Location: login.php");
-   }
+//  -------- Inicio de sesión --------
+session_start();
+if(!isset($_SESSION['login'])){
+   header("Location: login.php");
+}
 
-   //  -------- DATOS PARA UPDATE --------
-   /*if(isset($_GET['idadministrador'])){
-        $idAdministrador = $_GET['idadministrador'];
-        include_once 'Administrador.php';
-        $admin = new Administrador();
-        $datos = $admin->get_administrador($idAdministrador);
-        $row = $datos->fetchObject();
-      }
+//  -------- DATOS PARA UPDATE --------
+if(isset($_GET['matricula'])){
+   $matricula = $_GET['matricula'];
+   include_once 'Alumno.php';
+   $alumno = new Alumno();
+   $datos = $alumno->get_alumno($matricula);
+   $row = $datos->fetchObject();
    
-   if(isset($_GET['ver'])){
-        $ver = $_GET['ver'];
-      }*/
-   
+   include_once 'Tutor.php';
+   $tutor = new Tutor();
+   $idTutor = $row->idtutor;
+   $datos1 = $tutor->get_tutor($idTutor, null);
+   $row1 = $datos1->fetchObject();
+}
+
+if(isset($_GET['ver'])){
+   $ver = $_GET['ver'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,7 +41,7 @@
       <link href="css/font-awesome.css" rel="stylesheet">
       <link href="css/style.css" rel="stylesheet">
       <link href="css/pages/dashboard.css" rel="stylesheet">
-      
+
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
 
@@ -108,147 +114,325 @@ CONTENIDO
                      <div class="widget ">
                         <div class="widget-header">
                            <i class="icon-user"></i>
-                           <h3>Nuevo Usuario</h3>
+                           <h3>Inscripción de Nuevo Alumno</h3>
                            <a href="alumnos.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
                         </div> <!-- /widget-header -->					
                         <div class="widget-content">
-
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal">
+                                 <form id="edit-profile" class="form-horizontal" method="<?php
+if(isset($ver)){
+   echo "get";
+}else{
+   echo "post";
+}?>" action="<?php
+if(isset($ver)){
+   echo "frm_alumno.php";
+}else{
+   echo "agregar_alumno.php";
+}
+             ?>">
                                     <fieldset>                          
                                        <h6 class="bigstats">Información Personal del Alumno</h6>
                                        <div id="big_stats" class="cf">
-                                          <div class="control-group">											
-                                             <!--label class="control-label" for="username">Matricula</label>
+                                          <?php
+if(isset($matricula)){?>
+                                          <div class="control-group">
+                                             <label class="control-label" for="matricula">Matricula</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" id="matricula" value="12002039" disabled>
-                                                <p class="help-block">Dato no modificable</p>
-                                             </div--> <!-- /controls -->				
+                                                <?php
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row->matricula</p>";
+      echo "<input type='hidden' name='matricula' value='$row->matricula'>";
+   }else{
+      echo "<input type='text' class='span6 disabled' name='matricula' value='$row->matricula' id='matricula' disabled>";
+   }?>
+
+
+                                             </div> <!-- /controls -->
                                           </div> <!-- /control-group -->
+                                          <?php }?>
+
                                           <div class="control-group">											
-                                             <label class="control-label" for="username">Nombre</label>
+                                             <label class="control-label" for="nombre">Nombre</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" id="nombre" value="" >
+                                                <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row->nombre</p>";
+   }else{
+      echo "<input type='text' class='span6 disabled' name='nombre' id='nombre' value='$row->nombre'>";
+   }
+}else{
+   echo "<input type='text' class='span6 disabled' name='nombre' id='nombre'>";
+}?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
-                                             <label class="control-label" for="firstname">Apellido Paterno</label>
+                                             <label class="control-label" for="a_paterno">Apellido Paterno</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_paterno" value="">
+                                                <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row->a_paterno</p>";
+   }else{
+      echo "<input type='text' class='span6 disabled' name='a_paterno' id='a_paterno' value='$row->a_paterno'>";
+   }
+}else{
+   echo "<input type='text' class='span6 disabled' name='a_paterno' id='a_paterno'>";
+}?>	
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
-                                             <label class="control-label" for="lastname">Apellido Materno</label>
+                                             <label class="control-label" for="a_materno">Apellido Materno</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_materno" value="">
+                                                <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row->a_materno</p>";
+   }else{
+      echo "<input type='text' class='span6 disabled' name='a_materno' id='a_materno' value='$row->a_materno'>";
+   }
+}else{
+   echo "<input type='text' class='span6 disabled' name='a_materno' id='a_materno'>";
+}?>	
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label">Sexo</label>
                                              <div class="controls">
-                                                <label class="radio inline">
-                                                   <input type="radio"  name="sexo"> Hombre
-                                                </label>
-                                                <label class="radio inline">
-                                                   <input type="radio" name="sexo"> Mujer
-                                                </label>
+                                                <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>";
+      if($row->idsexo==3){
+         echo "Hombre";
+      }else{
+         echo "Mujer";
+      }
+      echo "</p>";;
+   }else{
+      echo "<label class='radio inline'><input type='radio' name='sexo' value='4'";
+      if($row->idsexo == 4){echo "checked='checked'";}
+      echo "> Mujer</label>";
+      echo "<label class='radio inline'><input type='radio' name='sexo' value='3'";
+      if($row->idsexo == 3){echo "checked='checked'";}
+      echo "> Hombre</label>";
+   }
+}else{
+   echo "<label class='radio inline'><input type='radio' name='sexo' value='4'> Mujer</label>";
+   echo "<label class='radio inline'><input type='radio' name='sexo' value='3'> Hombre</label>";
+}?>
+
+
+
+
                                              </div>	<!-- /controls -->
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="radiobtns">Grado</label>
                                              <div class="controls">
-                                                <select class="form-control" name="grado">
-                                                   <option value="1">1</option>
-                                                   <option value="2">2</option>
-                                                   <option value="3">3</option>
-                                                   <option value="4">4</option>
-                                                   <option value="5">5</option>
-                                                   <option value="6">6</option>
-                                                </select>
+                                                <?php 
+if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row->idgrado</p>";
+   }else{
+      echo "<select class='form-control' name='grado'>
+                                                   <option value='1'"; if($row->idgrado==1){echo "selected";} echo ">1</option>
+                                                   <option value='2'"; if($row->idgrado==2){echo "selected";} echo ">2</option>
+                                                   <option value='3'"; if($row->idgrado==3){echo "selected";} echo ">3</option>
+                                                   <option value='4'"; if($row->idgrado==4){echo "selected";} echo ">4</option>
+                                                   <option value='5'"; if($row->idgrado==5){echo "selected";} echo ">5</option>
+                                                   <option value='6'"; if($row->idgrado==6){echo "selected";} echo ">6</option>
+                                                </select>";
+   }
+}else{
+   echo "<select class='form-control' name='grado'>
+                                                   <option value='1'> 1 </option>
+                                                   <option value='2'> 2 </option>
+                                                   <option value='3'> 3 </option>
+                                                   <option value='4'> 4 </option>
+                                                   <option value='5'> 5 </option>
+                                                   <option value='6'> 6 </option>
+                                                </select>";   
+}?>
                                              </div>	<!-- /controls -->			
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="radiobtns">Grupo</label>
                                              <div class="controls">
-                                                <select class="form-control" name="grupo">
-                                                   <option value="a">A</option>
-                                                   <option value="b">B</option>
-                                                   <option value="c">C</option>
-                                                </select>
+                                                <?php 
+if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row->idgrupo</p>";
+   }else{
+      echo "<select class='form-control' name='grupo'>
+                                                   <option value='a'"; if($row->idgrupo=="a"){echo "selected";} echo ">A</option>
+                                                   <option value='b'"; if($row->idgrupo=="b"){echo "selected";} echo ">B</option>
+                                                   <option value='c'"; if($row->idgrupo=="c"){echo "selected";} echo ">C</option>
+                                                </select>";
+   }
+}else{
+   echo "<select class='form-control' name='grupo'>
+                                                   <option value='a'>A</option>
+                                                   <option value='b'>B</option>
+                                                   <option value='c'>C</option>
+                                                </select>";   
+}?>
                                              </div>	<!-- /controls -->			
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label">Escolaridad</label>
                                              <div class="controls">
-                                                <label class="radio inline">
-                                                   <input type="radio"  name="preescolar"> Preescolar
-                                                </label>
-                                                <label class="radio inline">
-                                                   <input type="radio" name="primaria"> Primaria
-                                                </label>
+                                                <?php
+if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>";
+      if($row->idescolaridad==2){
+         echo "Preescolar";
+      }else{
+         echo "Primaria";
+      }
+      echo "</p>";
+   }else{
+      echo "<label class='radio inline'><input type='radio'  name='escolaridad' value='2'"; 
+      if($row->idescolaridad==2){
+         echo "checked='checked'";
+      } 
+      echo "> Preescolar </label>";
+      echo "<label class='radio inline'><input type='radio'  name='escolaridad' value='1'"; 
+      if($row->idescolaridad==1){
+         echo "checked='checked'";
+      } 
+      echo "> Primaria </label>";
+   }
+}else{
+   echo "<label class='radio inline'><input type='radio'  name='escolaridad' value='2'> Preescolar </label><label class='radio inline'><input type='radio'  name='escolaridad' value='1'> Primaria </label>";
+}?>
                                              </div>	<!-- /controls -->
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="radiobtns">Beca</label>
                                              <div class="controls">
-                                                <select class="form-control" name="beca">
-                                                   <option value="10">10%</option>
-                                                   <option value="20">20%</option>
-                                                   <option value="50">50%</option>
-                                                   <option value="60">60%</option>
-                                                   <option value="80">80%</option>
-                                                   <option value="100">100%</option>
-                                                </select>
+                                                <?php 
+if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>";
+      if($row->idbeca==1){echo "25%";}
+      if($row->idbeca==2){echo "50%";}
+      if($row->idbeca==3){echo "75%";}
+      if($row->idbeca==4){echo "100%";}
+      echo "</p>";
+   }else{
+      echo "<select class='form-control' name='beca'>
+                                                   <option value='1'"; if($row->idbeca==1){echo "selected";} echo ">25%</option>
+                                                   <option value='2'"; if($row->idbeca==2){echo "selected";} echo ">50%</option>
+                                                   <option value='3'"; if($row->idbeca==3){echo "selected";} echo ">75%</option>
+                                                   <option value='4'"; if($row->idbeca==4){echo "selected";} echo ">100%</option>
+                                                </select>";
+      }
+}else{
+   echo "<select class='form-control' name='beca'>
+                                                   <option value='1'>25%</option>
+                                                   <option value='2'>50%</option>
+                                                   <option value='3'>75%</option>
+                                                   <option value='4'>100%</option>
+                                                </select>";
+}?>
                                              </div>	<!-- /controls -->			
-                                          </div> <!-- /control-group -->                                          
+                                          </div> <!-- /control-group -->
                                        </div> <!-- /big_stats -->
+
                                        <br />
                                        <h6 class="bigstats">Información del Tutor</h6>
                                        <div id="big_stats2" class="cf">
                                           <div class="control-group">											
                                              <label class="control-label" for="username">Nombre</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" id="nombre_tutor" value="Alejandro">
-                                                <p class="help-block">Nombre o nombres del Tutor del alumno</p>
+                                                <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row1->nombre</p>";
+   }else{
+      echo "<input type='text' class='span6 disabled' name='nombre_tutor' id='nombre_tutor' value='$row1->nombre'>";
+      echo "<input type='hidden' name='idTutor' id='idTutor' value='$row1->idtutor'>";
+   }
+}else{
+   echo "<input type='text' class='span6 disabled' name='nombre_tutor' id='nombre_tutor'>";
+}?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="firstname">Apellido Paterno</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_paterno_tutor" value="Tellez">
+                                               <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row1->a_paterno</p>";
+   }else{
+      echo "<input type='text' class='span6 disabled' name='a_paterno_tutor' id='a_paterno_tutor' value='$row1->a_paterno'>";
+   }
+}else{
+   echo "<input type='text' class='span6 disabled' name='a_paterno_tutor' id='a_paterno_tutor'>";
+}?>		
+                                                
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="lastname">Apellido Materno</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_materno_tutor" value="Aguilera">
+                                                <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row1->a_materno</p>";
+   }else{
+      echo "<input type='text' class='span6 disabled' name='a_materno_tutor' id='a_materno_tutor' value='$row1->a_materno'>";
+   }
+}else{
+   echo "<input type='text' class='span6 disabled' name='a_materno_tutor' id='a_materno_tutor'>";
+}?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="email">Email</label>
                                              <div class="controls">
-                                                <input type="email" class="span4" id="email_tutor" value="hola@ejemplo.com">
+                                                <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row1->email</p>";
+   }else{
+      echo "<input type='email' class='span6 disabled' name='email_tutor' id='email_tutor' value='$row1->email'>";
+   }
+}else{
+   echo "<input type='email' class='span6 disabled' name='email_tutor' id='email_tutor'>";
+}?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
-                                             <label class="control-label" for="email">Telefono</label>
+                                             <label class="control-label" for="telefono_tutor">Telefono</label>
                                              <div class="controls">
-                                                <input type="tel" class="span4" id="telefono_tutor" value="1234567890">
+                                                <?php if(isset($matricula)){
+   if(isset($ver)){
+      echo "<p class='form-control-static'>$row1->telefono</p>";
+   }else{
+      echo "<input type='tel' class='span6 disabled' name='telefono_tutor' id='telefono_tutor' value='$row1->telefono'>";
+   }
+}else{
+   echo "<input type='tel' class='span6 disabled' name='telefono_tutor' id='telefono_tutor'>";
+}?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
+                                          <input type="hidden" name="estatus" value="1">
                                        </div> <!-- /big_stats2 -->
 
                                        <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary">Guardar</button> 
-                                          <button class="btn">Cancelar</button>
+                                          <button type="submit" class="btn btn-primary">
+                                            <?php
+if(isset($ver)){
+   echo "Editar";
+}else{
+   echo " Guardar";
+}?>
+                                         </button>
+                                         <a href="alumnos.php" type="button" class="btn">Cancelar</a> 
+                                          <!--button class="btn">Cancelar</button-->
                                        </div> <!-- /form-actions -->
                                     </fieldset>
                                  </form>
-                                 <a href="alumnos.php" class="btn btn-primary">Enviar</a>
                               </div>								
                            </div>
-
                         </div> <!-- /widget-content -->
                      </div> <!-- /widget -->
                   </div> <!-- /span12 -->
