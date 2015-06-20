@@ -39,6 +39,10 @@
       
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
+      
+      <!-- KETCHUP-->
+    <link href="css/ketchup/jquery.ketchup.css" rel="stylesheet">
+    <link href="css/ketchup/jcomfirmaction.css" rel="stylesheet">
 
    </head> 
    <body>
@@ -56,7 +60,7 @@ MENU SECUNDARIO
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
                            <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
@@ -118,7 +122,7 @@ MENU SECUNDARIO
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal" action="<?php 
+                                 <form id="edit-profile" class="form-horizontal valiadmin" action="<?php 
 if(isset($ver)){echo "frm_administrador.php";}else{echo "agregar_admin.php";}
                                     ?>" method="<?php 
 if(isset($ver)){echo "get";}else{echo "post";}
@@ -133,10 +137,10 @@ if(isset($ver)){
 
    echo "<div class='control-group'><label class='control-label' for='matricula'>Matricula</label><div class='controls'><input type='text' class='span6 disabled' disabled='disabled' name='matricula' id='matricula' value = '$row->idadministrador'></div> <!-- /controls --></div> <!-- /control-group -->";
 }?>                        
-                                          <div class="control-group">											
+                                          <div class="input-group control-group">											
                                              <label class="control-label" for="nombre">Nombre</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" name="nombre" id="nombre" <?php if(isset($idAdministrador)){
+                                                <input type="text" class="span6 disabled form-control" data-validate="validate(required, rangelength(1,25))" name="nombre" id="nombre" <?php if(isset($idAdministrador)){
            echo 'value="'.$row->nombre.'"';}
 if(isset($ver)){echo "disabled='disabled'";}?>>
                                              </div> <!-- /controls -->				
@@ -144,7 +148,7 @@ if(isset($ver)){echo "disabled='disabled'";}?>>
                                           <div class="control-group">											
                                              <label class="control-label" for="a_paterno">Apellido Paterno</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_paterno" name="a_paterno" <?php if(isset($idAdministrador)){
+                                                <input type="text" class="span6 form-control" id="a_paterno" data-validate="validate(required, rangelength(1,25))" name="a_paterno" <?php if(isset($idAdministrador)){
            echo 'value="'.$row->a_paterno.'"';}
 if(isset($ver)){echo "disabled='disabled'";}?>>
                                              </div> <!-- /controls -->				
@@ -152,7 +156,7 @@ if(isset($ver)){echo "disabled='disabled'";}?>>
                                           <div class="control-group">											
                                              <label class="control-label" for="a_materno">Apellido Materno</label>
                                              <div class="controls">
-                                                <input type="text" class="span6" id="a_materno" name="a_materno" <?php if(isset($idAdministrador)){
+                                                <input type="text" class="span6 form-control" id="a_materno" data-validate="validate(required, rangelength(1,25))" name="a_materno" <?php if(isset($idAdministrador)){
            echo 'value="'.$row->a_materno.'"';}
 if(isset($ver)){echo "disabled='disabled'";}?>>
                                              </div> <!-- /controls -->				
@@ -160,7 +164,7 @@ if(isset($ver)){echo "disabled='disabled'";}?>>
                                           <div class="control-group">											
                                              <label class="control-label" for="password">Password</label>
                                              <div class="controls">
-                                                <input type="password" class="span6" id="password" name="password" <?php if(isset($idAdministrador)){
+                                                <input type="password" class="span6 form-control" id="password" data-validate="validate(required, rangelength(1,10))" name="password" <?php if(isset($idAdministrador)){
            echo 'value="'.$row->password.'"';}
 if(isset($ver)){echo "disabled='disabled'";}?>>
                                              </div> <!-- /controls -->				
@@ -304,7 +308,19 @@ FOOTER
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
 
-      
+      <script src="js/ketchup/jquery.js"></script>
+    <script src="js/ketchup/jquery.ketchup.js"></script>
+    <script src="js/ketchup/jquery.ketchup.validations.js"></script>
+    <script src="js/ketchup/jquery.ketchup.helpers.js"></script>
+    <script src="js/ketchup/jconfirmaction.jquery.js"></script>
+    
+    <script> 
+      $(document).ready(function(){
+          
+		  $('.valiadmin').ketchup();
+		  
+      });
+  </script>
 
    </body>
 </html>

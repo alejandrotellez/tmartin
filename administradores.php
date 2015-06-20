@@ -49,7 +49,7 @@ MENU SECUNDARIO
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
                            <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
@@ -196,12 +196,18 @@ CONTENIDO
                   <div class="span12">
                      <!-- /widget -->                     
                      <div class="widget widget-table action-table">
-                        <div class="widget-header"> <i class="icon-th-list"></i>
-                           <h3>Lista de Administradores</h3>
+                        <div class="widget-header"> 
+                           <a  role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  <i class="icon-th-list"></i><h3>Lista de Administradores <span class="label label-default">Lista despegable</span></h3>
+</a>
+                           
 
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
+                          <div class="collapse" id="collapseExample">
+  <div class="well">
+ 
                            <table class="table table-striped table-bordered get_table"  id="">
                               <thead>
                                  <tr>
@@ -223,11 +229,14 @@ while ($row = $datos->fetchObject()){
                                     <td><?php echo $row->idprivilegios;?></td>
                                     <td class="td-actions">
                                        <!-- Ver mas -->
-                                       <a class="btn btn-small btn-invert" href="frm_administrador.php?idadministrador=<?php echo $row->idadministrador;?>&ver=ver" title="Ver mas"><i class="btn-icon-only icon-zoom-in"> </i></a>
+                                       <span id="tooltip-ver" class="input-group-addon mitooltip" title="Ver más datos del Administrador" data-placement="top">
+                                       <a class="btn btn-small btn-invert" href="frm_administrador.php?idadministrador=<?php echo $row->idadministrador;?>&ver=ver" title="Ver mas"><i class="btn-icon-only icon-zoom-in"> </i></a></span>      
                                        <!-- Editar -->
-                                       <a class="btn btn-small btn-invert" href="frm_administrador.php?idadministrador=<?php echo $row->idadministrador;?>" title="Editar"><i class="btn-icon-only icon-pencil"> </i></a>
+                                       <span id="tooltip-ver" class="input-group-addon mitooltip" title="Editar datos del Administrador" data-placement="top">
+                                       <a class="btn btn-small btn-invert" href="frm_administrador.php?idadministrador=<?php echo $row->idadministrador;?>" title="Editar"><i class="btn-icon-only icon-pencil"> </i></a></span>
                                        <!-- Eliminar -->
-                                       <a class="btn btn-small btn-invert" href="del_administradro.php?idadministrador=<?php echo $row->idadministrador;?>" title="eliminar"><i class="btn-icon-only icon-trash"> </i></a>
+                                       <span id="tooltip-ver" class="input-group-addon mitooltip" title="Eliminar Administrador" data-placement="top">
+                                       <a class="btn btn-small btn-invert" href="del_administradro.php?idadministrador=<?php echo $row->idadministrador;?>" title="eliminar"><i class="btn-icon-only icon-trash"> </i></a></span>
                                  </tr>
                                  <?php
 }
@@ -237,6 +246,9 @@ while ($row = $datos->fetchObject()){
 
                               </tbody>
                            </table>
+                              
+  </div><!-- / well-->
+</div><!-- / collapse-->
                            <!-- ============== PAGINACION 
 <div class="row">
 <div>
@@ -348,7 +360,7 @@ FOOTER
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
 
-
+<script>$('.mitooltip').tooltip();</script>
 
    </body>
 </html>

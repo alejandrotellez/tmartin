@@ -26,6 +26,10 @@
       
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
+      
+       <!-- KETCHUP-->
+    <link href="css/ketchup/jquery.ketchup.css" rel="stylesheet">
+    <link href="css/ketchup/jcomfirmaction.css" rel="stylesheet">
 
    </head> 
    <body>
@@ -43,7 +47,7 @@ MENU SECUNDARIO
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
                            <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
@@ -105,21 +109,21 @@ MENU SECUNDARIO
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal" action="agregar_ciclo.php" method="post">
+                                 <form id="edit-profile" class="valicilo form-horizontal" action="agregar_ciclo.php" method="post">
                                     <fieldset>                          
                                        <h6 class="bigstats">Agregar un nuevo ciclo escolar</h6>
                                        <div id="big_stats" class="cf">
                                           <div class="control-group">											
                                              <label class="control-label" for="ciclo">Ciclo</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" name="ciclo" id="ciclo" value="Agosto-Junio" >
+                                                <input type="text" class="form-control span6 disabled" name="ciclo" id="ciclo" value="Agosto-Junio" data-validate="validate(required, rangelength(8,15))">
                                                 <p class="help-block">El ciclo por defaul es Agosto-Junio</p>
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
                                           <div class="control-group">											
                                              <label class="control-label" for="year">Año</label>
                                              <div class="controls">
-                                                <input type="number" class="span6" id="year" name="year" value="<?php echo date('Y'); ?>">
+                                                <input type="number" class="span6 form-control" id="year" name="year" value="<?php echo date('Y'); ?>" data-validate="validate(required, number, range(4, 4))">
                                                 <p class="help-block">El año por defaul es el año actual</p>
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->                
@@ -249,8 +253,18 @@ FOOTER
 <script src="js/chart.min.js" type="text/javascript"></script--> 
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
-
       
+      <script src="js/ketchup/jquery.js"></script>
+    <script src="js/ketchup/jquery.ketchup.js"></script>
+    <script src="js/ketchup/jquery.ketchup.validations.js"></script>
+    <script src="js/ketchup/jquery.ketchup.helpers.js"></script>
+    <script src="js/ketchup/jconfirmaction.jquery.js"></script>
+     
+      <script> 
+      $(document).ready(function(){
+      $('.valicilo').ketchup();
+      });
+        </script>  
 
    </body>
 </html>

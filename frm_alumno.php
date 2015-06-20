@@ -19,6 +19,7 @@ if(isset($_GET['matricula'])){
    $idTutor = $row->idtutor;
    $datos1 = $tutor->get_tutor($idTutor, null);
    $row1 = $datos1->fetchObject();
+   //var_dump($row1);
 }
 
 if(isset($_GET['ver'])){
@@ -44,6 +45,10 @@ if(isset($_GET['ver'])){
 
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
+      
+      <!-- KETCHUP-->
+    <link href="css/ketchup/jquery.ketchup.css" rel="stylesheet">
+    <link href="css/ketchup/jcomfirmaction.css" rel="stylesheet">
 
    </head> 
    <body>
@@ -61,7 +66,7 @@ MENU SECUNDARIO
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
                            <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
@@ -120,7 +125,7 @@ CONTENIDO
                         <div class="widget-content">
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal" method="<?php
+                                 <form id="edit-profile" class="form-horizontal valialum" method="<?php
 if(isset($ver)){
    echo "get";
 }else{
@@ -131,7 +136,7 @@ if(isset($ver)){
 }else{
    echo "agregar_alumno.php";
 }
-             ?>">
+             ?>" >
                                     <fieldset>                          
                                        <h6 class="bigstats">Información Personal del Alumno</h6>
                                        <div id="big_stats" class="cf">
@@ -141,17 +146,30 @@ if(isset($matricula)){?>
                                              <label class="control-label" for="matricula">Matricula</label>
                                              <div class="controls">
                                                 <?php
-   if(isset($ver)){
+   if(isset($_GET['matricula'])){
+      if(isset($ver)){
       echo "<p class='form-control-static'>$row->matricula</p>";
       echo "<input type='hidden' name='matricula' value='$row->matricula'>";
    }else{
-      echo "<input type='text' class='span6 disabled' name='matricula' value='$row->matricula' id='matricula' disabled>";
-   }?>
+         echo "<input type='text' class='span6 disabled' name='matricula2' value='$row->matricula' id='matricula' disabled>";
+          echo "<input type='hidden' name='matricula' value='$row->matricula'>";
+      }
+      
+  
+   }
+   
+   ?>
 
 
                                              </div> <!-- /controls -->
                                           </div> <!-- /control-group -->
                                           <?php }?>
+                                        <input type="hidden" name="idGg" value="<?php 
+if(isset($matricula)){
+      echo $row->idgg;
+   }else{
+      echo "1";
+   }?>" >
 
                                           <div class="control-group">											
                                              <label class="control-label" for="nombre">Nombre</label>
@@ -160,10 +178,10 @@ if(isset($matricula)){?>
    if(isset($ver)){
       echo "<p class='form-control-static'>$row->nombre</p>";
    }else{
-      echo "<input type='text' class='span6 disabled' name='nombre' id='nombre' value='$row->nombre'>";
+      echo "<input type='text' class='span6 disabled form-control' name='nombre' id='nombre' value='$row->nombre' data-validate='validate(required, rangelength(1,25))'>";
    }
 }else{
-   echo "<input type='text' class='span6 disabled' name='nombre' id='nombre'>";
+   echo "<input type='text' class='span6 disabled form-control' name='nombre' id='nombre' data-validate='validate(required, rangelength(1,25))'>";
 }?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
@@ -174,10 +192,10 @@ if(isset($matricula)){?>
    if(isset($ver)){
       echo "<p class='form-control-static'>$row->a_paterno</p>";
    }else{
-      echo "<input type='text' class='span6 disabled' name='a_paterno' id='a_paterno' value='$row->a_paterno'>";
+      echo "<input type='text' class='span6 disabled form-control' name='a_paterno' id='a_paterno' value='$row->a_paterno' data-validate='validate(required, rangelength(1,25))'>";
    }
 }else{
-   echo "<input type='text' class='span6 disabled' name='a_paterno' id='a_paterno'>";
+   echo "<input type='text' class='span6 disabled form-control' name='a_paterno' id='a_paterno' data-validate='validate(required, rangelength(1,25))'>";
 }?>	
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
@@ -188,10 +206,10 @@ if(isset($matricula)){?>
    if(isset($ver)){
       echo "<p class='form-control-static'>$row->a_materno</p>";
    }else{
-      echo "<input type='text' class='span6 disabled' name='a_materno' id='a_materno' value='$row->a_materno'>";
+      echo "<input type='text' class='span6 disabled form-control' name='a_materno' id='a_materno' value='$row->a_materno' data-validate='validate(required, rangelength(1,25))'>";
    }
 }else{
-   echo "<input type='text' class='span6 disabled' name='a_materno' id='a_materno'>";
+   echo "<input type='text' class='span6 disabled form-control' name='a_materno' id='a_materno' data-validate='validate(required, rangelength(1,25))'>";
 }?>	
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
@@ -349,11 +367,11 @@ if(isset($matricula)){
    if(isset($ver)){
       echo "<p class='form-control-static'>$row1->nombre</p>";
    }else{
-      echo "<input type='text' class='span6 disabled' name='nombre_tutor' id='nombre_tutor' value='$row1->nombre'>";
-      echo "<input type='hidden' name='idTutor' id='idTutor' value='$row1->idtutor'>";
+      echo "<input type='text' class='span6 disabled form-control' name='nombre_tutor' id='nombre_tutor' value='$row1->nombre'>";
+      echo "<input type='hidden' name='idTutor' id='idTutor' value='$row->idtutor' data-validate='validate(required, rangelength(1,25))'>";
    }
 }else{
-   echo "<input type='text' class='span6 disabled' name='nombre_tutor' id='nombre_tutor'>";
+   echo "<input type='text' class='span6 disabled form-control' name='nombre_tutor' id='nombre_tutor' data-validate='validate(required, rangelength(1,25))'>";
 }?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
@@ -364,10 +382,10 @@ if(isset($matricula)){
    if(isset($ver)){
       echo "<p class='form-control-static'>$row1->a_paterno</p>";
    }else{
-      echo "<input type='text' class='span6 disabled' name='a_paterno_tutor' id='a_paterno_tutor' value='$row1->a_paterno'>";
+      echo "<input type='text' class='span6 disabled form-control' name='a_paterno_tutor' id='a_paterno_tutor' value='$row1->a_paterno' data-validate='validate(required, rangelength(1,25))'>";
    }
 }else{
-   echo "<input type='text' class='span6 disabled' name='a_paterno_tutor' id='a_paterno_tutor'>";
+   echo "<input type='text' class='span6 disabled form-control' name='a_paterno_tutor' id='a_paterno_tutor' data-validate='validate(required, rangelength(1,25))'>";
 }?>		
                                                 
                                              </div> <!-- /controls -->				
@@ -379,10 +397,10 @@ if(isset($matricula)){
    if(isset($ver)){
       echo "<p class='form-control-static'>$row1->a_materno</p>";
    }else{
-      echo "<input type='text' class='span6 disabled' name='a_materno_tutor' id='a_materno_tutor' value='$row1->a_materno'>";
+      echo "<input type='text' class='span6 disabled form-control' name='a_materno_tutor' id='a_materno_tutor' value='$row1->a_materno'data-validate='validate(required, rangelength(1,25))'>";
    }
 }else{
-   echo "<input type='text' class='span6 disabled' name='a_materno_tutor' id='a_materno_tutor'>";
+   echo "<input type='text' class='span6 disabled form-control' name='a_materno_tutor' id='a_materno_tutor'data-validate='validate(required, rangelength(1,25))'>";
 }?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
@@ -393,10 +411,10 @@ if(isset($matricula)){
    if(isset($ver)){
       echo "<p class='form-control-static'>$row1->email</p>";
    }else{
-      echo "<input type='email' class='span6 disabled' name='email_tutor' id='email_tutor' value='$row1->email'>";
+      echo "<input type='email' class='span6 disabled form-control' name='email_tutor' id='email_tutor' value='$row1->email' data-validate='validate(required, email)'>";
    }
 }else{
-   echo "<input type='email' class='span6 disabled' name='email_tutor' id='email_tutor'>";
+   echo "<input type='email' class='span6 disabled form-control' name='email_tutor' id='email_tutor' data-validate='validate(required, email)'>";
 }?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
@@ -407,10 +425,10 @@ if(isset($matricula)){
    if(isset($ver)){
       echo "<p class='form-control-static'>$row1->telefono</p>";
    }else{
-      echo "<input type='tel' class='span6 disabled' name='telefono_tutor' id='telefono_tutor' value='$row1->telefono'>";
+      echo "<input type='tel' class='span6 disabled form-control' name='telefono_tutor' id='telefono_tutor' value='$row1->telefono' data-validate='validate(required, number, rangelength(1,10))'>";
    }
 }else{
-   echo "<input type='tel' class='span6 disabled' name='telefono_tutor' id='telefono_tutor'>";
+   echo "<input type='tel' class='span6 disabled form-control' name='telefono_tutor' id='telefono_tutor' data-validate='validate(required, number, rangelength(1,10))'>";
 }?>		
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
@@ -516,6 +534,19 @@ FOOTER
 <script src="js/chart.min.js" type="text/javascript"></script--> 
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script--> 
-
+      
+      <script src="js/ketchup/jquery.js"></script>
+    <script src="js/ketchup/jquery.ketchup.js"></script>
+    <script src="js/ketchup/jquery.ketchup.validations.js"></script>
+    <script src="js/ketchup/jquery.ketchup.helpers.js"></script>
+    <script src="js/ketchup/jconfirmaction.jquery.js"></script>
+    
+<script> 
+      $(document).ready(function(){
+          
+		  $('.valialum').ketchup();
+		  
+      });
+  </script>
    </body>
 </html>

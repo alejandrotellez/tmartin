@@ -9,12 +9,14 @@ if(!isset($_SESSION['login'])){
 //  -------- Get administradores --------
 
 if(isset($_GET['matricula'])){
-   $matricula = $_GET['matricula'];
-   include_once 'Alumno.php';
-   $alumno = new Alumno();
-   $datos = $alumno->get_alumno($matricula);
-   $row = $datos->fetchObject();
-   //var_dump ($row);
+   if($_GET['matricula'] != null){
+      $matricula = $_GET['matricula'];
+      include_once 'Alumno.php';
+      $alumno = new Alumno();
+      $datos = $alumno->get_alumno($matricula);
+      $row = $datos->fetchObject();
+      //var_dump ($row);
+   }
 }
 
 
@@ -38,6 +40,10 @@ if(isset($_GET['matricula'])){
 
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
+      
+      <!-- KETCHUP-->
+    <link href="css/ketchup/jquery.ketchup.css" rel="stylesheet">
+    <link href="css/ketchup/jcomfirmaction.css" rel="stylesheet">
 
    </head> 
    <body>
@@ -55,7 +61,7 @@ MENU SECUNDARIO
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
                            <li><a href="login.html"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
@@ -113,10 +119,10 @@ CONTENIDO
                               <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
                               <h4 class="modal-title" id="myModalLabel">Pago</h4>
                            </div>
-                           <form action="pagos.php" method="get" >
+                           <form action="pagos.php" method="get"  >
                               <div class="modal-body">                             
                                  <label>Inserte la matricula del alumno</label>
-                                 <input type="text" class="span5 disabled" id="matricula" name="matricula">  
+                                 <input type="text" class="span5 disabled form-control" id="matricula" name="matricula" >  
                               </div>
                               <div class="modal-footer">
                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -139,7 +145,7 @@ CONTENIDO
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal" <?php if(isset($matricula)){
+                                 <form id="edit-profile" class="form-horizontal valipago" <?php if(isset($matricula)){
    echo "action='agregar_pago.php' method='post'";
 }else{
    echo "action='pagos.php' method='get'";}?> >
@@ -155,14 +161,14 @@ CONTENIDO
                                                          <?php if(isset($matricula)){
    echo "<p class='form-control-static'>".$row->matricula."</p><input type='hidden' name='matricula' value='".$row->matricula."'>";
 }else{
-   echo "<input type='text' class='span4 disabled' name='matricula' id='matricula'><p class='help-block'>Inserte Matricula</p>";}?>
+   echo "<input type='text' class='span4 disabled form-control' name='matricula' id='matricula' data-validate='validate(required, number, rangelength(1,11))'><p class='help-block'>Inserte Matricula</p>";}?>
                                                       </div> <!-- /controls -->
                                                    </div> <!-- /control-group -->
                                                    <div class="control-group">		
                                                       <label class='control-label' for='nombre'>Nombre</label>
                                                       <div class='controls'>
                                                          <p class="form-control-static"><?php if(isset($matricula)){echo $row->nombre." ".$row->a_paterno." ".$row->a_materno;}?></p>
-                                                         
+
                                                       </div> <!-- /controls -->
                                                    </div> <!-- /control-group -->
                                                    <div class="control-group">		
@@ -351,23 +357,34 @@ FOOTER
 <script src="js/chart.min.js" type="text/javascript"></script--> 
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
-
-      <?php
+      
+      <script src="js/ketchup/jquery.js"></script>
+    <script src="js/ketchup/jquery.ketchup.js"></script>
+    <script src="js/ketchup/jquery.ketchup.validations.js"></script>
+    <script src="js/ketchup/jquery.ketchup.helpers.js"></script>
+    <script src="js/ketchup/jconfirmaction.jquery.js"></script>
+    
+    <script> 
+      $(document).ready(function(){
+          
+		  $('.valimatricula').ketchup();
+		  $('.valipago').ketchup();
+         
+         <?php
 
 if(!isset($_GET['matricula'])){
-   echo "<script>
-         $(document).ready(function(){
-            $('#matricula').modal({
-               show: true
+   echo " $('#matricula').modal({
+               show: true;
             })
-         });
-
-
-      </script>";
+         ";
 }
 
 
       ?>
+      });
+  </script>
+
+      
 
 
    </body>

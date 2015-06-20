@@ -50,7 +50,7 @@ MENU SECUNDARIO
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
                            <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
@@ -111,11 +111,11 @@ MENU SECUNDARIO
                            <div class="shortcuts"> 
                               <a href="frm_alumno.php" class="shortcut">
                                  <i class="shortcut-icon icon-plus"></i><span class="shortcut-label">Nuevo Alumno</span> </a>
-                              <a href="javascript:;" class="shortcut">
+                              <a href="javascript:;" class="shortcut" data-toggle="modal" data-target="#matricula_editar">
                                  <i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Editar Alumno</span> </a>
-                              <a href="javascript:;" class="shortcut">
+                              <a href="javascript:;" class="shortcut"data-toggle="modal" data-target="#matricula_eliminar">
                                  <i class="shortcut-icon icon-trash"></i> <span class="shortcut-label">Eliminar Alumno</span></a>
-                              <a href="javascript:;" class="shortcut">
+                              <a href="javascript:;" class="shortcut"data-toggle="modal" data-target="#matricula_ver">
                                  <i class="shortcut-icon icon-search"></i> <span class="shortcut-label">Buscar Alumno</span></a>                              </div>
                            <!-- /shortcuts --> 
                         </div>
@@ -123,6 +123,74 @@ MENU SECUNDARIO
                      </div>
                      <!-- /span12 --> 
                   </div>
+                  <!-- ============== MODAL EDITAR ADMINISTRADORES ============== -->
+                  <div class="modal fade" id="matricula_editar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
+                              <h4 class="modal-title" id="myModalLabel">Editar Alumno</h4>
+                           </div>
+                           <form action="frm_alumno.php" method="get" >
+                           <div class="modal-body">                             
+                                <label>Inserte la matricula del Alumno</label>
+                                <input type="text" name="matricula">  
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Editar</button>
+                           </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  
+                  <!-- ============== MODAL ELIMINAR ADMINISTRADORES ============== -->
+                  <div class="modal fade" id="matricula_eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
+                              <h4 class="modal-title" id="myModalLabel">Eliminar Alumno</h4>
+                           </div>
+                           <form action="del_alumno.php" method="get" >
+                           <div class="modal-body">                             
+                                <label>Inserte la matricula del Alumno</label>
+                                <input type="text" name="matricula">  
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Eliminar</button>
+                           </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <!-- ============== MODAL VER MAS ADMINISTRADORES ============== -->
+                  <div class="modal fade" id="matricula_ver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
+                              <h4 class="modal-title" id="myModalLabel">Ver más información de Alumno</h4>
+                           </div>
+                           <form action="frm_alumno.php" method="get" >
+                           <div class="modal-body">                             
+                                <label>Inserte la matricula del Alumno</label>
+                                <input type="text" name="matricula">
+                                <input type="hidden" name="ver" value="ver">
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Buscar</button>
+                           </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+
 
 <!-- ============== TABLA DE ALUMNOS ============== -->    
                   <div class="span12">
@@ -158,14 +226,17 @@ while ($row = $datos->fetchObject()){
                                     <td><?php echo $row->idbeca;?></td>
                                     <td class="td-actions">
                                       <!------------- VER MAS ------------->
-                                       <a href="frm_alumno.php?matricula=<?php echo $row->matricula;?>&ver=ver" class="btn btn-small btn-invert" title="Ver mas">
-                                          <i class="btn-icon-only icon-zoom-in"> </i></a>
+                                       <span id="tooltip-ver" class="input-group-addon mitooltip" title="Ver más datos del Alumno" data-placement="top">
+                                         <a href="frm_alumno.php?matricula=<?php echo $row->matricula;?>&ver=ver" class="btn btn-small btn-invert" title="Ver mas">
+                                          <i class="btn-icon-only icon-zoom-in"> </i></a></span>
                                           <!------------- EDITAR ------------->
+                                          <span id="tooltip-editar" class="input-group-addon mitooltip" title="Editar información del Alumno" data-placement="top">
                                        <a href="frm_alumno.php?matricula=<?php echo $row->matricula;?>" class="btn btn-small btn-invert" title="Editar">
-                                          <i class="btn-icon-only icon-pencil"> </i></a>
+                                          <i class="btn-icon-only icon-pencil"> </i></a></span>
                                           <!------------- ELIMINAR ------------->
-                                       <a href="javascript:;" class="btn btn-small btn-invert" title="Eliminar">
-                                          <i class="btn-icon-only icon-trash"> </i></a>
+                                          <span id="tooltip-eliminar" class="input-group-addon mitooltip" title="Eliminar Alumno" data-placement="top">
+                                       <a href="del_alumno.php?matricula=<?php echo $row->matricula;?>" class="btn btn-small btn-invert" title="Eliminar">
+                                          <i class="btn-icon-only icon-trash"> </i></a></span>
                                     </td>
                                  </tr>
                                  <?php
@@ -283,7 +354,7 @@ FOOTER
 <script src="js/chart.min.js" type="text/javascript"></script--> 
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
-
+<script>$('.mitooltip').tooltip();</script>
       
 
    </body>

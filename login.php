@@ -26,6 +26,10 @@
 
 <link href="css/styleAAA.css" rel="stylesheet">
 
+<!-- KETCHUP-->
+    <link href="css/ketchup/jquery.ketchup.css" rel="stylesheet">
+    <link href="css/ketchup/jcomfirmaction.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -63,17 +67,20 @@
 
 <div class="account-container">	
 	<div class="content clearfix">		
-		<form action="validar.php" method="post">		
+		<form action="validar.php" method="post" class="valilogin">		
 			<h1>Iniciar Sesión</h1>					
 			<div class="login-fields">						
-				<div class="field">
-					<label for="matricula">Matricula de Administrador</label>
-					<input type="text" id="matricula" name="matricula" value="" placeholder="Matricula de Administrador" class="login username-field" />
+				<div class="input-group field">
+				<span class="input-group-addon mitooltip" title="Ingresa la matricula de Alumno" data-placement="top">
+				   <label for="matricula">Matricula de Administrador</label>
+				</span>
+					
+					<input type="text" id="matricula" name="matricula" value="" placeholder="Matricula de Administrador" class="login username-field form-control" data-validate="validate(required, rangelength(1,25))" />
 				</div> <!-- /field de matricula-->
 				
 				<div class="field">
 					<label for="password">Password</label>
-					<input type="password" id="password" name="password" value="" placeholder="Contraseña" class="login password-field"/>
+					<input type="password" id="password" name="password" value="" placeholder="Contraseña" class="login password-field form-control" data-validate="validate(required, rangelength(1,10))"/>
 				</div> <!-- /field de contraseña password -->
 				
 			</div> <!-- /login-fields -->
@@ -90,6 +97,23 @@
 <script src="js/bootstrap.js"></script>
 
 <script src="js/signin.js"></script>
+
+
+    <script src="js/ketchup/jquery.js"></script>
+    <script src="js/ketchup/jquery.ketchup.js"></script>
+    <script src="js/ketchup/jquery.ketchup.validations.js"></script>
+    <script src="js/ketchup/jquery.ketchup.helpers.js"></script>
+    <script src="js/ketchup/jconfirmaction.jquery.js"></script>
+
+<script>
+   $('.mitooltip').tooltip();
+   
+   $(document).ready(function(){
+          
+		  $('.valilogin').ketchup();
+		  
+      });
+   </script>
 
 </body>
 

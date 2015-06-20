@@ -48,6 +48,10 @@ if(!isset($_SESSION['login'])){
 
       <!---------- Style de AAA y Asociados ---------->
       <link href="css/styleAAA.css" rel="stylesheet">
+      
+      <!-- KETCHUP-->
+    <link href="css/ketchup/jquery.ketchup.css" rel="stylesheet">
+    <link href="css/ketchup/jcomfirmaction.css" rel="stylesheet">
 
    </head> 
    <body>
@@ -65,7 +69,7 @@ MENU SECUNDARIO
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
                            <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
@@ -127,7 +131,7 @@ CONTENIDO
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal" action="agregar_beca.php" method="post">
+                                 <form id="edit-profile" class="form-horizontal valibeca" action="agregar_beca.php" method="post">
                                     <fieldset>                          
                                        <h6 class="bigstats">Información sobre la Beca</h6>
                                        <div id="big_stats" class="cf">
@@ -137,7 +141,7 @@ CONTENIDO
                                           <div class="control-group">											
                                              <label class="control-label" for="nombre">Nombre</label>
                                              <div class="controls">
-                                                <input type="text" class="span6 disabled" name="nombre" id="nombre" <?php if(isset($idBeca)){
+                                                <input type="text" class="span6 disabled form-control" name="nombre" data-validate="validate(required, rangelength(1,11))" id="nombre" <?php if(isset($idBeca)){
                 echo "value='".$row->nombre."'";}
 ?>             >
                                              </div> <!-- /controls -->				
@@ -146,7 +150,7 @@ CONTENIDO
                                              <label class="control-label" for="descuento">Descuento</label>
                                              <div class="controls">
                                                 <span>%</span>
-                                                <input type="text" class="span6" id="descuento" name="descuento" <?php if(isset($idBeca)){
+                                                <input type="text" class="span6 form-control" id="descuento" data-validate="validate(required, rangelength(1,4), number)" name="descuento" <?php if(isset($idBeca)){
                $descuento= $row->descuento*100;
                 echo "value='".$descuento."'";}
 ?> >
@@ -260,7 +264,19 @@ FOOTER
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
 
-
+<script src="js/ketchup/jquery.js"></script>
+    <script src="js/ketchup/jquery.ketchup.js"></script>
+    <script src="js/ketchup/jquery.ketchup.validations.js"></script>
+    <script src="js/ketchup/jquery.ketchup.helpers.js"></script>
+    <script src="js/ketchup/jconfirmaction.jquery.js"></script>
+    
+    <script> 
+      $(document).ready(function(){
+         
+		  $('.valibeca').ketchup();
+		  
+      });
+  </script>
 
    </body>
 </html>

@@ -55,7 +55,7 @@ MENU SECUNDARIO
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Nombre del Administrador <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
                            <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
@@ -205,11 +205,13 @@ while ($row = $datos->fetchObject()){
                                        <!--a href="javascript:;" class="btn btn-small btn-invert" title="Asignar">
                                           <i class="btn-icon-only icon-zoom-in"> </i></a-->
                                           <!-- Editar Becas -->
+                                          <span id="tooltip-ver" class="input-group-addon mitooltip" title="Editar datos del Beca" data-placement="top">
                                        <a href="frm_beca.php?idBeca=<?php echo $row->idbeca;?>" class="btn btn-small btn-invert" title="Editar">
-                                          <i class="btn-icon-only icon-pencil"> </i></a>
+                                          <i class="btn-icon-only icon-pencil"> </i></a></span>
                                           <!-- Eliminar Becas -->
+                                          <span id="tooltip-ver" class="input-group-addon mitooltip" title="Eliminar datos del Alumno" data-placement="top">
                                        <a href="del_beca.php?idBeca=<?php echo $row->idbeca;?>" class="btn btn-small btn-invert" title="Eliminar">
-                                          <i class="btn-icon-only icon-trash"> </i></a>
+                                          <i class="btn-icon-only icon-trash"> </i></a></span>
                                     </td>
                                  </tr>
                                  <?php
@@ -308,7 +310,7 @@ FOOTER
       <script src="js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
       
-
+<script>$('.mitooltip').tooltip();</script>
       
 
    </body>

@@ -92,12 +92,14 @@ class Alumno{
          if($this->matricula != null){
             $consulta->bindParam(12, $this->matricula);
          }
+         
+         var_dump($consulta);
 
-         if($consulta->execute($sql)){
+         /*if($consulta->execute()){
              return TRUE;
          }  else {
              return False;
-         }
+         }*/
              
       } catch (PDOExeption $e) {
          print "Error:". $e->getMessge();
@@ -143,8 +145,48 @@ class Alumno{
          $consulta->bindParam(':idbeca', $idBeca, PDO::PARAM_INT);
          $consulta->bindParam(':idgrado', $idGrado, PDO::PARAM_INT);
          $consulta->bindParam(':idgrupo', $idGrupo, PDO::PARAM_STR);
-                  
-         $consulta->execute();         
+         
+         echo $matricula." ". $a_paterno." ". $a_materno." ". $nombre." ". $idSexo." ". $idEstatus." ". $idGg." ". $idEscolaridad." ". $idTutor3." ". $idBeca." ".$idGrado." ". $idGrupo."    ";
+         var_dump($consulta);
+                
+         if($consulta->execute()){
+             return true;
+         }  else {
+             return false;
+         }      
+         
+         
+      }catch (PDOException $ex) {
+           print "Error:". $e->getMessage();
+       }
+   }
+   
+   public function update_alumno1($matricula, $a_paterno, $a_materno, $nombre, $idSexo, $idEstatus, $idGg, $idEscolaridad, $idTutor3, $idBeca,$idGrado, $idGrupo){
+      try{
+         $sql = "UPDATE alumno SET a_paterno=:a_paterno, a_materno=:a_materno, nombre=:nombre, idsexo=:idsexo, idestatus=:idestatus, idgg=:idgg, idescolaridad=:idescolaridad, idtutor=:idtutor, idbeca=:idbeca, idgrupo=:idgrupo, idgrado=:idgrado WHERE matricula = :matricula";
+         $consulta = $this->con->prepare($sql);
+         $consulta->bindParam(':matricula', $matricula, PDO::PARAM_INT);
+         $consulta->bindParam(':a_paterno', $a_paterno, PDO::PARAM_STR);
+         $consulta->bindParam(':a_materno', $a_materno, PDO::PARAM_STR);
+         $consulta->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+         $consulta->bindParam(':idsexo', $idSexo, PDO::PARAM_INT);
+         $consulta->bindParam(':idestatus', $idEstatus, PDO::PARAM_INT);
+         $consulta->bindParam(':idgg', $idGg, PDO::PARAM_INT);
+         $consulta->bindParam(':idescolaridad', $idEscolaridad, PDO::PARAM_INT);
+         $consulta->bindParam(':idtutor', $idTutor3, PDO::PARAM_INT);
+         $consulta->bindParam(':idbeca', $idBeca, PDO::PARAM_INT);
+         $consulta->bindParam(':idgrado', $idGrado, PDO::PARAM_INT);
+         $consulta->bindParam(':idgrupo', $idGrupo, PDO::PARAM_STR);
+         
+         echo $matricula." ". $a_paterno." ". $a_materno." ". $nombre." ". $idSexo." ". $idEstatus." ". $idGg." ". $idEscolaridad." ". $idTutor3." ". $idBeca." ".$idGrado." ". $idGrupo."    ";
+         var_dump($consulta);
+                
+         if($consulta->execute()){
+             return true;
+         }  else {
+             return false;
+         }      
+         
          
       }catch (PDOException $ex) {
            print "Error:". $e->getMessage();

@@ -24,7 +24,7 @@ if($Tutor != null){
    $idTutor1 = $Tutor->fetchObject();
    $idTutor = $idTutor1->idtutor;
 }else{
-   $idTutor = $_POST['idAdministrador'];
+   $idTutor = $_POST['idTutor'];
 }
    
 $tutor->set_tutor($idTutor, $a_paterno_tutor, $a_materno_tutor, $nombre_tutor, $email_tutor, $telefono_tutor);
@@ -41,29 +41,45 @@ if($newtutor == TRUE){
    
    $alumno = new Alumno();
 
-   // -------------- Variables de Alumno --------------
-   $alumno1 = $alumno->max_alumno();
-   $dato = $alumno1->fetchColumn();
-   //$matricula1 = date("Y"); 
-   //$idAdministrador = $matricula1.$dato;
-   $matricula = $dato + 1;
-   
    $nombre = $_POST['nombre'];
    $a_paterno = $_POST['a_paterno'];
    $a_materno = $_POST['a_materno'];
 
-   $idSexo = $_POST['sexo'];
+   $sexo = $_POST['sexo'];
+   $idSexo = $sexo;
    $idEstatus = $_POST['estatus'];
-   $idGg = null;
+   $idGg = $_POST['idGg'];
    $idEscolaridad = $_POST['escolaridad'];   
    $idBeca = $_POST['beca'];
    $idGrado = $_POST['grado'];
    $idGrupo = $_POST['grupo'];
    
-   var_dump($matricula);
-
-   $newalumno = $alumnos->add_alumno($matricula, $a_paterno, $a_materno, $nombre, $idSexo, $idEstatus, $idGg, $idEscolaridad, $idTutor3, $idBeca,$idGrado, $idGrupo);
+   // -------------- Variables de Alumno --------------
+  if(isset($_POST['matricula'])){
+     $matricula= $_POST['matricula'];
+     
+     $newalumno = $alumno->update_alumno1($matricula, $a_paterno, $a_materno, $nombre, $idSexo, $idEstatus, $idGg, $idEscolaridad, $idTutor3, $idBeca,$idGrado, $idGrupo);
+     
+  }else{
+     $alumno1 = $alumno->max_alumno();
+   $dato = $alumno1->fetchColumn();
+   //$matricula1 = date("Y"); 
+   //$idAdministrador = $matricula1.$dato;
+   $matricula = $dato + 1;
+     
+     $newalumno = $alumno->add_alumno1($matricula, $a_paterno, $a_materno, $nombre, $idSexo, $idEstatus, $idGg, $idEscolaridad, $idTutor3, $idBeca,$idGrado, $idGrupo);
+  }
    
-   var_dump($newalumno);
+   
+   
+   
+   
+   
+   if($pagohecho = TRUE){
+      header("Location: alumnos.php");
+   }else {
+      header("Location: index.php");
+   }
+  
 }
 }

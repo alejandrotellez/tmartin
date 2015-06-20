@@ -33,3 +33,19 @@ a{
    background: rgb(221,229,0);
    color: #000;
 }
+
+.modal-lg{
+   width: 900px;
+}
+
+#carusel-index{
+   margin-left: 0px;
+}
+
+.subnavbar .container > ul > li.active > a{
+     border-bottom: 3px solid rgb(20,176,166);
+}
+
+.modal-content form {
+   margin-bottom: 0px;
+}

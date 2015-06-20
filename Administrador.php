@@ -122,7 +122,7 @@ class Administrador{
             return TRUE;
             echo $sql;
          }  else {
-            return False;
+            return false;
          }
          
 
