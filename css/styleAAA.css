@@ -49,3 +49,33 @@ a{
 .modal-content form {
    margin-bottom: 0px;
 }
+
+.configpublic{
+   width: 93% !important;
+}  
+
+#nav-configpublic{
+   margin-bottom: 5px;
+}
+
+.table_configpublic{
+   margin-top: 10px;
+}
+  
+.radio + .radio, .checkbox + .checkbox {
+  margin-top: 10px;
+}
+
+input.aweform[type=text] {
+   width: 100% !important
+}
+
+.img-rounded{
+     max-width: 150px;
+     max-height: 150px;
+}
+
+.imagen_noticia{
+   max-width: 484px;
+  max-height: 252px;
+}

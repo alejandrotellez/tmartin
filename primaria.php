@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-//  -------- Get Slider --------
-include_once 'admin/Slider.php';
-$slide = new Slider();
-$datos = $slide->get_slider(null);
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -57,9 +52,9 @@ $datos = $slide->get_slider(null);
                      <div id="dl-menu" class="dl-menuwrapper">
                         <button class="dl-trigger">Abrir Menu</button>
                         <ul class="dl-menu">
-                           <li class="current"><a href="index.php">Inicio</a></li>
+                           <li><a href="index.php">Inicio</a></li>
                            <li><a href="nosotros.php">Nosotros</a></li>
-                           <li><a href="#">Servicios</a>
+                           <li class="current"><a href="#">Servicios</a>
                               <ul class="dl-submenu">
                                  <li><a href="preescolar.php">Preescolar</a></li>
                                  <li><a href="primaria.php">Primaria</a></li>
@@ -69,7 +64,6 @@ $datos = $slide->get_slider(null);
                            </li>
                            <li><a href="noticias.php">Noticias</a></li>
                            <li><a href="contacto.php">Contacto</a></li>
-                           
                            <?php
 if(isset($_SESSION['nombre'])){
    echo "<li><a href='#'>Tareas de Administrador</a>
@@ -87,8 +81,7 @@ if(isset($_SESSION['nombre'])){
 }else{
    echo "<li><a href='admin/index.php'>Administrador</a>";
 }
-?>
-                       </li>                           
+?>                           
                         </ul>
                      </div> 
                   </div><!-- /.menu --> 
@@ -99,157 +92,50 @@ if(isset($_SESSION['nombre'])){
          </div>
       </header>	
 
-      <!-- SLIDER CON AYUDA DE PLUGGIN DE JAVASCRIPT -->
-      <div class="slider">
-         <ul class="bxslider" id="slider">
-           <?php
-while ($row = $datos->fetchObject()){
-                                 ?>
-            <li>
-               <img src="<?php echo $row->url;?>" /></li>
-<?php
-}
-                                 ?> 
-         </ul>
+      <div class="page_banner">
+
+         <!-- IMAGEN DE INICIO start page_title -->
+         <img src="images/page_banner_about.jpg" alt="" />
+         <!-- end page_title --> 
+
       </div>
-      <!-- end slider -->
 
       <!-- start content -->
       <div class="content">
 
-         <!-- PROMOBOX FRASE PROMOCIONAL PRINCIPAL -->		
-         <div class="promobox text-center">
-            <div class="container">
-               <h1>“ Vivir la experiencia de Dios y ayudar a que otros la vivan, preferentemente entre los pobres ”</h1>
-               <a href="solicitud_alumno.php" class="btn btn-transparent"> Inscribirme </a>
-            </div>
-         </div>
-         <!-- end promobox -->	
-
-         <!-- BLOCK DE IMAGENES DE NOTICIAS -->		
+         <!-- start block -->		
          <div class="block">
             <div class="container">
 
-               <div class="row">
-
-                  <div class="col-md-12">
-
-                     <h2 class="headline">Eventos Recientes</h2>
-                     <span class="line">
-                        <span class="sub-line"></span>
-                     </span>
-
-                     <ul id="recent-works">
-                        <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento1.jpg">
-                           <h3>
-                              <small>
-                                 <a href="#">Preescolar Inicia</a>
-                              </small>
-                           </h3>
-                        </li>
-
-                        <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento2.jpg">
-                           <h3>
-                              <small>
-                                 <a href="#">Dia del Niño</a>
-                              </small>
-                           </h3>
-                        </li>
-
-                        <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento3.jpg">
-                           <h3>
-                              <small>
-                                 <a href="#">Ensaño del Desfile</a>
-                              </small>
-                           </h3>
-                        </li>
-
-                        <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento4.jpg">
-                           <h3>
-                              <small>
-                                 <a href="#">Mini-olimpiadas 2015</a>
-                              </small>
-                           </h3>
-                        </li>	 
-
-                        <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento5.jpg">
-                           <h3>
-                              <small>
-                                 <a href="#">Día del Maestro</a>
-                              </small>
-                           </h3>
-                        </li>	
-
-                        <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento6.jpg">
-                           <h3>
-                              <small>
-                                 <a href="#">Equipos Deportivos</a>
-                              </small>
-                           </h3>
-                        </li>	
-
-
-                     </ul>
-
-                  </div>
-
-               </div>
-
-            </div>
-         </div>
-         <!-- end block -->  	
-
-
-         <!-- BLOCK DE TEXTO CON IMAGEN -->		
-         <div class="block">
-            <div class="container">
-
-               <h2 class="headline">Somos Teresa Martin</h2>
+               <!-- BLOCK SOBRE PREESCOLAR -->
+               <h2 class="headline">Primaria</h2>
                <span class="line">
                   <span class="sub-line"></span>
                </span>
 
                <div class="row">
 
-                  <div class="col-md-12">
+                  <div class="col-md-6">
+                     <p>Para el Colegio Teresa Martin la primaria es la etapa más intensa de formación de hábitos y valores como fuerza que sustenta aprendizajes fundamentales como son la conciencia del trabajo bien hecho y el cumplimiento del deber.</p><p>
 
-                     <h3>Teresa Martin. Labor, Virtus y Scientia </h3>
-                     <br /><br />
-                     <p><img class="pull-left" alt="img" src="img/tm-about.jpg" width="450" style="padding:0 20px 20px 0;">	
-                        El Colegio Teresa Martin es un colegio fundado por las CARMELITAS MISIONERAS DE SANTA TERESA (CMST).
-
-                        Las CMST somos una Congregación fundada en la Ciudad de México el 8 de marzo de 1903 por cuatro religiosas mexicanas, con un CARISMA y peculiar estilo de vida religiosa que acentúa el aspecto contemplativo como fuente de servicio al pueblo de Dios. </p>
-
-                     <p>EN 1942 FUNDAMOS EL COLEGIO TERESA MARTÍN.</p>
-
-                     <p>Como Carmelitas misioneras de Santa Teresa tenemos la Misión de: “vivir la experiencia de Dios y ayudar a que otros la vivan, preferentemente entre los pobres.”</p>
-
-                     <p>Sembrar en el corazón del niño, adolescente y joven, semillas de verdad, sacar de ellos y ellas todo el valioso potencial que poseen y orientarles para su crecimiento y trascendencia hacia la construcción de una sociedad de bien.</p>
-
-                     <p>Padres de familia, si ustedes desean una formación sólida, fundamentada en valores ético-sociales y calidad académica para sus hijos e hijas, aquí en el Colegio Teresa Martin está su lugar, aquí son siempre bienvenidas y bienvenidos.
-                     </p>
-
+                     Se propicia la armonía y alegría de la convivencia y amistad que surge de reconocer a Dios como Padre y tratar a los demás como hermanos. Se brindan las herramientas para cimentar conocimientos que suponen las etapas posteriores de estudio.</p><br>
+                     
+                        <a href="solicitud_alumno.php" class="btn btn-default"> Inscribirme </a>
+                    
+                     <br>
 
                   </div>
 
-                  <div class="col-md-6">
 
+                  <div class="col-md-6">
+                     <img class="gym-club" alt="img" src="img/eventos/evento2.jpg">		
                   </div>
 
                </div>
 
-
-
-            </div>
+            </div><!-- end container -->
          </div>
-         <!-- end block -->  
-
+         <!-- end block -->
 
          <!-- BLOCK DE SERVICIOS -->	
          <div class="block">
@@ -259,7 +145,7 @@ while ($row = $datos->fetchObject()){
                <div class="row">
 
                   <div class="col-md-12">
-                     <h2 class="headers">Servicios</h2>
+                     <h2 class="headers">Requisitos</h2>
                      <span class="line" >
                         <span class="sub-line" ></span>
                      </span>
@@ -268,34 +154,32 @@ while ($row = $datos->fetchObject()){
 
                         <div class="col-md-4">
                            <ul class="nav nav-pills nav-stacked services">
-                              <li class="active"><a href="#tab_a" data-toggle="pill"><i class="fa fa-male"></i>Preescolar</a></li>
-                              <li><a href="#tab_b" data-toggle="pill"><i class="fa fa-user"></i>Primaria</a></li>
-                              <li><a href="#tab_c" data-toggle="pill"><i class="fa fa-heart"></i>Pastoral</a></li>
-                              <li><a class="last" href="#tab_d" data-toggle="pill"><i class="fa fa-users"></i>Familia</a></li>
+                              <li class="active"><a href="#tab_a" data-toggle="pill"><i class="fa fa-male"></i>1er. Grado</a></li>
+                              <li><a href="#tab_b" data-toggle="pill"><i class="fa fa-user"></i>2do. a 6to. Grado</a></li>
                            </ul>
                         </div>
 
                         <div class="tab-content col-md-8">
                            <div class="tab-pane active" id="tab_a">
-                              <h4>Preescolar</h4>
-                              <img src="img/servicios/servicio1.jpg" style="margin:15px 0;" alt="" />
-                              <p>Formando en los pequeños, hábitos fundamentales que más tarde se convertirán en actitudes de vida: atención, ejecución de indicaciones, escucha; se despierta la capacidad innata hacia la sorpresa y de admiración mediante el contacto físico con la naturaleza.</p>
+                              <h4>1er. Grado</h4>
+                              <ul>
+                                 <li>Original y 3 copias del acta de nacimiento</li>
+                                 <li>Original y 2 copias del certificado de preescolar</li>
+                                 <li>Original y copia de cartilla de vacunación</li>
+                                 <li>6 años cumplidos al 1º de septiembre</li>
+                                 <li>Original y 2 copias del CURP</li>
+                              </ul>
                            </div>
                            <div class="tab-pane" id="tab_b">
-                              <h4>Primaria</h4>
-                              <img src="img/servicios/servicio2.jpg" style="margin:15px 0;" alt="" />
-                              <p>La etapa más intensa de formación de hábitos y valores como fuerza que sustenta aprendizajes fundamentales como son la conciencia del trabajo bien hecho y el cumplimiento del deber.</p>
-                           </div>
-                           <div class="tab-pane" id="tab_c">
-                              <h4>Pastoral</h4>
-                              <img src="img/servicios/servicio3.jpg" style="margin:15px 0;" alt="" />
-                              <p> La educación del Colegio Teresa Martin se caracteriza por su enfoque católico y se fundamenta en la Sagrada Escritura y espiritualidad del Carmelo Teresiano.</p>
-                           </div>
-                           <div class="tab-pane" id="tab_d">
-                              <h4>Ingles</h4>
-                              <img src="img/servicios/servicio4.jpg" style="margin:15px 0;" alt="" />
-                              <p>La familia, es la primera responsable de la educación y el Colegio, su colaborador cercano y solidario.</p>
-                           </div>
+                              <h4>2do. a 6to. Grado</h4>                           
+                              <ul>
+                                 <li>Original y 3 copias del acta de nacimiento</li>
+                                 <li>Original y 2 copias de la boleta del grado anterior</li>
+                                 <li>Original y 2 copias del CURP</li>
+                                 <li>Carta original de buena conducta</li>
+                              </ul>  
+
+                           </div>                                                
 
                         </div><!-- tab content -->
 
