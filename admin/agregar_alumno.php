@@ -26,22 +26,21 @@ $Tutor = $tutor->get_tutor($idTutor1, $email_tutor);
 
 if($Tutor != null){
    $idTutor1 = $Tutor->fetchObject();
-   $idTutor = $idTutor1->idtutor;
+   $idTutor3 = $idTutor1->idtutor;
 }else{
-   $idTutor = $_POST['idTutor'];
-}
-   
-$tutor->set_tutor($idTutor, $a_paterno_tutor, $a_materno_tutor, $nombre_tutor, $email_tutor, $telefono_tutor);
-$newtutor = $tutor->add_tutor();
-
-if($Tutor != null){
-   $Tutor = $tutor->get_tutor($idTutor1, $email_tutor);
-   $idTutor2 = $Tutor->fetchObject();
+   $tutor->set_tutor($idTutor, $a_paterno_tutor, $a_materno_tutor, $nombre_tutor, $email_tutor, $telefono_tutor);
+   $newtutor = $tutor->add_tutor();
+   $Tutores = $tutor->get_tutor($idTutor, $email_tutor);
+   $idTutor2 = $Tutores->fetchObject();
    $idTutor3 = $idTutor2->idtutor;
 }
+   
+if(isset($_POST['idTutor'])){
+      $idTutor3 = $_POST['idTutor'];
+   }
+  
 
-
-if($newtutor == TRUE){
+if($idTutor3 != null){
    
    $alumno = new Alumno();
 
