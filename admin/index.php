@@ -220,7 +220,8 @@ CONTENIDO
                               </div>
                            </div>
                         </div>
-                     </div>
+                        
+                     
 
 
                      <!---------- CARUSEL DE IMAGENES ---------->
@@ -256,8 +257,8 @@ CONTENIDO
                            </a>
                         </div>
                      </div>
-                  </div>             
-
+                               
+</div>
 
                   <div class="span6">
                      <div class="widget">
