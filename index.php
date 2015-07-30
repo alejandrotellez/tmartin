@@ -2,7 +2,7 @@
 session_start();
 
 //  -------- Get Slider --------
-include_once 'admin/Slider.php';
+include_once 'admin/Clases/Slider.php';
 $slide = new Slider();
 $datos = $slide->get_slider(null);
 
@@ -14,23 +14,20 @@ $datos = $slide->get_slider(null);
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="description" content="">
       <meta name="author" content="AAA-Asociados">
-      <link rel="shortcut icon" href="img/ico/favicon.png">
+      <link rel="shortcut icon" href="assets/img/ico/favicon.png">
 
       <title>Teresa Martin</title>
 
       <!-- CSS DE BOOTSTRAP -->
-      <link href="css/bootstrap2.css" rel="stylesheet">
-
+      <link href="assets/css/bootstrap2.css" rel="stylesheet">
       <!-- CSS DE LA PLANTILLA -->
-      <link href="css/stylepublic.css" rel="stylesheet">
-      <link href="css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-
+      <link href="assets/css/stylepublic.css" rel="stylesheet">
+      <link href="assets/css/jquery.bxslider.css" rel="stylesheet" type="text/css">
+      
       <!-- JAVASCRIPT DE PLANTILLA -->
-      <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-
-
-      <script src="js/jquery.bxslider.js" type="text/javascript"></script>
-      <script src="js/modernizr.custom.js"></script>
+      <script type="text/javascript" src="assets/js/jquery-1.11.1.min.js"></script>
+      <script src="assets/js/jquery.bxslider.js" type="text/javascript"></script>
+      <script src="assets/js/modernizr.custom.js"></script>
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
 <script src="../../assets/js/html5shiv.js"></script>
@@ -58,37 +55,37 @@ $datos = $slide->get_slider(null);
                         <button class="dl-trigger">Abrir Menu</button>
                         <ul class="dl-menu">
                            <li class="current"><a href="index.php">Inicio</a></li>
-                           <li><a href="nosotros.php">Nosotros</a></li>
+                           <li><a href="public/nosotros.php">Nosotros</a></li>
                            <li><a href="#">Servicios</a>
                               <ul class="dl-submenu">
-                                 <li><a href="preescolar.php">Preescolar</a></li>
-                                 <li><a href="primaria.php">Primaria</a></li>
-                                 <li><a href="pastoral.php">Pastoral</a></li>
-                                 <li><a href="familia.php">Familia</a></li>
+                                 <li><a href="public/preescolar.php">Preescolar</a></li>
+                                 <li><a href="public/primaria.php">Primaria</a></li>
+                                 <li><a href="public/pastoral.php">Pastoral</a></li>
+                                 <li><a href="public/familia.php">Familia</a></li>
                               </ul>
                            </li>
-                           <li><a href="noticias.php">Noticias</a></li>
-                           <li><a href="contacto.php">Contacto</a></li>
+                           <li><a href="public/noticias.php">Noticias</a></li>
+                           <li><a href="public/contacto.php">Contacto</a></li>
                            
                            <?php
 if(isset($_SESSION['nombre'])){
    echo "<li><a href='#'>Tareas de Administrador</a>
                               <ul class='dl-submenu'>
                                  <li><a href='admin/index.php'>Inicio</a></li>
-                                 <li><a href='admin/alumnos.php'>Alumnos</a></li>
-                                 <li><a href='admin/pagos.php'>Pagos</a></li>
-                                 <li><a href='admin/reportes.php'>Reportes</a></li>
-                                 <li><a href='admin/becas.php'>Becas</a></li>
-                                 <li><a href='admin/ciclos.php'>Ciclos</a></li>
-                                 <li><a href='admin/administradores.php'>Administradores</a></li>
-                                 <li><a href='admin/configpublic.php'>Pagina Publica</a></li>
+                                 <li><a href='admin/Alumno/alumnos.php'>Alumnos</a></li>
+                                 <li><a href='admin/Pago/pagos.php'>Pagos</a></li>
+                                 <li><a href='admin/Reportes/reportes.php'>Reportes</a></li>
+                                 <li><a href='admin/Beca/becas.php'>Becas</a></li>
+                                 <li><a href='admin/Ciclo/ciclos.php'>Ciclos</a></li>
+                                 <li><a href='admin/Administrador/administradores.php'>Administradores</a></li>
+                                 <li><a href='admin/Configuracion/configpublic.php'>Pagina Publica</a></li>
                               </ul>
                            </li>";
 }else{
-   echo "<li><a href='admin/index.php'>Administrador</a>";
+   echo "<li><a href='admin/index.php'>Administrador</a></li>";
 }
 ?>
-                       </li>                           
+                                                  
                         </ul>
                      </div> 
                   </div><!-- /.menu --> 
@@ -121,7 +118,7 @@ while ($row = $datos->fetchObject()){
          <div class="promobox text-center">
             <div class="container">
                <h1>“ Vivir la experiencia de Dios y ayudar a que otros la vivan, preferentemente entre los pobres ”</h1>
-               <a href="solicitud_alumno.php" class="btn btn-transparent"> Inscribirme </a>
+               <a href="public/solicitud_alumno.php" class="btn btn-transparent"> Inscribirme </a>
             </div>
          </div>
          <!-- end promobox -->	
@@ -141,7 +138,7 @@ while ($row = $datos->fetchObject()){
 
                      <ul id="recent-works">
                         <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento1.jpg">
+                           <img class="img-responsive" alt="image" src="assets/img/eventos/evento1.jpg">
                            <h3>
                               <small>
                                  <a href="#">Preescolar Inicia</a>
@@ -150,7 +147,7 @@ while ($row = $datos->fetchObject()){
                         </li>
 
                         <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento2.jpg">
+                           <img class="img-responsive" alt="image" src="assets/img/eventos/evento2.jpg">
                            <h3>
                               <small>
                                  <a href="#">Dia del Niño</a>
@@ -159,7 +156,7 @@ while ($row = $datos->fetchObject()){
                         </li>
 
                         <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento3.jpg">
+                           <img class="img-responsive" alt="image" src="assets/img/eventos/evento3.jpg">
                            <h3>
                               <small>
                                  <a href="#">Ensaño del Desfile</a>
@@ -168,7 +165,7 @@ while ($row = $datos->fetchObject()){
                         </li>
 
                         <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento4.jpg">
+                           <img class="img-responsive" alt="image" src="assets/img/eventos/evento4.jpg">
                            <h3>
                               <small>
                                  <a href="#">Mini-olimpiadas 2015</a>
@@ -177,7 +174,7 @@ while ($row = $datos->fetchObject()){
                         </li>	 
 
                         <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento5.jpg">
+                           <img class="img-responsive" alt="image" src="assets/img/eventos/evento5.jpg">
                            <h3>
                               <small>
                                  <a href="#">Día del Maestro</a>
@@ -186,7 +183,7 @@ while ($row = $datos->fetchObject()){
                         </li>	
 
                         <li>
-                           <img class="img-responsive" alt="image" src="img/eventos/evento6.jpg">
+                           <img class="img-responsive" alt="image" src="assets/img/eventos/evento6.jpg">
                            <h3>
                               <small>
                                  <a href="#">Equipos Deportivos</a>
@@ -221,7 +218,7 @@ while ($row = $datos->fetchObject()){
 
                      <h3>Teresa Martin. Labor, Virtus y Scientia </h3>
                      <br /><br />
-                     <p><img class="pull-left" alt="img" src="img/tm-about.jpg" width="450" style="padding:0 20px 20px 0;">	
+                     <p><img class="pull-left" alt="img" src="assets/img/tm-about.jpg" width="450" style="padding:0 20px 20px 0;">	
                         El Colegio Teresa Martin es un colegio fundado por las CARMELITAS MISIONERAS DE SANTA TERESA (CMST).
 
                         Las CMST somos una Congregación fundada en la Ciudad de México el 8 de marzo de 1903 por cuatro religiosas mexicanas, con un CARISMA y peculiar estilo de vida religiosa que acentúa el aspecto contemplativo como fuente de servicio al pueblo de Dios. </p>
@@ -278,23 +275,23 @@ while ($row = $datos->fetchObject()){
                         <div class="tab-content col-md-8">
                            <div class="tab-pane active" id="tab_a">
                               <h4>Preescolar</h4>
-                              <img src="img/servicios/servicio1.jpg" style="margin:15px 0;" alt="" />
-                              <p>Formando en los pequeños, hábitos fundamentales que más tarde se convertirán en actitudes de vida: atención, ejecución de indicaciones, escucha; se despierta la capacidad innata hacia la sorpresa y de admiración mediante el contacto físico con la naturaleza.</p>
+                              <img src="assets/img/servicios/servicio1.jpg" style="margin:15px 0;" alt="" />
+                              <p>Formando en los pequeños, hábitos fundamentales que más tarde se convertirán en actitudes de vida: atención, ejecución de indicaciones, escucha; se despierta la capacidad innata hacia la sorpresa y de admiración mediante el contacto físico con la naturaleza. <a href="public/preescolar.php">Ver más</a></p>
                            </div>
                            <div class="tab-pane" id="tab_b">
                               <h4>Primaria</h4>
-                              <img src="img/servicios/servicio2.jpg" style="margin:15px 0;" alt="" />
-                              <p>La etapa más intensa de formación de hábitos y valores como fuerza que sustenta aprendizajes fundamentales como son la conciencia del trabajo bien hecho y el cumplimiento del deber.</p>
+                              <img src="assets/img/servicios/servicio2.jpg" style="margin:15px 0;" alt="" />
+                              <p>La etapa más intensa de formación de hábitos y valores como fuerza que sustenta aprendizajes fundamentales como son la conciencia del trabajo bien hecho y el cumplimiento del deber.<a href="public/primaria.php">Ver más</a></p>
                            </div>
                            <div class="tab-pane" id="tab_c">
                               <h4>Pastoral</h4>
-                              <img src="img/servicios/servicio3.jpg" style="margin:15px 0;" alt="" />
-                              <p> La educación del Colegio Teresa Martin se caracteriza por su enfoque católico y se fundamenta en la Sagrada Escritura y espiritualidad del Carmelo Teresiano.</p>
+                              <img src="assets/img/servicios/servicio3.jpg" style="margin:15px 0;" alt="" />
+                              <p> La educación del Colegio Teresa Martin se caracteriza por su enfoque católico y se fundamenta en la Sagrada Escritura y espiritualidad del Carmelo Teresiano.<a href="public/pastoral.php">Ver más</a></p>
                            </div>
                            <div class="tab-pane" id="tab_d">
-                              <h4>Ingles</h4>
-                              <img src="img/servicios/servicio4.jpg" style="margin:15px 0;" alt="" />
-                              <p>La familia, es la primera responsable de la educación y el Colegio, su colaborador cercano y solidario.</p>
+                              <h4>Familia</h4>
+                              <img src="assets/img/servicios/servicio4.jpg" style="margin:15px 0;" alt="" />
+                              <p>La familia, es la primera responsable de la educación y el Colegio, su colaborador cercano y solidario.<a href="public/familia.php">Ver más</a></p>
                            </div>
 
                         </div><!-- tab content -->
@@ -322,14 +319,14 @@ while ($row = $datos->fetchObject()){
                </span>	
 
                <ul id="clients"> 
-                  <li><img src="img/alianzas/alianza1.png" alt="" width="200" ></li>
-                  <li><img src="img/alianzas/alianza2.png" alt="" width="200"></li>
-                  <li><img src="img/alianzas/alianza3.png" alt="" width="200"></li>
-                  <li><img src="img/alianzas/alianza4.png" alt="" width="200"></li>
-                  <li><img src="img/alianzas/alianza1.png" alt="" width="200" ></li>
-                  <li><img src="img/alianzas/alianza2.png" alt="" width="200"></li>
-                  <li><img src="img/alianzas/alianza3.png" alt="" width="200"></li>
-                  <li><img src="img/alianzas/alianza4.png" alt="" width="200"></li>
+                  <li><img src="assets/img/alianzas/alianza1.png" alt="" width="200" ></li>
+                  <li><img src="assets/img/alianzas/alianza2.png" alt="" width="200"></li>
+                  <li><img src="assets/img/alianzas/alianza3.png" alt="" width="200"></li>
+                  <li><img src="assets/img/alianzas/alianza4.png" alt="" width="200"></li>
+                  <li><img src="assets/img/alianzas/alianza1.png" alt="" width="200" ></li>
+                  <li><img src="assets/img/alianzas/alianza2.png" alt="" width="200"></li>
+                  <li><img src="assets/img/alianzas/alianza3.png" alt="" width="200"></li>
+                  <li><img src="assets/img/alianzas/alianza4.png" alt="" width="200"></li>
                </ul>
 
             </div>
@@ -404,15 +401,15 @@ while ($row = $datos->fetchObject()){
 ================================================== -->
 
       <!-- JAVASCRIP DE BOOTSTRAPT -->
-      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 
       <!-- JAVASCRIP DE PLANTILLA -->
-      <script type="text/javascript" src="js/jquery.dlmenu.js"></script>
-      <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-      <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
-      <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-      <script type="text/javascript" src="js/jquery.ajax-contact-form.js"></script>
-      <script type="text/javascript" src="js/script.js"></script>
+      <script type="text/javascript" src="assets/js/jquery.dlmenu.js"></script>
+      <script type="text/javascript" src="assets/js/jquery.flexisel.js"></script>
+      <script type="text/javascript" src="assets/js/jquery.prettyPhoto.js"></script>
+      <script type="text/javascript" src="assets/js/jquery.easing.1.3.js"></script>
+      <script type="text/javascript" src="assets/js/jquery.ajax-contact-form.js"></script>
+      <script type="text/javascript" src="assets/js/script.js"></script>
 
    </body>
 </html>

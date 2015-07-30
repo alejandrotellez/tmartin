@@ -1,0 +1,116 @@
+table, tr, td{
+   border: 1px solid #000;
+}
+
+div{
+   display: block;
+   box-sizing: border-box;
+}
+
+body{
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 15px;
+   line-height: 1.428571429;
+   color: #333333;
+}
+
+h1, h2, h3{
+   margin-top: 20px;
+  margin-bottom: 0px !important;
+     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+   margin: 0.67em 0;
+}
+.col-12{
+   width: 100%;
+}
+
+.col-4{
+   width: 10%; 
+}
+
+.col-8{
+   width: 70%;
+}
+
+.col-12, .col-4, .col-8{
+   position: relative;
+   min-height: 1px;
+   padding-right: 15px;
+   padding-left: 15px;
+   float: left;
+}
+
+/* ------------------- Head ------------------- */
+
+#escudo{
+  width: 100px;
+}
+
+#title{
+     text-align: left;
+}
+
+h1{
+   font-size: 30px;
+   color: rgb(11,72,107);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+h2{
+     color: rgb(221,229,0);
+}
+
+/* ------------------- Body ------------------- */
+#title{
+   text-align: center;
+}
+
+#title > h2{
+   color: rgb(11,72,107);
+  text-transform: uppercase;
+  font-weight: bold;
+   text-align: center;
+   font-size: 20px;
+}
+
+
+#body > div{
+   width: 90%;
+  margin: auto;
+}
+
+.line{
+   border-bottom: 1px solid #CDD1D0;
+  display: block;
+  margin: 0 0 10px;
+}
+  
+.subline{
+     display: block;
+  border: 2px solid rgb(221,229,0);
+  margin-bottom: -1px;
+  width: 51px;
+}
+
+.informacion{
+  margin: auto;
+   padding-left: 20px;
+}
+
+.info-name{
+   font-weight:bold;
+}
+  
+
+/* ------------------- Footer ------------------- */
+#footer{
+     margin-top: 10px;
+  text-align: center;
+}
+
+p{
+   margin: 0px;
+}

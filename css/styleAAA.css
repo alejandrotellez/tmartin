@@ -67,7 +67,7 @@ a{
 }
 
 input.aweform[type=text] {
-   width: 100% !important
+   width: 100% !important;
 }
 
 .img-rounded{
@@ -78,4 +78,15 @@ input.aweform[type=text] {
 .imagen_noticia{
    max-width: 484px;
   max-height: 252px;
+}
+
+.btn-cancelar{
+    color: #fff !important;  
+}
+
+.btn-descargar{
+ padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;  
 }

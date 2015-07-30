@@ -1,0 +1,133 @@
+/**/
+
+body{
+   font-family: "Open Sans",sans-serif;
+   font-size: 12px;
+}
+
+.get_table .td-actions{
+   width: 150px;
+}
+
+.get_table tr td, .get_table tr th{
+   text-align: center;
+}
+
+.cerrar_frm{
+   float: right;
+   margin-right: 20px;
+}
+
+.pagos{
+   margin-left: 70px;
+}
+
+.navbar-inner{
+   background: rgb(11,72,107) !important;
+}
+
+.navbar-search .search-query{
+   background-color: rgb(241,241,241);
+}
+
+a{
+   color: rgb(221,229,0);
+}
+
+.dropdown-menu .active>a:hover { background:rgb(11,72,107);}
+
+.shortcuts .shortcut:hover {
+   background: rgb(221,229,0);
+   color: #000;
+}
+
+.modal-lg{
+   width: 900px;
+}
+
+#carusel-index{
+   margin-left: 0px;
+}
+
+.subnavbar .container > ul > li > a {
+   font-weight: normal;
+   text-transform: uppercase;
+}
+
+.subnavbar .container > ul > li.active > a{
+   border-bottom: 3px solid rgb(20,176,166);
+}
+
+.modal-content form {
+   margin-bottom: 0px;
+}
+
+.configpublic{
+   width: 93% !important;
+}  
+
+#nav-configpublic{
+   margin-bottom: 5px;
+}
+
+.table_configpublic{
+   margin-top: 10px;
+}
+
+.widget-header h3 {
+   font-weight: normal;
+}
+
+.radio + .radio, .checkbox + .checkbox {
+   margin-top: 0px;
+}
+
+input.aweform[type=text] {
+   width: 100% !important;
+}
+
+.img-rounded{
+   max-width: 150px;
+   max-height: 150px;
+}
+
+.imagen_noticia{
+   max-width: 484px;
+   max-height: 252px;
+}
+
+.btn-cancelar{
+   color: #fff !important;  
+}
+
+.btn-descargar{
+   padding: 5px 10px;
+   font-size: 12px;
+   line-height: 1.5;
+   border-radius: 3px;  
+}
+
+.extra a{
+   text-decoration: none;
+   color: #BBB !important;
+}
+
+a:hover {
+   color: rgb(221,229,0) !important;
+}
+
+.sexo{
+     text-transform: lowercase;
+}
+
+.grupo{
+   text-transform: uppercase;
+}
+
+.estatusfrm{
+   float: right;
+}
+
+.text-danger{
+   color: #FF0000;
+}

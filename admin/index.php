@@ -3,7 +3,7 @@
 //  -------- Inicio de sesión --------
 session_start();
 if(!isset($_SESSION['login'])){
-   header("Location: login.php");
+   header("Location: Administrador/login.php");
 }
 
 ?>
@@ -13,20 +13,20 @@ if(!isset($_SESSION['login'])){
    <head>
       <meta charset="utf-8">
       <title>TERESA MARTIN</title>
-
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      
-      <link rel="shortcut icon" href="../img/ico/favicon.png">
+      <meta name="apple-mobile-web-app-capable" content="yes">  
+      <link rel="shortcut icon" href="../assets/img/ico/favicon.png">
 
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-      <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
-      <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
-      <link href="../css/font-awesome2.css" rel="stylesheet">
-      <link href="../css/style.css" rel="stylesheet">
-      <link href="../css/pages/dashboard.css" rel="stylesheet">
-
-      <link href="../css/styleAAA.css" rel="stylesheet">
+      <!-- CSS DE BOOTSTRAP -->
+      <link type="text/css" rel="stylesheet" href="../assets/css/bootstrap.min.css">
+      <link type="text/css" rel="stylesheet" href="../assets/css/bootstrap-responsive.min.css">
+      <!-- CSS DE PLANTILLA -->
+      <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+      <link type="text/css" rel="stylesheet" href="../assets/css/font-awesome2.css">
+      <link type="text/css" rel="stylesheet" href="../assets/css/style.css">
+      <link type="text/css" rel="stylesheet" href="../assets/css/pages/dashboard.css">
+      <!-- CSS DE AAA Y ASOCIADOS -->
+      <link type="text/css" rel="stylesheet" href="../assets/css/styleAAA.css">
 
    </head> 
    <body>
@@ -43,17 +43,17 @@ MENU SECUNDARIO
                <a class="brand" href="index.php">TERESA MARTIN </a>
                <div class="nav-collapse">
                   <ul class="nav pull-right">
-                    <li>
+                     <li>
                         <a href="../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
                      </li>
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
-                           <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
+                           <li><a href="Administrador/login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
                         </ul>
                      </li>
-                     
+
                   </ul>
                   <form class="navbar-search pull-right">
                      <input type="text" class="search-query" placeholder="Buscar">
@@ -75,13 +75,13 @@ MENU PRINCIPAL
             <div class="container">
                <ul class="mainnav">
                   <li class="active"><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
-                  <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
-                  <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
-                  <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
-                  <li><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
-                  <li><a href="configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
+                  <li><a href="Alumno/alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
+                  <li><a href="Pago/pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
+                  <li><a href="Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
+                  <li><a href="Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <li><a href="Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <li><a href="Configuracion/configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
             </div>
             <!-- /container --> 
@@ -120,7 +120,7 @@ CONTENIDO
 
                                  <button type="button" class="btn btn-lg btn-danger center-block" id="btn-info-1" data-toggle="popover" 
                                          title="Tu nombre completo" 
-                                         data-content="Tue nombre es : <?php echo $_SESSION['nombre']; echo "<br>";?> Tus Privilegios son:<?php echo $_SESSION['privilegios'];echo "<br>";?> Tu matricula es:<?php echo $_SESSION['idAdministrador'];echo "<br>";?> Tu contraseña es: <?php echo $_SESSION['password'];?>">
+                                         data-content="Tue nombre es : <?php echo $_SESSION['nombre']; echo "<br>";?> Tus Privilegios son: <?php echo $_SESSION['privilegios'];echo "<br>";?> Tu matricula es: <?php echo $_SESSION['idAdministrador'];echo "<br>";?> Tu contraseña es: <?php echo $_SESSION['password'];?>">
                                     Mis datos
                                  </button>
 
@@ -190,8 +190,8 @@ CONTENIDO
 
                                  <!--   -------------------------modal 3 ----------------------     -->
 
-                                 <div id="paso-3" class="modal fade bs-modal-3 bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
+                                 <div id="paso-3" class="modal fade bs-modal-3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
                                        <div class="modal-content">
                                           <div class="modal-header">
                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -205,6 +205,7 @@ CONTENIDO
                                                    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non 
                                                    metus auctor fringilla.
                                                 </p>
+                                             </div>
                                              </div>
                                              <div class="modal-footer">
                                                 <button type="button" id="guia_3a" class="btn btn-primary">Anterior</button>
@@ -231,13 +232,13 @@ CONTENIDO
                            <!-- Wrapper for slides -->
                            <div class="carousel-inner" role="listbox">
                               <div class="item active">
-                                 <img src="../img/index1.png" alt="...">
+                                 <img src="../assets/img/index1.png" alt="...">
                                  <div class="carousel-caption">
                                     &nbsp;
                                  </div>
                               </div>
                               <div class="item">
-                                 <img src="../img/index2.png" alt="...">
+                                 <img src="../assets/img/index2.png" alt="...">
                                  <div class="carousel-caption">
                                     &nbsp;
                                  </div>
@@ -266,11 +267,11 @@ CONTENIDO
                         <!-- /widget-header -->
                         <div class="widget-content">
                            <div class="shortcuts"> 
-                              <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label"> Nuevo Alumno </span> </a>
-                              <a href="javascript:;" class="shortcut"><i class="shortcut-icon  icon-group"></i><span class="shortcut-label"> Nuevo Administrador </span></a>
-                              <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-money"></i> <span class="shortcut-label"> Nuevo Pago </span> </a>
-                              <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-refresh"></i><span class="shortcut-label"> Nuevo Ciclos </span> </a>                              
-                              </div>
+                              <a href="Alumno/frm_alumno.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label"> Nuevo Alumno </span> </a>
+                              <a href="Administrador/frm_administrador.php" class="shortcut"><i class="shortcut-icon  icon-group"></i><span class="shortcut-label"> Nuevo Administrador </span></a>
+                              <a href="Pago/pagos.php" class="shortcut"><i class="shortcut-icon icon-money"></i> <span class="shortcut-label"> Nuevo Pago </span> </a>
+                              <a href="Ciclo/ciclos.php" class="shortcut"> <i class="shortcut-icon icon-refresh"></i><span class="shortcut-label"> Nuevo Ciclos </span> </a>                              
+                           </div>
                            <!-- /shortcuts --> 
                         </div>
                         <!-- /widget-content --> 
@@ -333,19 +334,22 @@ ANTE FOOTER
                      <h4>
                         Teresa Martin</h4>
                      <ul>
-                        <li><a href="alumnos.php">Alumnos</a></li>
-                        <li><a href="#">Pagos</a></li>
-                        <li><a href="#">Reportes</a></li>
-                        <li><a href="#">Becas</a></li>
-                        <li><a href="#">Ciclo</a></li>
+                        <li><a href="index.php"> Inicio </a></li>
+                        <li><a href="Alumno/alumnos.php"> Alumnos </a></li>
+                        <li><a href="Pago/pagos.php"> Pagos </a></li>
+                        <li><a href="Reportes/reportes.php"> Reportes </a></li>
+                        <li><a href="Beca/becas.php"> Becas </a></li>
+                        <li><a href="Ciclo/ciclos.php"> Ciclos </a></li>
+                        <li><a href="Administrador/administradores.php"> Administradores</a></li>
+                        <li><a href="Configuracion/configpublic.php"> Pagina Publicitaria</a></li>
                      </ul>
                   </div>
                   <!-- /span3 -->
                   <div class="span6">
                      <h4>
-                        Somos</h4>
+                        Misión</h4>
                      <p>
-                        Somos una institución.... 
+                        Educar a niñez, adolescencia y juventud en el dinamismo de la ciencia y valores de vida, el cultivo de su interioridad que fortalece el espíritu y dispone para el compromiso y responsabilidad consigo mismos, la familia, la saciedad y la patria.
                      </p>
                   </div>
                   <!-- /span6 -->
@@ -390,14 +394,16 @@ FOOTER
 
       <!-- Le javascript
 ================================================== --> 
-      <!-- Placed at the end of the document so the pages load faster --> 
-      <script src="../js/jquery-1.7.2.min.js"></script> 
+      <!-- Placed at the end of the document so the pages load faster -->
+      <!-- CSS DE PLANTILLA --> 
+      <script type="text/javascript" src="../assets/js/jquery-1.7.2.min.js"></script> 
       <!--script src="js/excanvas.min.js"></script> 
 <script src="js/chart.min.js" type="text/javascript"></script--> 
 
-
-      <script src="../js/bootstrap.js"></script>
+      <!-- CSS DE BOOTSTRAP -->
+      <script type="text/javascript" src="../assets/js/bootstrap.js"></script>
       <!--script src="js/base.js"></script--> 
+      
       <script>
          $('#btn-info-1').popover('show');
          $('#btn-info-1').popover('hide');
