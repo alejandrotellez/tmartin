@@ -1,10 +1,8 @@
 <?php
 session_start();
-include_once 'Pago1.php';
+include_once '../Clases/Pago1.php';
 
-
-
-if(isset($_POST['matricula'])){
+if(!isset($_POST['matricula'])){
    header("Location: pagos.php");
 }else{
    $nuevoresultado = new Pago1();
@@ -40,7 +38,7 @@ if(isset($_POST['matricula'])){
    }
 
    if($pagohecho = TRUE){
-      header("Location: pagos.php");
+      header("Location: recibopago.php");
    }else {
       header("Location: index.php");
    }

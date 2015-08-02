@@ -7,7 +7,7 @@ if(!isset($_SESSION['login'])){
 }
 
 //  -------- Get administradores --------
-include_once 'Beca.php';
+include_once '../Clases/Beca.php';
 $beca = new Beca();
 $datos = $beca->get_beca(null, null);
 
@@ -24,20 +24,16 @@ $datos = $beca->get_beca(null, null);
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <meta name="apple-mobile-web-app-capable" content="yes">
 
-     <!---------- Style de AAA y Asociados ---------->
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-      <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
-      
-      <!---------- Style de AAA y Asociados ---------->
+     <!-- CSS DE BOOTSTRAP -->
+      <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+      <link href="../../assets/css/bootstrap-responsive.min.css" rel="stylesheet">      
+      <!-- CSS DE PLANTILLA -->
       <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
-      
-      <!---------- Style de AAA y Asociados ---------->
-      <link href="../css/font-awesome2.css" rel="stylesheet">
-      <link href="../css/style.css" rel="stylesheet">
-      <link href="../css/pages/dashboard.css" rel="stylesheet">
-
-      <!---------- Style de AAA y Asociados ---------->
-      <link href="../css/styleAAA.css" rel="stylesheet">
+      <link href="../../assets/css/font-awesome2.css" rel="stylesheet">
+      <link href="../../assets/css/style.css" rel="stylesheet">
+      <link href="../../assets/css/pages/dashboard.css" rel="stylesheet">
+      <!-- CSS DE AAA Y ASOCIADOS -->
+      <link href="../../assets/css/styleAAA.css" rel="stylesheet">
       
    </head> 
    <body>
@@ -85,14 +81,19 @@ MENU SECUNDARIO
          <div class="subnavbar-inner">
             <div class="container">
                <ul class="mainnav">
-                  <li><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
-                  <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
-                  <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
-                  <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
+                  <li><a href="../index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
+                  <li><a href="../Alumno/alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
+                  <li><a href="../Pago/pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
+                  <li><a href="../Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
                   <li class="active"><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
-                  <li><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
-                  <li><a href="configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <?php
+   $root = "Root";
+   if($_SESSION['privilegios']== $root){?>
+      <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+  <?php }
+                  ?> 
+                  <li><a href="../Configuracion/configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
             </div>
             <!-- /container --> 
@@ -180,6 +181,22 @@ MENU SECUNDARIO
 
 <!-- ============== TABLA DE ALUMNOS ============== -->    
                   <div class="span12">
+                    
+                     <!-- Alerta -->
+                     <?php 
+   if(isset($_GET['alert'])){
+   $success = "success";
+   if($_GET['alert']==$success){?>
+                     <div id="eliminar" class="alert alert-success alert-dismissible" role="alert">
+                        <a href="#" type="button" class="close" data-dismiss="alert" aria-label="Close"><i class=" icon-remove"></i></a>
+                        <?php echo $_GET['message'];?>
+                     </div>
+                     <?php
+                               }
+   
+}
+                     ?>
+                     
                      <!-- /widget -->                     
                      <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-th-list"></i>
@@ -200,6 +217,14 @@ MENU SECUNDARIO
                               </thead>
                               <tbody>
                                 <?php
+if($row = false){?>
+                     <div id="eliminar" class="alert alert-danger alert-dismissible" role="alert">
+                        <a href="#" type="button" class="close" data-dismiss="alert" aria-label="Close"><i class=" icon-remove"></i></a>
+                        No existen becas establecidas
+                     </div>
+                     <?php
+                               }
+
 while ($row = $datos->fetchObject()){
                                  ?>
                                  <tr>                                    
@@ -309,11 +334,8 @@ FOOTER
       <!-- Le javascript
 ================================================== --> 
       <!-- Placed at the end of the document so the pages load faster --> 
-      <script src="../js/jquery-1.7.2.min.js"></script> 
-      <!--script src="js/excanvas.min.js"></script> 
-<script src="js/chart.min.js" type="text/javascript"></script--> 
-      <script src="../js/bootstrap.js"></script>
-      <!--script src="js/base.js"></script-->
+      <script src="../../assets/js/jquery-1.7.2.min.js"></script> 
+      <script src="../../assets/js/bootstrap.js"></script>
       
 <script>$('.mitooltip').tooltip();</script>
       

@@ -1,48 +1,57 @@
 <?php
 
-   //  -------- Inicio de sesión --------
-   session_start();
-   if(!isset($_SESSION['login'])){
-      header("Location: login.php");
-   }
+//  -------- Inicio de sesión --------
+session_start();
+if(!isset($_SESSION['login'])){
+   header("Location: login.php");
+}
 
-   //  -------- DATOS PARA UPDATE --------
-   if(isset($_GET['idadministrador'])){
-        $idAdministrador = $_GET['idadministrador'];
-        include_once 'Administrador.php';
-        $admin = new Administrador();
-        $datos = $admin->get_administrador($idAdministrador);
-        $row = $datos->fetchObject();
-      }
-   
-   if(isset($_GET['ver'])){
-        $ver = $_GET['ver'];
-      }
-   
+$root = "Root";
+if($_SESSION['privilegios'] != $root){ 
+   header("Location: index.php"); 
+}
+
+//  -------- DATOS PARA UPDATE --------
+if(isset($_GET['idadministrador'])){
+   $idAdministrador = $_GET['idadministrador'];
+   include_once '../Clases/Administrador.php';
+   $admin = new Administrador();
+   $datos = $admin->get_administrador($idAdministrador);
+   $row = $datos->fetchObject();
+}
+
+include_once '../Clases/Privilegios.php';
+$privilegios = new Privilegios();
+$datos2 = $privilegios->get_privilegios();
+
+
+if(isset($_GET['ver'])){
+   $ver = $_GET['ver'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
    <head>
       <meta charset="utf-8">
       <title>TERESA MARTIN</title>
-
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="shortcut icon" href="../../assets/img/ico/favicon.png">
 
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-      <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
-      <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
-      <link href="../css/font-awesome2.css" rel="stylesheet">
-      <link href="../css/style.css" rel="stylesheet">
-      <link href="../css/pages/dashboard.css" rel="stylesheet">
-      
-      
-      <!---------- Style de AAA y Asociados ---------->
-      <link href="../css/styleAAA.css" rel="stylesheet">
-      
-      <!-- KETCHUP-->
-    <link href="../css/ketchup/jquery.ketchup.css" rel="stylesheet">
-    <link href="../css/ketchup/jcomfirmaction.css" rel="stylesheet">
+      <!-- CSS DE BOOTSTRAP -->
+      <link type="text/css" rel="stylesheet" href="../../assets/css/bootstrap.min.css" >
+      <link type="text/css" rel="stylesheet" href="../../assets/css/bootstrap-responsive.min.css">
+      <!-- CSS DE PLANTILLA -->
+      <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+      <link type="text/css" rel="stylesheet" href="../../assets/css/font-awesome2.css">
+      <link type="text/css" rel="stylesheet" href="../../assets/css/style.css">
+      <link type="text/css" rel="stylesheet" href="../../assets/css/pages/dashboard.css">
+      <!-- CSS DE AAA Y ASOCIADOS -->
+      <link type="text/css" rel="stylesheet" href="../../assets/css/styleAAA.css">      
+      <!-- CSS DE KETCHUP-->
+      <link type="text/css" rel="stylesheet" href="../../assets/css/ketchup/jquery.ketchup.css">
+      <link type="text/css" rel="stylesheet" href="../../assets/css/ketchup/jcomfirmaction.css">
 
    </head> 
    <body>
@@ -59,7 +68,7 @@ MENU SECUNDARIO
                <a class="brand" href="index.php">TERESA MARTIN </a>
                <div class="nav-collapse">                 
                   <ul class="nav pull-right">
-                    <li>
+                     <li>
                         <a href="../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
                      </li>
                      <li class="dropdown">
@@ -83,20 +92,20 @@ MENU SECUNDARIO
       <!-- /navbar -->
 
       <!-- ==================================================
-                     MENU PRINCIPAL 
+MENU PRINCIPAL 
 =================================================== --> 
       <div class="subnavbar">
          <div class="subnavbar-inner">
             <div class="container">
                <ul class="mainnav">
-                  <li><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
-                  <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
-                  <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
-                  <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <li><a href="../index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
+                  <li><a href="../Alumno/alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
+                  <li><a href="../Pago/pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
+                  <li><a href="../Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
+                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
                   <li class="active"><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
-                  <li><a href="configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
+                  <li><a href="../Configuracion/configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
             </div>
             <!-- /container --> 
@@ -106,7 +115,7 @@ MENU SECUNDARIO
       <!-- /subnavbar -->
 
       <!-- ==================================================
-                  CONTENIDO 
+CONTENIDO 
 ==================================================== -->
 
       <div class="main">
@@ -126,106 +135,121 @@ MENU SECUNDARIO
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
-                                 <form id="edit-profile" class="form-horizontal valiadmin" action="<?php 
-if(isset($ver)){echo "frm_administrador.php";}else{echo "agregar_admin.php";}
-                                    ?>" method="<?php 
-if(isset($ver)){echo "get";}else{echo "post";}
-                                    ?>">
+                                 <form id="edit-profile" class="form-horizontal valiadmin" action="<?php if(isset($ver)){ echo "frm_administrador.php"; }else{ echo "agregar_admin.php"; }?>" method="<?php if(isset($ver)){ echo "get"; }else{echo "post";}?>">
                                     <fieldset>                          
                                        <h6 class="bigstats">Información Personal del Administrador</h6>
                                        <div id="big_stats" class="cf">
                                           <?php if(isset($idAdministrador)){
-                echo '<input type="hidden" name="idAdministrador" value="'.$row->idadministrador.'">';}
+   echo '<input type="hidden" name="idAdministrador" value="'.$row->idadministrador.'">';}
 if(isset($ver)){
-                echo '<input type="hidden" name="idadministrador" value="'.$row->idadministrador.'">';
+   echo '<input type="hidden" name="idadministrador" value="'.$row->idadministrador.'">';
 
    echo "<div class='control-group'><label class='control-label' for='matricula'>Matricula</label><div class='controls'><input type='text' class='span6 disabled' disabled='disabled' name='matricula' id='matricula' value = '$row->idadministrador'></div> <!-- /controls --></div> <!-- /control-group -->";
 }?>                        
+                                          <!-- Nombre -->
                                           <div class="input-group control-group">											
                                              <label class="control-label" for="nombre">Nombre</label>
                                              <div class="controls">
                                                 <input type="text" class="span6 disabled form-control" data-validate="validate(required, rangelength(1,25))" name="nombre" id="nombre" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->nombre.'"';}
+   echo 'value="'.$row->nombre.'"';}
 if(isset($ver)){echo "disabled='disabled'";}?>>
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
+
+                                          <!-- Apellido Paterno -->
                                           <div class="control-group">											
                                              <label class="control-label" for="a_paterno">Apellido Paterno</label>
                                              <div class="controls">
                                                 <input type="text" class="span6 form-control" id="a_paterno" data-validate="validate(required, rangelength(1,25))" name="a_paterno" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->a_paterno.'"';}
+   echo 'value="'.$row->a_paterno.'"';}
 if(isset($ver)){echo "disabled='disabled'";}?>>
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
+
+                                          <!-- Apellido Materno -->
                                           <div class="control-group">											
                                              <label class="control-label" for="a_materno">Apellido Materno</label>
                                              <div class="controls">
                                                 <input type="text" class="span6 form-control" id="a_materno" data-validate="validate(required, rangelength(1,25))" name="a_materno" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->a_materno.'"';}
+   echo 'value="'.$row->a_materno.'"';}
 if(isset($ver)){echo "disabled='disabled'";}?>>
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->
+
+                                          <!-- Password -->
                                           <div class="control-group">											
                                              <label class="control-label" for="password">Password</label>
                                              <div class="controls">
                                                 <input type="password" class="span6 form-control" id="password" data-validate="validate(required, rangelength(1,10))" name="password" <?php if(isset($idAdministrador)){
-           echo 'value="'.$row->password.'"';}
+   echo 'value="'.$row->password.'"';}
 if(isset($ver)){echo "disabled='disabled'";}?>>
                                              </div> <!-- /controls -->				
-                                          </div> <!-- /control-group -->                                
+                                          </div> <!-- /control-group -->  
+
+                                          <!-- Apellido Paterno -->                              
                                           <div class="control-group">											
                                              <label class="control-label" for="radiobtns">Privilegios</label>
                                              <div class="controls">
-                                                <select class="form-control" name="idPrivilegios" <?php
-if(isset($ver)){echo "disabled='disabled'";}?>>
-                                                   <option value="1" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 1){
-         echo "selected";
-      }
-          }?>>1</option>
-                                                   <option value="2" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 2){
-         echo "selected";
-      }
-          }?>>2</option>
-                                                   <option value="3" <?php if(isset($idAdministrador)){
-      if($row->idprivilegios == 3){
-         echo "selected";
-      }
-          }?>>3</option>
-                                                   </select>
-                                             </div>	<!-- /controls -->			
-                                          </div> <!-- /control-group -->
-                                       <div class="form-actions">
-                                          <button type="submit" class="btn btn-primary">
-                                          <?php 
+
+                                                <?php
 if(isset($ver)){
-   echo "Editar";}else{
-   if(isset($idAdministrador)){
-                    echo "Actualizar";
-                }  else {
-                    echo "Guardar";
-                }
+   echo "<input type='text' class='span6 form-control' id='privilegios' name='privilegios' disabled='disabled' value='";
+   while ($row2 = $datos2->fetchObject()){
+      if($row->idprivilegios == $row2->idprivilegios){
+         echo $row2->privilegios;
+      }
+   }
+   echo "'>";
+} else {
+   echo "<select class='form-control' name='idPrivilegios'>";
+
+   while ($row2 = $datos2->fetchObject()){
+      echo "<option value='$row2->idprivilegios'";
+      if(isset($idAdministrador)){
+         if($row->idprivilegios == $row2->idprivilegios){
+            echo "selected";
+         }
+      }
+      echo ">$row2->privilegios</option>";
+   }
+   echo "</select>";
 }
 
-                                             ?>
-                                         </button> 
-                                          <button class="btn">Cancelar</button>
-                                       </div> <!-- /form-actions -->
+                                                ?>
+
+                                             </div>	<!-- /controls -->			
+                                          </div> <!-- /control-group -->
+                                          <div class="form-actions">
+                                             <button type="submit" class="btn btn-primary">
+                                                <?php 
+if(isset($ver)){
+   echo "Editar";
+}else{
+   if(isset($idAdministrador)){
+      echo "Actualizar";
+   }  else {
+      echo "Guardar";
+   }
+}
+
+                                                ?>
+                                             </button> 
+                                             <button class="btn">Cancelar</button>
+                                          </div> <!-- /form-actions -->
                                        </div> <!-- /big_stats -->
                                     </fieldset>
                                  </form>
-                                 
+
                               </div>								
                            </div>
 
                         </div> <!-- /widget-content -->
                      </div> <!-- /widget -->
                   </div> <!-- /span12 -->
-                  
-                  
+
+
                   <!-- ============== TABLA DE ADMINISTRADORES ============== -->               
-                  
+
                   <!-- /span12 --> 
                </div>
                <!-- /row --> 
@@ -305,26 +329,24 @@ FOOTER
 
       <!-- Le javascript
 ================================================== --> 
-      <!-- Placed at the end of the document so the pages load faster --> 
-      <script src="../js/jquery-1.7.2.min.js"></script> 
-      <!--script src="js/excanvas.min.js"></script> 
-<script src="js/chart.min.js" type="text/javascript"></script--> 
-      <script src="../js/bootstrap.js"></script>
-      <!--script src="js/base.js"></script-->
+      <!-- CSS DE PLANTILLA -->
+      <script src="../../assets/js/jquery-1.7.2.min.js"></script> 
+      <!-- CSS DE BOOTSTRAP -->
+      <script src="../../assets/js/bootstrap.js"></script>
+      <!-- CSS DE KETCHUP -->
+      <script src="../../assets/js/ketchup/jquery.js"></script>
+      <script src="../../assets/js/ketchup/jquery.ketchup.js"></script>
+      <script src="../../assets/js/ketchup/jquery.ketchup.validations.js"></script>
+      <script src="../../assets/js/ketchup/jquery.ketchup.helpers.js"></script>
+      <script src="../../assets/js/ketchup/jconfirmaction.jquery.js"></script>
 
-      <script src="../js/ketchup/jquery.js"></script>
-    <script src="../js/ketchup/jquery.ketchup.js"></script>
-    <script src="../js/ketchup/jquery.ketchup.validations.js"></script>
-    <script src="../js/ketchup/jquery.ketchup.helpers.js"></script>
-    <script src="../js/ketchup/jconfirmaction.jquery.js"></script>
-    
-    <script> 
-      $(document).ready(function(){
-          
-		  $('.valiadmin').ketchup();
-		  
-      });
-  </script>
+      <script> 
+         $(document).ready(function(){
+
+            $('.valiadmin').ketchup();
+
+         });
+      </script>
 
    </body>
 </html>

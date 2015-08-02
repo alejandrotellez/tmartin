@@ -1,11 +1,12 @@
 <?php
 session_start();
-include_once 'Administrador.php';
+include_once '../Clases/Administrador.php';
 
 //crea un nuevo objeto de una clase
 //Clase objeto = new Clase()
 $admin = new Administrador();
 
+echo $_POST['nombre'];
 //$idAdministrador = 1;
 $nombre = $_POST['nombre'];
 $a_paterno = $_POST['a_paterno'];
@@ -31,8 +32,8 @@ $administrador = $admin->add_administrador();
 }
 
 if($administrador = TRUE){
-    $_SESSION['login']="algo";
-    header("Location: administradores.php");
+   $message = "El sistema a agregado correctamente la informacion del Administrador";
+    header("Location: administradores.php?alert=success&message=$message");
 }  else {
     header("Location: index.php");
 }

@@ -15,19 +15,20 @@ if(!isset($_SESSION['login'])){
    <head>
       <meta charset="utf-8">
       <title>TERESA MARTIN</title>
-
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="shortcut icon" href="../../assets/img/ico/favicon.png">
 
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-      <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
-      <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
-      <link href="../css/font-awesome2.css" rel="stylesheet">
-      <link href="../css/style.css" rel="stylesheet">
-      <link href="../css/pages/dashboard.css" rel="stylesheet">
-
-      <!---------- Style de AAA y Asociados ---------->
-      <link href="../css/styleAAA.css" rel="stylesheet">
+      <!-- CSS DE BOOTSTRAP -->
+      <link type="text/css" rel="stylesheet" href="../../assets/css/bootstrap.min.css" >
+      <link type="text/css" rel="stylesheet" href="../../assets/css/bootstrap-responsive.min.css">
+      <!-- CSS DE PLANTILLA -->
+      <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+      <link type="text/css" rel="stylesheet" href="../../assets/css/font-awesome2.css">
+      <link type="text/css" rel="stylesheet" href="../../assets/css/style.css">
+      <link type="text/css" rel="stylesheet" href="../../assets/css/pages/dashboard.css">
+      <!-- CSS DE AAA Y ASOCIADOS -->
+      <link type="text/css" rel="stylesheet" href="../../assets/css/styleAAA.css">
 
    </head> 
    <body>
@@ -44,7 +45,7 @@ MENU SECUNDARIO
                <a class="brand" href="index.html">TERESA MARTIN </a>
                <div class="nav-collapse">
                   <ul class="nav pull-right">
-                    <li>
+                     <li>
                         <a href="../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
                      </li>
                      <li class="dropdown">
@@ -80,7 +81,12 @@ MENU PRINCIPAL
                   <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
                   <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
                   <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
-                  <li><a href="administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <?php
+   $root = "Root";
+if($_SESSION['privilegios']== $root){?>
+                  <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <?php }
+                  ?> 
                   <li><a href="configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
             </div>
@@ -107,9 +113,9 @@ CONTENIDO
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
-                          
-                          
-                          
+
+
+
                            <table class="table table-striped table-bordered get_table">
                               <thead>
                                  <tr>
@@ -119,20 +125,20 @@ CONTENIDO
                                  </tr>
                               </thead>
                               <tbody>
-                                <?php
+                                 <?php
 while ($row = $datos->fetchObject()){
                                  ?>
                                  <tr>                                    
                                     <td><?php echo $row->nombre;?></td>
                                     <td>% <?php $descuento= $row->descuento*100; echo $descuento;?></td>
                                     <td class="td-actions">
-                                      <!-- Asignar becas -->
+                                       <!-- Asignar becas -->
                                        <!--a href="javascript:;" class="btn btn-small btn-invert" title="Asignar">
-                                          <i class="btn-icon-only icon-zoom-in"> </i></a-->
-                                          <!-- Editar Becas -->
+<i class="btn-icon-only icon-zoom-in"> </i></a-->
+                                       <!-- Editar Becas -->
                                        <a href="frm_beca.php?idBeca=<?php echo $row->idbeca;?>" class="btn btn-small btn-invert" title="Editar">
                                           <i class="btn-icon-only icon-pencil"> </i></a>
-                                          <!-- Eliminar Becas -->
+                                       <!-- Eliminar Becas -->
                                        <a href="del_beca.php?idBeca=<?php echo $row->idbeca;?>" class="btn btn-small btn-invert" title="Eliminar">
                                           <i class="btn-icon-only icon-trash"> </i></a>
                                     </td>
@@ -228,10 +234,10 @@ FOOTER
       <!-- Le javascript
 ================================================== --> 
       <!-- Placed at the end of the document so the pages load faster --> 
-      <script src="../js/jquery-1.7.2.min.js"></script> 
+      <script src="../../assets/js/jquery-1.7.2.min.js"></script> 
       <!--script src="js/excanvas.min.js"></script> 
 <script src="js/chart.min.js" type="text/javascript"></script--> 
-      <script src="../js/bootstrap.js"></script>
+      <script src="../../assets/js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
 
    </body>

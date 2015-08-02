@@ -131,3 +131,7 @@ a:hover {
 .text-danger{
    color: #FF0000;
 }
+
+.mes_pago{
+       text-transform: capitalize;
+}

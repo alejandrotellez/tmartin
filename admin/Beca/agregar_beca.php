@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'Beca.php';
+include_once '../Clases/Beca.php';
  
 $beca = new Beca();
 
@@ -17,7 +17,8 @@ $beca->set_beca($idBeca,$nombre, $descuento);
 $beca1 = $beca->add_beca();
 
 if($beca1 = TRUE){
-   header("Location: becas.php");
+   $message = "El sistema ha almacenado la información de la beca";
+   header("Location: becas.php?alert=success&message=$message");
 }else {
     header("Location: index.php");
 }

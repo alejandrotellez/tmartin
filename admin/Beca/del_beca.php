@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'Beca.php';
+include_once '../Clases/Beca.php';
 $beca = new Beca();
 
 if(isset($_GET['nombre'])){
@@ -17,7 +17,8 @@ if(isset($_GET['idBeca'])){
 $datos = $beca->del_beca($idBeca);
 
 if($datos == TRUE){
-    header("Location: becas.php");
+   $message = "El sistema ha eliminado la beca $row->nombre";
+   header("Location: becas.php?alert=success&message=$message");
 }  else {
-    header("Location: index.php");
+   header("Location: index.php");
 }
