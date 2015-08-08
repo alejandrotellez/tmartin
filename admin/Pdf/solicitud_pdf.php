@@ -12,7 +12,7 @@
 
       <table class="col-12">
          <tr>
-            <td class="col-4" rowspan="2"><img id="escudo" src="../img/escudo.png" alt="Teresa Martin"></td>
+            <td class="col-4" rowspan="2"><img id="escudo" src="../../assets/img/escudo.png" alt="Teresa Martin"></td>
             <td class="col-8">
                <h1>Colegio Teresa Martin</h1> 
                <h2>Labor, Virtus y Scientia</h2> 

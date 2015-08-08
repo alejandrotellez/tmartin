@@ -132,7 +132,7 @@ CONTENIDO
                                           <div class="control-group">											
                                              <label class="control-label" for="year">Año</label>
                                              <div class="controls">
-                                                <input type="number" class="span6 form-control" id="year" name="year" value="<?php echo date('Y'); ?>" data-validate="validate(required, number, range(4, 4))">
+                                                <input type="number" class="span6 form-control" id="year" name="year" value="<?php echo date('Y'); ?>" data-validate="validate(required, number)">
                                                 <p class="help-block">El año por defaul es el año actual</p>
                                              </div> <!-- /controls -->				
                                           </div> <!-- /control-group -->                

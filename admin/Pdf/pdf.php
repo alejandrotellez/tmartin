@@ -2,23 +2,23 @@
 
 // somewhere early in your project's loading, require the Composer autoloader
 // see: http://getcomposer.org/doc/00-intro.md
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 // disable DOMPDF's internal autoloader if you are using Composer
 define('DOMPDF_ENABLE_AUTOLOAD', false);
 
 // include DOMPDF's default configuration
-require_once '../vendor/dompdf/dompdf/dompdf_config.inc.php';
+require_once '../../vendor/dompdf/dompdf/dompdf_config.inc.php';
 
 //  -------- DATOS PARA UPDATE --------
 if(isset($_GET['matricula'])){
    $matricula = $_GET['matricula'];
-   include_once 'Alumno.php';
+   include_once '../Clases/Alumno.php';
    $alumno = new Alumno();
    $datos = $alumno->get_alumno($matricula);
    $row = $datos->fetchObject();
    
-   include_once 'Tutor.php';
+   include_once '../Clases/Tutor.php';
    $tutor = new Tutor();
    $idTutor = $row->idtutor;
    $datos1 = $tutor->get_tutor($idTutor, null);
@@ -47,8 +47,8 @@ ob_start();
 extract($data);
 include 'solicitud_pdf.php';
 $html = ob_get_clean();
-echo $html;
-exit();
+//echo $html;
+//exit();
 
 $dompdf = new DOMPDF();
 $dompdf->load_html($html);

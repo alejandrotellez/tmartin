@@ -172,11 +172,27 @@ CONTENIDO
                            <a href="pagos.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
                         </div> <!-- /widget-header -->					
                         <div class="widget-content">
+                         
+                         <!-- Alerta -->
+                     <?php 
+   if(isset($_GET['alert'])){
+   $success = "success";
+   if($_GET['alert']==$success){?>
+                     <div id="eliminar" class="alert alert-success alert-dismissible" role="alert">
+                        <a href="#" type="button" class="close" data-dismiss="alert" aria-label="Close"><i class=" icon-remove"></i></a>
+                        <?php echo $_GET['message'];?>
+                     </div>
+                     <?php
+                               }
+
+}
+?>
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
                                  <form id="edit-profile" class="form-horizontal valipago" <?php if(isset($matricula)){
-                     echo "action='agregar_pago.php' method='post'";
+                     //echo "action='agregar_pago.php' method='post'";
+                     echo "action='recibopago.php' method='post'";
                   }else{
                      echo "action='pagos.php' method='get'";}?> >
                                     <fieldset>

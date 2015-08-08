@@ -80,7 +80,9 @@ if(!isset($_POST['nombre_tutor'])){
       if($newalumno = TRUE){
          if($idEstatus != 3){
             $nombre = $row->nombre." ".$row->a_paterno." ".$row->a_materno;
-            header("Location: alumnos.php?option=2&nombre=$nombre");
+            $matricula_solicitud = $row->matricula;
+            header("Location: ../Pago/pagos.php?matricula=$matricula_solicitud");
+            //header("Location: alumnos.php?option=2&nombre=$nombre");
          }else{
             $matricula_solicitud = $row->matricula;
             header("Location: ../../public/solicitud_alumno.php?matricula_solicitud=$matricula_solicitud&matricula_tutor=$idTutor3");

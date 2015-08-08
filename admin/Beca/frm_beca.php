@@ -159,7 +159,7 @@ CONTENIDO
                                              <label class="control-label" for="descuento">Descuento</label>
                                              <div class="controls">
                                                 <span>%</span>
-                                                <input type="text" class="span6 form-control" id="descuento" data-validate="validate(required, rangelength(1,4), number)" name="descuento" <?php if(isset($idBeca)){
+                                                <input type="text" class="span6 form-control" id="descuento" data-validate="validate(required, number)" name="descuento" <?php if(isset($idBeca)){
                                                           $descuento= $row->descuento*100;
                                                           echo "value='".$descuento."'";}
                                                        ?> >

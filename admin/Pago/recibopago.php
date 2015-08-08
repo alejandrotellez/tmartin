@@ -3,10 +3,38 @@
 //  -------- Inicio de sesión --------
 session_start();
 if(!isset($_SESSION['login'])){
-   header("Location: login.php");
+   header("Location: ../Administrador/login.php");
 }
 
 //  -------- Get administradores --------
+$matricula = $_POST['matricula'];
+
+if(empty($_POST['mes'])){
+   header("Location: pagos.php?matricula=$matricula");
+}else{
+   include_once '../Clases/Alumno.php';
+   $alumno = new Alumno();
+   $datos = $alumno->get_alumno($matricula);
+   $row = $datos->fetchObject();
+   //var_dump ($row);
+
+   include_once '../Clases/Grado.php';
+   $grado = new Grado();
+   $grado1 = $grado->get_grado();
+
+   include_once '../Clases/Grupo.php';
+   $grupo = new Grupo();
+   $grupo1 = $grupo->get_grupo();
+
+   include_once '../Clases/Escolaridad.php';
+   $escolaridad = new Escolaridad();
+   $escolaridad1 = $escolaridad->get_escolaridad();
+
+   include_once '../Clases/Beca.php';
+   $becas = new Beca();
+   $becas1 = $becas->get_beca();
+}
+
 
 ?>
 
@@ -75,19 +103,19 @@ MENU PRINCIPAL
          <div class="subnavbar-inner">
             <div class="container">
                <ul class="mainnav">
-                  <li><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
-                  <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
+                  <li><a href="../index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
+                  <li><a href="../Alumno/alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li class="active"><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
-                  <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <li><a href="../Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
+                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
                   <?php
    $root = "Root";
 if($_SESSION['privilegios']== $root){?>
                   <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
                   <?php }
                   ?> 
-                  <li><a href="configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
+                  <li><a href="../Configuracion/configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
             </div>
             <!-- /container --> 
@@ -108,46 +136,241 @@ CONTENIDO
                   <div class="span12">
                      <!-- /widget -->                     
                      <div class="widget widget-table action-table">
-                        <div class="widget-header"> <i class="icon-th-list"></i>
-                           <h3>Lista de Becas</h3>
+                        <div class="widget-header"> <i class="icon-money"></i>
+                           <h3>Pago de colegiatura</h3>
+                           <a href="pagos.php?matricula=<?php echo $matricula;?>" class="cerrar_frm"><i class=" icon-remove"></i></a>
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
 
-
-
-                           <table class="table table-striped table-bordered get_table">
+                           <table class="table table-striped ">
                               <thead>
                                  <tr>
-                                    <th> Nombre </th>
-                                    <th> Descuento </th>
-                                    <th class="td-actions"> Acciones </th>
+                                    <th rowspan="2" colspan="2"> <img src="../../assets/img/escudo.png" alt="escudo"> </th>
+                                    <th colspan="4"> Colegio Teresa Maritn </th>
+                                 </tr>
+                                 <tr>
+                                    <th colspan="4"> Labor, Virtus y Scientia</th>
                                  </tr>
                               </thead>
                               <tbody>
-                                 <?php
-while ($row = $datos->fetchObject()){
-                                 ?>
-                                 <tr>                                    
-                                    <td><?php echo $row->nombre;?></td>
-                                    <td>% <?php $descuento= $row->descuento*100; echo $descuento;?></td>
-                                    <td class="td-actions">
-                                       <!-- Asignar becas -->
-                                       <!--a href="javascript:;" class="btn btn-small btn-invert" title="Asignar">
-<i class="btn-icon-only icon-zoom-in"> </i></a-->
-                                       <!-- Editar Becas -->
-                                       <a href="frm_beca.php?idBeca=<?php echo $row->idbeca;?>" class="btn btn-small btn-invert" title="Editar">
-                                          <i class="btn-icon-only icon-pencil"> </i></a>
-                                       <!-- Eliminar Becas -->
-                                       <a href="del_beca.php?idBeca=<?php echo $row->idbeca;?>" class="btn btn-small btn-invert" title="Eliminar">
-                                          <i class="btn-icon-only icon-trash"> </i></a>
-                                    </td>
+                                 <tr><td colspan="6">&nbsp;</td></tr>
+                                 <tr>
+                                    <th colspan="4">Información de Alumo</th>
+                                    <th>fecha</th>
+                                    <td><?php echo date("d/m/y");?></td>
                                  </tr>
+                                 <tr>
+                                    <th>Nombre</th>
+                                    <td colspan="6"><?php echo "$row->nombre $row->a_paterno $row->a_materno"?></td>
+                                    <!--th> Folio </th>
+                                    <td> <?php //echo $new_folio;?> </td-->
+                                 </tr>
+                                 <tr>
+                                    <th>Grado</th>
+                                    <td><?php while ($grado2 = $grado1->fetchObject()){
+                     if($row->idgrado == $grado2->idgrado)
+                        echo $grado2->grado;
+                  } ?></td>
+                                    <th>Grupo</th>
+                                    <td><?php
+while ($grupo2 = $grupo1->fetchObject()){
+   if($row->idgrupo == $grupo2->idgrupo)
+      echo $grupo2->grupo;
+}?> </td>
+                                    <th>Escolaridad</th>
+                                    <td><?php
+while ($escolaridad2 = $escolaridad1->fetchObject()){
+   if($row->idescolaridad == $escolaridad2->idescolaridad){
+      echo $escolaridad2->escolaridad;}
+}?></td>
+                                 </tr>
+                                 <tr><td colspan="6"></td></tr>
+                                 <tr>
+                                    <th>No.</th>
+                                    <th colspan="2">Descripción</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Beca</th>
+                                    <th>Total</th>
+                                 </tr>
+
                                  <?php
+$colegiatura = 1500;
+while ($becas2 = $becas1->fetchObject()){
+   if($row->idbeca==$becas2->idbeca){
+      $descuento1 = $becas2->descuento*$colegiatura;
+      $descuento = number_format($descuento1, 2, '.', ' ');
+   }         
 }
+$a = 0;
+$subtotal = 0;
+$diaactual = date("d");
+$limite = 10;
+$recargo= 5;
+$subtotal2 = 0;
+$date_m = array(
+
+   "1" => "August",
+   "2" => "August",
+   "3" => "September",
+   "4" => "October",
+   "5" => "November",
+   "6" => "December",
+   "7" => "January",
+   "8" => "January",
+   "9" => "February",
+   "10" => "March",
+   "11" => "April",
+   "12" => "May",
+   "13" => "June"   
+);
+$date_m2 = array(
+
+   "1" => "inscripcion",
+   "2" => "agosto",
+   "3" => "septiembre",
+   "4" => "octubre",
+   "5" => "noviembre",
+   "6" => "diciembre",
+   "7" => "reinscripcion",
+   "8" => "enero",
+   "9" => "febrero",
+   "10" => "marzo",
+   "11" => "abril",
+   "12" => "mayo",
+   "13" => "junio"
+);
+
+
+
+foreach($_POST['mes'] as $mes){
+   $n = $a + 1;
+   $a = $n;
+   $total_mes = $colegiatura-$descuento;
+   $total_mes1 = number_format($total_mes, 2, '.', ' ');
+   $colegiatura1 = number_format($colegiatura, 2, '.', ' ');
+   $recargo1 = number_format($recargo, 2, '.', ' ');
+   
+   echo "<tr>
+            <td>
+               $a
+            </td>
+            <td colspan='2'>
+               $mes
+            </td>
+            <td>
+               $ $colegiatura1
+            </td>
+            <td>
+               $ $descuento
+            </td>
+            <td>
+               $ $total_mes1
+            </td>
+         </tr>";
+
+   foreach($date_m as $num_mes=>$mes_in){
+      $mes_actual = date("F");
+      if($mes_actual == $mes_in){
+         $num_mes_in = $num_mes;
+         //echo "<tr><td colspan='6'>num_mes_in $num_mes_in</td></tr>";
+      }
+   }
+
+   foreach($date_m2 as $num_mes2=>$mes_es){
+      if($mes == $mes_es){
+         $num_mes_es = $num_mes2;
+         //echo "<tr><td colspan='6'>num_mes_es $num_mes_es</td></tr>";
+      }
+   }
+
+   if($num_mes_es <= $num_mes_in){
+      if($num_mes_es == $num_mes_in or 1<2 or 7<8){
+         if($diaactual > $limite){
+            $n = $a + 1;
+            $a = $n;
+            $recargos = ($diaactual-$limite)*$recargo;
+            $total_recargo = number_format($recargos, 2, '.', ' ');
+            echo "<tr>
+            <td>
+               $a
+            </td>
+            <td colspan='2'>
+               Recargos de $mes
+            </td>
+            <td>
+               $ $recargo1
+            </td>
+            <td>
+               $ 0.00
+            </td>
+            <td>
+               $ $total_recargo
+            </td>
+         </tr>";
+            $subtotal2 = $subtotal + $total_recargo;
+         }
+      }else{
+         $n = $a + 1;
+         $a = $n;
+         $recargos = 30 *$recargo;
+         $total_recargo = number_format($recargos, 2, '.', ' ');
+         echo "<tr>
+            <td>
+               $a
+            </td>
+            <td colspan='2'>
+               Recargos de $mes
+            </td>
+            <td>
+               $ $recargo1
+            </td>
+            <td>
+               $ 0.00
+            </td>
+            <td>
+               $ $total_recargo
+            </td>
+         </tr>";
+         $subtotal2 = $subtotal + $total_recargo;
+      }
+   }
+
+
+
+   $subtotal1 = $subtotal + $total_mes1 + $subtotal2;
+   $subtotal = $subtotal1;   
+
+};
+
+
+
                                  ?>
+                                 <tr>
+                                    <th colspan="4">&nbsp;</th>
+                                    <th>Total</th>
+                                    <th><?php 
+$subtotal1 = number_format($subtotal, 2, '.', ' ');
+echo "$ $subtotal1";?></th>
+                                 </tr>
+
                               </tbody>
+                              <tfooter>
+                                 <tr><td colspan="6">&nbsp;</td></tr>
+                                 <tr>
+                                    <td colspan="6"> Colegio Teresa Martin 1 de Mayo # 123 Col. Centro Tel. 123 456 7890</td>
+                                 </tr>
+                              </tfooter>
                            </table>
+                           <form action="agregar_pago.php" method="post">
+                              <input type="hidden" name="matricula" value="<?php echo $_POST['matricula'];?>">
+                              <?php
+foreach($_POST['mes'] as $mes){
+   echo "<input type='hidden' name='mes[]' value='$mes'>";
+}?>                              
+                              <input type="submit" value="pagar">
+                           </form>
+
                         </div>
                         <!-- /widget-content --> 
                      </div>

@@ -16,7 +16,7 @@ $datos1 = $noticias->get_noticia(null);
       <meta name="author" content="">
       <link rel="shortcut icon" href="../assets/img/ico/favicon.png">
 
-      <title>Yellow!</title>
+      <title>Teresa Martin</title>
 
       <!-- Bootstrap core CSS -->
       <link href="../assets/css/bootstrap2.css" rel="stylesheet">
@@ -133,7 +133,7 @@ while ($row1 = $datos1->fetchObject()){
                         <!-- End Post Title & Meta -->
                         <!-- Imagen del Post -->
                         <div class="post-image-wrap">
-                           <img src="<?php echo $row1->urlimagen;?>" alt="" class="imagen_noticia">
+                           <img src="../<?php echo $row1->urlimagen;?>" alt="" class="imagen_noticia">
                         </div><br/>
                         <!-- End Post Image -->
                         <p>

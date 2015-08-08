@@ -340,7 +340,7 @@ if(isset($matricula)){
                                  <div class="form-submit">
                                     <?php
 if(isset($matricula)){
-   echo "<a href='admin/pdf.php?matricula=$row->matricula' type='button' class='btn btn-primary btn-sm btn-descargar'>Descargar</a>";
+   echo "<a href='admin/Pdf/pdf.php?matricula=$row->matricula' type='button' class='btn btn-primary btn-sm btn-descargar'>Descargar</a>";
 }else{
    echo "<button type='submit' id='submit' class='btn btn-primary btn-sm' name='submit'>Enviar</button>";
 }

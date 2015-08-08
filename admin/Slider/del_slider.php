@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'Slider.php';
+include '../Clases/Slider.php';
 $slide = new Slider();
 
 if(isset($_GET['idslider'])){
@@ -11,9 +11,11 @@ if(isset($_GET['idslider'])){
    $datos = $slide->del_slider($idslider);
    
    if($datos == TRUE){
-      $url1 = "../".$url;
+      $url1 = "../../".$url;
       if(unlink($url1)){
-         header("Location: configpublic.php");
+         $message = "El sistema a eliminado correctamente una nueva imagen de slider";
+         $alert = "success";
+         header("Location: ../Configuracion/configpublic.php?alert=$alert&message=$message");
       }else{
          header("Location: index.php");
       }

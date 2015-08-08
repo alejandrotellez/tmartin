@@ -221,4 +221,41 @@ class Alumno{
            print "Error:". $e->getMessage();
        }
    }
+ 
+   public function get_report_status($idestatus){
+      try {          
+         $sql = "SELECT COUNT(idestatus) AS estatus FROM alumno WHERE idestatus= :idestatus";
+         
+         $consulta = $this->con->prepare($sql);
+
+         $consulta->bindParam(':idestatus', $idestatus, PDO::PARAM_INT);
+                  
+         if($consulta->execute()){
+            return $consulta;
+            //echo $sql;
+         } else {
+            return FALSE;
+         }
+
+      } catch (PDOExeption $e) {
+         print "Error:". $e->getMessge();
+      }  
+   }
+   
+   public function get_report_alumnos(){
+      try {          
+         $sql = "SELECT COUNT(matricula) AS matricula FROM alumno";         
+         $consulta = $this->con->prepare($sql);                  
+         if($consulta->execute()){
+            return $consulta;
+            //echo $sql;
+         } else {
+            return FALSE;
+         }
+
+      } catch (PDOExeption $e) {
+         print "Error:". $e->getMessge();
+      }  
+   }
+   
 }

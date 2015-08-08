@@ -7,12 +7,12 @@ if(!isset($_SESSION['login'])){
 }
 
 //  -------- Get Slider --------
-include_once 'Slider.php';
+include_once '../Clases/Slider.php';
 $slide = new Slider();
 $datos = $slide->get_slider(null);
 
 //  -------- Get Noticias --------
-include_once 'Noticia.php';
+include_once '../Clases/Noticia.php';
 $noticias = new Noticia();
 $datos1 = $noticias->get_noticia(null);
 
@@ -23,20 +23,20 @@ $datos1 = $noticias->get_noticia(null);
    <head>
       <meta charset="utf-8">
       <title>TERESA MARTIN</title>
-
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="shortcut icon" href="../../assets/img/ico/favicon.png">
 
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-      <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+     <!-- CSS DE BOOTSTRAP -->
+      <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+      <link href="../../assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+      <!-- CSS DE PLANTILLA -->
       <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
-      <link href="../css/font-awesome2.css" rel="stylesheet">
-      <link href="../css/style.css" rel="stylesheet">
-      <link href="../css/pages/dashboard.css" rel="stylesheet">
-
-
-      <!---------- Style de AAA y Asociados ---------->
-      <link href="../css/styleAAA.css" rel="stylesheet">
+      <link href="../../assets/css/font-awesome2.css" rel="stylesheet">
+      <link href="../../assets/css/style.css" rel="stylesheet">
+      <link href="../../assets/css/pages/dashboard.css" rel="stylesheet">
+      <!-- CSS DE AAA Y ASOCIADOS -->
+      <link href="../../assets/css/styleAAA.css" rel="stylesheet">
 
    </head> 
    <body>
@@ -83,20 +83,19 @@ MENU PRINCIPAL
          <div class="subnavbar-inner">
             <div class="container">
                <ul class="mainnav">
-                  <li><a href="index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
-                  <li><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
-                  <li><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
-                  <li><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <li><a href="../index.php"><i class="icon-home"></i><span>Inicio</span> </a> </li>
+                  <li><a href="../Alumno/alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
+                  <li><a href="../Pago/pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
+                  <li><a href="../Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
+                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
                   <?php
    $root = "Root";
    if($_SESSION['privilegios']== $root){?>
       <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
   <?php }
                   ?> 
-                  <li class="active"><a href="configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a>
-                   </li>
+                  <li  class="active"><a href="configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
             </div>
             <!-- /container --> 
@@ -115,6 +114,22 @@ CONTENIDO
             <div class="container">
                <div class="row">
                   <div class="span12">
+                    
+                    <!-- Alerta -->
+                     <?php 
+   if(isset($_GET['alert'])){
+   $success = "success";
+   if($_GET['alert']==$success){?>
+                     <div id="eliminar" class="alert alert-success alert-dismissible" role="alert">
+                        <a href="#" type="button" class="close" data-dismiss="alert" aria-label="Close"><i class=" icon-remove"></i></a>
+                        <?php echo $_GET['message'];?>
+                     </div>
+                     <?php
+                               }
+
+}
+                     ?>
+                    
                      <div class="widget ">
                         <div class="widget-header">
                            <i class="icon-user"></i>
@@ -150,7 +165,7 @@ CONTENIDO
                                                          <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
                                                          <h4 class="modal-title" id="myModalLabel">Agregar nuevo slider</h4>
                                                       </div>
-                                                      <form enctype="multipart/form-data" action="agregar_slider.php" method="post" class="form-horizontal valialum" >
+                                                      <form enctype="multipart/form-data" action="../Slider/agregar_slider.php" method="post" class="form-horizontal valialum" >
                                                          <div class="modal-body">
                                                             <div class="control-group">											
                                                                <label class="control-label" for="nombre">Nombre de la Imagen</label>
@@ -187,11 +202,11 @@ CONTENIDO
                                                 <tbody><?php
 while ($row = $datos->fetchObject()){
                                  ?><tr>
-                                                   <td><img src="../<?php echo $row->url;?>" class="img-responsive img-rounded" alt=""></td>
+                                                   <td><img src="../../<?php echo $row->url;?>" class="img-responsive img-rounded" alt=""></td>
                                                    <td><?php echo $row->nombre;?></td>
                                                    <td>
                                                       <span id="tooltip-ver" class="input-group-addon mitooltip" title="Eliminar Slider" data-placement="top">
-                                                         <a class="btn btn-bigger btn-invert" href="del_slider.php?idslider=<?php echo $row->idslider;?>&url=<?php echo $row->url;?>">
+                                                         <a class="btn btn-bigger btn-invert" href="../Slider/del_slider.php?idslider=<?php echo $row->idslider;?>&url=<?php echo $row->url;?>">
                                                             <i class="btn-icon-only icon-trash"> </i>
                                                          </a>
                                                       </span>
@@ -224,7 +239,7 @@ while ($row = $datos->fetchObject()){
                                                          <a class="close" data-dismiss="modal" aria-label="Close"><i class=" icon-remove"></i></a>
                                                          <h4 class="modal-title" id="myModalLabel">Agregar nueva noticia</h4>
                                                       </div>
-                                                      <form enctype="multipart/form-data" action="agregar_noticia.php" method="post" class="form-horizontal valialum" >
+                                                      <form enctype="multipart/form-data" action="../Noticia/agregar_noticia.php" method="post" class="form-horizontal valialum" >
                                                          <div class="modal-body">
                                                             <div class="control-group">											
                                                                <label class="control-label" for="titulo">Titulo</label>
@@ -280,7 +295,7 @@ while ($row1 = $datos1->fetchObject()){
                                                    <td><?php echo $row1->fecha;?></td>
                                                    <td>
                                                       <span id="tooltip-ver" class="input-group-addon mitooltip" title="Eliminar Noticia" data-placement="top">
-                                                         <a class="btn btn-bigger btn-invert" href="del_noticia.php?idnoticia=<?php echo $row1->idnoticia;?>&urlimagen=<?php echo $row1->urlimagen;?>">
+                                                         <a class="btn btn-bigger btn-invert" href="../Noticia/del_noticia.php?idnoticia=<?php echo $row1->idnoticia;?>&urlimagen=<?php echo $row1->urlimagen;?>">
                                                             <i class="btn-icon-only icon-trash"> </i>
                                                          </a>
                                                       </span>
@@ -376,10 +391,10 @@ FOOTER
       <!-- Le javascript
 ================================================== --> 
       <!-- Placed at the end of the document so the pages load faster --> 
-      <script src="../js/jquery-1.7.2.min.js"></script> 
+      <script src="../../assets/js/jquery-1.7.2.min.js"></script> 
       <!--script src="js/excanvas.min.js"></script> 
 <script src="js/chart.min.js" type="text/javascript"></script--> 
-      <script src="../js/bootstrap.js"></script>
+      <script src="../../assets/js/bootstrap.js"></script>
       <!--script src="js/base.js"></script-->
 
       <script>$('.mitooltip').tooltip();</script>

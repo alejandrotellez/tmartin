@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'Slider.php';
+include '../Clases/Slider.php';
 
 $slide = new Slider();
 
@@ -11,10 +11,12 @@ $slide->set_slider($nombre,$url);
 $slider1 = $slide->add_slider();
 
 if($slider1 == TRUE){
-   $urlbase = '../assets/img/slides/';
-$newurl = $urlbase . basename($_FILES['imagen']['name']);
+   $urlbase = '../../assets/img/slides/';
+   $newurl = $urlbase . basename($_FILES['imagen']['name']);
    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $newurl)) {
-      header("Location: configpublic.php");
+      $message = "El sistema a agregado correctamente una nueva imagen de slider";
+         $alert = "success";
+      header("Location: ../Configuracion/configpublic.php?alert=$alert&message=$message");
    } else {
       echo "¡Posible ataque de carga de archivos!\n";
    }

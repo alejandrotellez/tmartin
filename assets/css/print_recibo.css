@@ -1,0 +1,63 @@
+/* GENERALES */
+body{
+   font-family: "Open Sans",sans-serif;
+   font-size: 12px;
+}
+
+table, tr, td, th {
+   /*border: solid 1px black;*/
+   padding: 0px;
+   margin: 0px;
+}
+
+table{
+   width: 100%;
+}
+
+th{
+   text-align: right;
+   font-weight: bold;
+}
+
+td{
+   text-align: center;
+}
+
+/* THEAD */
+#escudo{
+   text-align: center;
+}
+#colegio {
+   text-align: center;
+   text-transform: uppercase;
+   font-size: 20px;
+}
+
+#labor{
+   text-align: center;
+   text-transform: uppercase;
+   font-size: 15px;
+}
+
+#recibo{
+   text-align: center;
+   text-transform: uppercase;
+   font-size: 13px;
+   text-decoration: underline;
+}
+/* TBODY */
+
+.table_information{
+   text-align: left;
+   padding-left: 15px;
+}
+
+.table_body{
+   text-align: center;
+}
+
+.table_body_th{
+   border: 1px solid black;
+}
+
+/* TFOOTER */
