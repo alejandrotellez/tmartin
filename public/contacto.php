@@ -66,10 +66,14 @@ if(isset($_SESSION['nombre'])){
                                  <li><a href='../admin/index.php'>Inicio</a></li>
                                  <li><a href='../admin/Alumno/alumnos.php'>Alumnos</a></li>
                                  <li><a href='../admin/Pago/pagos.php'>Pagos</a></li>
-                                 <li><a href='../admin/Reportes/reportes.php'>Reportes</a></li>
-                                 <li><a href='../admin/Beca/becas.php'>Becas</a></li>
-                                 <li><a href='../admin/Ciclo/ciclos.php'>Ciclos</a></li>
-                                 <li><a href='../admin/Administrador/administradores.php'>Administradores</a></li>
+                                 <li><a href='../admin/Reportes/reportes.php'>Reportes</a></li>";
+   $root = "Root";
+   if($_SESSION['privilegios']== $root){
+   echo "
+                                 <li><a href='admin/Beca/becas.php'>Becas</a></li>
+                                 <li><a href='admin/Ciclo/ciclos.php'>Ciclos</a></li>
+                                 <li><a href='admin/Administrador/administradores.php'>Administradores</a></li>";}
+   echo "
                                  <li><a href='../admin/Configuracion/configpublic.php'>Pagina Publica</a></li>
                               </ul>
                            </li>";

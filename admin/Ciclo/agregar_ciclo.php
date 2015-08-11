@@ -1,7 +1,8 @@
 <?php
 session_start();
-include_once 'Year.php';
-include_once 'Ciclo.php';
+include_once '../Clases/Year.php';
+include_once '../Clases/Ciclo.php';
+include_once '../Clases/Gg.php';
 
 $year = $_POST['year'];
 
@@ -40,4 +41,13 @@ if($idCiclo1 == FALSE){
 $row = $idCiclo1->fetchObject();
 $idCiclo = $row->idciclo;
 
+$gg = new Gg();
+$idGg = 0;
+$idgg = $gg->set_gg($idGg,$grado, $grupo);
+$idgg2 = $gg->add_gg();
 
+
+if(isset($idCiclo)){
+   $message = "se agrego un nuevo ciclo";
+   header("Location: ciclos.php?alert=success&message=$message");
+}

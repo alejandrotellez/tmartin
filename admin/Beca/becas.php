@@ -3,7 +3,12 @@
 //  -------- Inicio de sesión --------
 session_start();
 if(!isset($_SESSION['login'])){
-   header("Location: login.php");
+   header("Location: ../Administrador/login.php");
+}
+
+$root = "Root";
+if($_SESSION['privilegios'] != $root){ 
+   header("Location: ../index.php"); 
 }
 
 //  -------- Get administradores --------
@@ -47,17 +52,17 @@ MENU SECUNDARIO
                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                </a>
-               <a class="brand" href="index.php">TERESA MARTIN </a>
+               <a class="brand" href="../index.php">TERESA MARTIN </a>
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                     <li>
-                        <a href="../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
+                        <a href="../../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
                      </li>
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
-                           <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
+                           <li><a href="../Administrador/login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
                            
                         </ul>
                      </li>
@@ -276,19 +281,22 @@ ANTE FOOTER
                      <h4>
                         Teresa Martin</h4>
                      <ul>
-                        <li><a href="alumnos.php">Alumnos</a></li>
-                        <li><a href="#">Pagos</a></li>
-                        <li><a href="#">Reportes</a></li>
-                        <li><a href="#">Becas</a></li>
-                        <li><a href="#">Ciclo</a></li>
+                        <li><a href="../index.php"> Inicio </a></li>
+                        <li><a href="../Alumno/alumnos.php"> Alumnos </a></li>
+                        <li><a href="../Pago/pagos.php"> Pagos </a></li>
+                        <li><a href="../Reportes/reportes.php"> Reportes </a></li>
+                        <li><a href="becas.php"> Becas </a></li>
+                        <li><a href="../Ciclo/ciclos.php"> Ciclos </a></li>
+                        <li><a href="../Administrador/administradores.php"> Administradores</a></li>
+                        <li><a href="../Configuracion/configpublic.php"> Pagina Publicitaria</a></li>
                      </ul>
                   </div>
                   <!-- /span3 -->
                   <div class="span6">
                      <h4>
-                        Somos</h4>
+                        Misión</h4>
                      <p>
-                        Somos una institución.... 
+                        Educar a niñez, adolescencia y juventud en el dinamismo de la ciencia y valores de vida, el cultivo de su interioridad que fortalece el espíritu y dispone para el compromiso y responsabilidad consigo mismos, la familia, la saciedad y la patria.
                      </p>
                   </div>
                   <!-- /span6 -->
@@ -299,7 +307,7 @@ ANTE FOOTER
                         <li><i class="icon-map-marker"></i><span> 1 de Mayo #123</span></li>
                         <li><i class="icon-phone"></i><span> Telefono</span></li>
                         <li><i class="icon-envelope"></i><span> contacto@teresamartin.com</span></li>
-                        <li><i class="fa icon-twitter"></i>&nbsp;<i class="fa icon-facebook"></i>&nbsp;<i class="fa icon-youtube"></i>&nbsp;<span> /teresamartin</span></li>
+                        <li><i class=" icon-twitter"></i>&nbsp;<i class="icon-facebook"></i>&nbsp;<i class="icon-youtube"></i>&nbsp;<span> /teresamartin</span></li>
                      </ul>
                   </div>
                   <!-- /span3 -->

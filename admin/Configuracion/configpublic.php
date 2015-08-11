@@ -3,7 +3,7 @@
 //  -------- Inicio de sesión --------
 session_start();
 if(!isset($_SESSION['login'])){
-   header("Location: login.php");
+   header("Location: ../Administrador/login.php");
 }
 
 //  -------- Get Slider --------
@@ -27,7 +27,7 @@ $datos1 = $noticias->get_noticia(null);
       <meta name="apple-mobile-web-app-capable" content="yes">
       <link rel="shortcut icon" href="../../assets/img/ico/favicon.png">
 
-     <!-- CSS DE BOOTSTRAP -->
+      <!-- CSS DE BOOTSTRAP -->
       <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
       <link href="../../assets/css/bootstrap-responsive.min.css" rel="stylesheet">
       <!-- CSS DE PLANTILLA -->
@@ -50,17 +50,17 @@ MENU SECUNDARIO
                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                </a>
-               <a class="brand" href="index.php">TERESA MARTIN </a>
+               <a class="brand" href="../index.php">TERESA MARTIN </a>
                <div class="nav-collapse">
                   <ul class="nav pull-right">
-                    <li>
-                        <a href="../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
+                     <li>
+                        <a href="../../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
                      </li>
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre']?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
-                           <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
+                           <li><a href="../Administrador/login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
                         </ul>
                      </li>
                   </ul>
@@ -87,13 +87,14 @@ MENU PRINCIPAL
                   <li><a href="../Alumno/alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li><a href="../Pago/pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="../Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+
                   <?php
    $root = "Root";
-   if($_SESSION['privilegios']== $root){?>
-      <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
-  <?php }
+if($_SESSION['privilegios']== $root){?>
+                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <?php }
                   ?> 
                   <li  class="active"><a href="configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
@@ -114,10 +115,10 @@ CONTENIDO
             <div class="container">
                <div class="row">
                   <div class="span12">
-                    
-                    <!-- Alerta -->
+
+                     <!-- Alerta -->
                      <?php 
-   if(isset($_GET['alert'])){
+if(isset($_GET['alert'])){
    $success = "success";
    if($_GET['alert']==$success){?>
                      <div id="eliminar" class="alert alert-success alert-dismissible" role="alert">
@@ -129,7 +130,7 @@ CONTENIDO
 
 }
                      ?>
-                    
+
                      <div class="widget ">
                         <div class="widget-header">
                            <i class="icon-user"></i>
@@ -201,7 +202,7 @@ CONTENIDO
                                                 </thead>
                                                 <tbody><?php
 while ($row = $datos->fetchObject()){
-                                 ?><tr>
+                                                   ?><tr>
                                                    <td><img src="../../<?php echo $row->url;?>" class="img-responsive img-rounded" alt=""></td>
                                                    <td><?php echo $row->nombre;?></td>
                                                    <td>
@@ -211,9 +212,9 @@ while ($row = $datos->fetchObject()){
                                                          </a>
                                                       </span>
                                                    </td> </tr>                                                  
- <?php
+                                                   <?php
 }
-                                 ?>                                               </tbody>
+                                                   ?>                                               </tbody>
                                              </table>
                                           </div>
                                        </div>
@@ -256,14 +257,14 @@ while ($row = $datos->fetchObject()){
                                                             <div class="control-group">											
                                                                <label class="control-label" for="nombre">Imagen</label>
                                                                <div class="controls"> 
-                                                                 <p class="help-block">La imagen debe medir 484x252px</p> 
+                                                                  <p class="help-block">La imagen debe medir 484x252px</p> 
                                                                   <input type='file' class='span3 disabled form-control' name='imagen' id='imagen' data-validate='validate(required, rangelength(1,25))'>
                                                                </div> <!-- /controls -->				
                                                             </div> <!-- /control-group -->
                                                             <div class="control-group">											
                                                                <label class="control-label" for="descripcion">Descripción</label>
                                                                <div class="controls">
-                                                                 <p class="help-block">La descripción no puede ser mayor a 1500 caracteres</p>  
+                                                                  <p class="help-block">La descripción no puede ser mayor a 1500 caracteres</p>  
                                                                   <textarea name="descripcion" id="descripcion" cols="60" rows="10"></textarea>
                                                                </div> <!-- /controls -->				
                                                             </div> <!-- /control-group -->  
@@ -288,22 +289,22 @@ while ($row = $datos->fetchObject()){
                                                 </thead>
                                                 <tbody><?php
 while ($row1 = $datos1->fetchObject()){
-                                 ?>
+                                                   ?>
                                                    <tr>
-                                                   <td><?php echo $row1->titulo;?></td>
-                                                   <td><?php echo $row1->autor;?></td>
-                                                   <td><?php echo $row1->fecha;?></td>
-                                                   <td>
-                                                      <span id="tooltip-ver" class="input-group-addon mitooltip" title="Eliminar Noticia" data-placement="top">
-                                                         <a class="btn btn-bigger btn-invert" href="../Noticia/del_noticia.php?idnoticia=<?php echo $row1->idnoticia;?>&urlimagen=<?php echo $row1->urlimagen;?>">
-                                                            <i class="btn-icon-only icon-trash"> </i>
-                                                         </a>
-                                                      </span>
-                                                   </td> 
+                                                      <td><?php echo $row1->titulo;?></td>
+                                                      <td><?php echo $row1->autor;?></td>
+                                                      <td><?php echo $row1->fecha;?></td>
+                                                      <td>
+                                                         <span id="tooltip-ver" class="input-group-addon mitooltip" title="Eliminar Noticia" data-placement="top">
+                                                            <a class="btn btn-bigger btn-invert" href="../Noticia/del_noticia.php?idnoticia=<?php echo $row1->idnoticia;?>&urlimagen=<?php echo $row1->urlimagen;?>">
+                                                               <i class="btn-icon-only icon-trash"> </i>
+                                                            </a>
+                                                         </span>
+                                                      </td> 
                                                    </tr>
                                                    <?php
 }
-                                 ?>                                                  
+                                                   ?>                                                  
                                                 </tbody>
                                              </table>
                                           </div>
@@ -333,19 +334,22 @@ ANTE FOOTER
                      <h4>
                         Teresa Martin</h4>
                      <ul>
-                        <li><a href="alumnos.php">Alumnos</a></li>
-                        <li><a href="#">Pagos</a></li>
-                        <li><a href="#">Reportes</a></li>
-                        <li><a href="#">Becas</a></li>
-                        <li><a href="#">Ciclo</a></li>
+                        <li><a href="../index.php"> Inicio </a></li>
+                        <li><a href="../Alumno/alumnos.php"> Alumnos </a></li>
+                        <li><a href="../Pago/pagos.php"> Pagos </a></li>
+                        <li><a href="../Reportes/reportes.php"> Reportes </a></li>
+                        <li><a href="../Beca/becas.php"> Becas </a></li>
+                        <li><a href="../Ciclo/ciclos.php"> Ciclos </a></li>
+                        <li><a href="../Administrador/administradores.php"> Administradores</a></li>
+                        <li><a href="configpublic.php"> Pagina Publicitaria</a></li>
                      </ul>
                   </div>
                   <!-- /span3 -->
                   <div class="span6">
                      <h4>
-                        Somos</h4>
+                        Misión</h4>
                      <p>
-                        Somos una institución.... 
+                        Educar a niñez, adolescencia y juventud en el dinamismo de la ciencia y valores de vida, el cultivo de su interioridad que fortalece el espíritu y dispone para el compromiso y responsabilidad consigo mismos, la familia, la saciedad y la patria.
                      </p>
                   </div>
                   <!-- /span6 -->
@@ -356,7 +360,7 @@ ANTE FOOTER
                         <li><i class="icon-map-marker"></i><span> 1 de Mayo #123</span></li>
                         <li><i class="icon-phone"></i><span> Telefono</span></li>
                         <li><i class="icon-envelope"></i><span> contacto@teresamartin.com</span></li>
-                        <li><i class="fa icon-twitter"></i>&nbsp;<i class="fa icon-facebook"></i>&nbsp;<i class="fa icon-youtube"></i>&nbsp;<span> /teresamartin</span></li>
+                        <li><i class=" icon-twitter"></i>&nbsp;<i class="icon-facebook"></i>&nbsp;<i class="icon-youtube"></i>&nbsp;<span> /teresamartin</span></li>
                      </ul>
                   </div>
                   <!-- /span3 -->

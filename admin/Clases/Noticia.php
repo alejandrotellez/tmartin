@@ -25,7 +25,7 @@ class Noticia{
    
    public function get_noticia($idnoticia = null){
        try{
-         $sql = "SELECT * FROM noticias";
+         $sql = "SELECT * FROM noticias ORDER BY idnoticia DESC";
           
           if($idnoticia != null){
              $sql .="WHERE idnoticia = :idnoticia";

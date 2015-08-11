@@ -3,7 +3,7 @@
 //  -------- Inicio de sesión --------
 session_start();
 if(!isset($_SESSION['login'])){
-   header("Location: login.php");
+   header("Location: ../Administrador/login.php");
 }
 
 //  -------- Get administradores --------
@@ -14,6 +14,10 @@ include_once '../Clases/Estatus.php';
 $estatus = new Estatus();
 $datos_estatus = $estatus->get_estatus(null, null);
 $idestatus = null;
+
+include_once '../Clases/Beca.php';
+$beca = new Beca();
+$beca2 = $beca->get_beca(null, null);
 
 if(isset($_GET['estatus'])){
    $idestatus = $_GET['estatus'];
@@ -94,13 +98,14 @@ MENU PRINCIPAL
                   <li class="active"><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li><a href="../Pago/pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="../Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+
                   <?php
    $root = "Root";
-   if($_SESSION['privilegios']== $root){?>
-      <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
-  <?php }
+if($_SESSION['privilegios']== $root){?>
+                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <?php }
                   ?> 
                   <li><a href="../Configuracion/configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
@@ -215,9 +220,9 @@ CONTENIDO
                   <!-- ============== TABLA DE ALUMNOS ============== -->    
                   <div class="span12">
 
-                    <!-- ============== MENSAJES DE AVISO ============== -->
+                     <!-- ============== MENSAJES DE AVISO ============== -->
                      <?php 
-   if(isset($_GET['option'])){
+if(isset($_GET['option'])){
 
    if($_GET['option']==1){?>
                      <div id="eliminar" class="alert alert-success alert-dismissible" role="alert">
@@ -303,7 +308,13 @@ if($datos == false){
                                     <td><?php echo $row->idgg;?></td>
                                     <td><?php echo $row->idgg;?></td>
                                     <td><?php echo $row->idescolaridad;?></td>
-                                    <td><?php echo $row->idbeca;?></td>
+                                    <td><?php 
+      while($beca3 = $beca2->fetchObject()){
+         if($row->idbeca == $beca3->idbeca){
+            echo $beca3->nombre;
+         }
+      }
+      ?></td>
                                     <td class="td-actions">
                                        <!------------- VER MAS ------------->
                                        <span id="tooltip-ver" class="input-group-addon mitooltip" title="Ver más datos del Alumno" data-placement="top">

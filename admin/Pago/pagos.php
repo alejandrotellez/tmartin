@@ -3,7 +3,7 @@
 //  -------- Inicio de sesión --------
 session_start();
 if(!isset($_SESSION['login'])){
-   header("Location: login.php");
+   header("Location: ../Administrador/login.php");
 }
 
 //  -------- Get administradores --------
@@ -115,11 +115,12 @@ MENU PRINCIPAL
                   <li><a href="../Alumno/alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li class="active"><a href="pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="../Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+
                   <?php
    $root = "Root";
 if($_SESSION['privilegios']== $root){?>
+                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
                   <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
                   <?php }
                   ?> 
@@ -172,29 +173,29 @@ CONTENIDO
                            <a href="pagos.php" class="cerrar_frm"><i class=" icon-remove"></i></a>
                         </div> <!-- /widget-header -->					
                         <div class="widget-content">
-                         
-                         <!-- Alerta -->
-                     <?php 
-   if(isset($_GET['alert'])){
+
+                           <!-- Alerta -->
+                           <?php 
+if(isset($_GET['alert'])){
    $success = "success";
    if($_GET['alert']==$success){?>
-                     <div id="eliminar" class="alert alert-success alert-dismissible" role="alert">
-                        <a href="#" type="button" class="close" data-dismiss="alert" aria-label="Close"><i class=" icon-remove"></i></a>
-                        <?php echo $_GET['message'];?>
-                     </div>
-                     <?php
+                           <div id="eliminar" class="alert alert-success alert-dismissible" role="alert">
+                              <a href="#" type="button" class="close" data-dismiss="alert" aria-label="Close"><i class=" icon-remove"></i></a>
+                              <?php echo $_GET['message'];?>
+                           </div>
+                           <?php
                                }
 
 }
-?>
+                           ?>
 
                            <div class="content">
                               <div class="pane" id="formcontrols">
                                  <form id="edit-profile" class="form-horizontal valipago" <?php if(isset($matricula)){
-                     //echo "action='agregar_pago.php' method='post'";
-                     echo "action='recibopago.php' method='post'";
-                  }else{
-                     echo "action='pagos.php' method='get'";}?> >
+                              //echo "action='agregar_pago.php' method='post'";
+                              echo "action='recibopago.php' method='post'";
+                           }else{
+                              echo "action='pagos.php' method='get'";}?> >
                                     <fieldset>
                                        <div class="container">
                                           <div class="row">
@@ -205,13 +206,13 @@ CONTENIDO
                                                       <label class='control-label' for='matricula'>Matricula</label>
                                                       <div class='controls'>
                                                          <?php if(!isset($matricula)){
-                     echo "<input type='text' class='span4 disabled form-control' name='matricula' id='matricula' data-validate='validate(required, number, rangelength(1,11))'><p class='help-block'>Inserte Matricula</p> 
+                              echo "<input type='text' class='span4 disabled form-control' name='matricula' id='matricula' data-validate='validate(required, number, rangelength(1,11))'><p class='help-block'>Inserte Matricula</p> 
                      </div> <!-- /controls -->
                                                    </div> <!-- /control-group -->
                                                    </div><!-- /big_stats -->
                                              </div><!-- /span6 -->";
-                  }else{
-                     echo "<p class='form-control-static'>$row->matricula</p><input type='hidden' name='matricula' value='$row->matricula?>'>
+                           }else{
+                              echo "<p class='form-control-static'>$row->matricula</p><input type='hidden' name='matricula' value='$row->matricula?>'>
 </div> <!-- /controls -->
                                                    </div> <!-- /control-group -->
                                                    <div class='control-group'>		
@@ -223,45 +224,45 @@ CONTENIDO
                                                    <div class='control-group'>		
                                                       <label class='control-label' for='nombre'>Grado</label>
                                                       <div class='controls'>";
-                     while ($grado2 = $grado1->fetchObject()){
-                        if($row->idgrado == $grado2->idgrado)
-                           echo "<p class='form-control-static'>$grado2->grado</p>";
-                     }
-                     echo "
+                              while ($grado2 = $grado1->fetchObject()){
+                                 if($row->idgrado == $grado2->idgrado)
+                                    echo "<p class='form-control-static'>$grado2->grado</p>";
+                              }
+                              echo "
 
                                                       </div> <!-- /controls -->
                                                    </div> <!-- /control-group -->
                                                    <div class='control-group'>		
                                                       <label class='control-label' for='nombre'>Grupo</label>
                                                       <div class='controls'>";
-                     while ($grupo2 = $grupo1->fetchObject()){
-                        if($row->idgrupo == $grupo2->idgrupo)
-                           echo "<p class='form-control-static'>$grupo2->grupo</p>";
-                     }
-                     echo "
+                              while ($grupo2 = $grupo1->fetchObject()){
+                                 if($row->idgrupo == $grupo2->idgrupo)
+                                    echo "<p class='form-control-static'>$grupo2->grupo</p>";
+                              }
+                              echo "
                                                       </div> <!-- /controls -->
                                                    </div> <!-- /control-group -->
                                                    <div class='control-group'>		
                                                       <label class='control-label' for='nombre'>Escolaridad</label>
                                                       <div class='controls'>";
-                     while ($escolaridad2 = $escolaridad1->fetchObject()){
-                        if($row->idescolaridad == $escolaridad2->idescolaridad)
-                           echo "<p class='form-control-static'>$escolaridad2->escolaridad</p>";
-                     }
-                     echo "
+                              while ($escolaridad2 = $escolaridad1->fetchObject()){
+                                 if($row->idescolaridad == $escolaridad2->idescolaridad)
+                                    echo "<p class='form-control-static'>$escolaridad2->escolaridad</p>";
+                              }
+                              echo "
 
                                                       </div> <!-- /controls -->
                                                    </div> <!-- /control-group -->
                                                    <div class='control-group'>		
                                                       <label class='control-label' for='nombre'>Beca</label>
                                                       <div class='controls'>";
-                     while ($becas2 = $becas1->fetchObject()){
-                        if($row->idbeca==$becas2->idbeca){
-                           $descuento = $becas2->descuento*100;
-                           echo "<p class='form-control-static'>$becas2->nombre con $descuento% de descuento</p>";
-                        }         
-                     }
-                     echo"
+                              while ($becas2 = $becas1->fetchObject()){
+                                 if($row->idbeca==$becas2->idbeca){
+                                    $descuento = $becas2->descuento*100;
+                                    echo "<p class='form-control-static'>$becas2->nombre con $descuento% de descuento</p>";
+                                 }         
+                              }
+                              echo"
 
                                                       </div> <!-- /controls -->
                                                    </div> <!-- /control-group -->
@@ -273,131 +274,131 @@ CONTENIDO
                                                    <div id='big_stats' class='cf pagos'>
                                                    <table class='span4'>
                                                    ";
-                     
-                     $inscripcion= "inscripcion";
-                     $datos3 = $pago->get_pago($matricula, $inscripcion); 
-                     $row3 = $datos3->fetchObject();
-                     if($row3 != false){                          
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row3->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='inscripcion'>Inscripción</label></div></td><td>$1500.00</td></tr>";
-                     }
 
-                     $agosto = "agosto";
-                     $datos4 = $pago->get_pago($matricula, $agosto); 
-                     $row4 = $datos4->fetchObject();
-                     if($row4 != false){                         
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row4->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='agosto'>Agosto</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $inscripcion= "inscripcion";
+                              $datos3 = $pago->get_pago($matricula, $inscripcion); 
+                              $row3 = $datos3->fetchObject();
+                              if($row3 != false){                          
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row3->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='inscripcion'>Inscripción</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $septiembre = "septiembre";
-                     $datos5 = $pago->get_pago($matricula, $septiembre); 
-                     $row5 = $datos5->fetchObject();
-                     if($row5 != false){                         
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row5->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='septiembre'>Septiembre</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $agosto = "agosto";
+                              $datos4 = $pago->get_pago($matricula, $agosto); 
+                              $row4 = $datos4->fetchObject();
+                              if($row4 != false){                         
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row4->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='agosto'>Agosto</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $octubre = "octubre";
-                     $datos6 = $pago->get_pago($matricula, $octubre);   
-                     $row6 = $datos6->fetchObject();
-                     if($row6 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row6->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='octubre'>Octubre</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $septiembre = "septiembre";
+                              $datos5 = $pago->get_pago($matricula, $septiembre); 
+                              $row5 = $datos5->fetchObject();
+                              if($row5 != false){                         
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row5->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='septiembre'>Septiembre</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $noviembre = "noviembre";
-                     $datos7 = $pago->get_pago($matricula, $noviembre);   
-                     $row7 = $datos7->fetchObject();
-                     if($row7 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row7->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='noviembre'>Noviembre</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $octubre = "octubre";
+                              $datos6 = $pago->get_pago($matricula, $octubre);   
+                              $row6 = $datos6->fetchObject();
+                              if($row6 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row6->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='octubre'>Octubre</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $diciembre = "diciembre";
-                     $datos8 = $pago->get_pago($matricula, $diciembre);   
-                     $row8 = $datos8->fetchObject();
-                     if($row8 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row8->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='diciembre'>Diciembre</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $noviembre = "noviembre";
+                              $datos7 = $pago->get_pago($matricula, $noviembre);   
+                              $row7 = $datos7->fetchObject();
+                              if($row7 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row7->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='noviembre'>Noviembre</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $reinscripcion = "reinscripcion";
-                     $datos9 = $pago->get_pago($matricula, $reinscripcion);   
-                     $row9 = $datos9->fetchObject();
-                     if($row9 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row9->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='reinscripcion'>Reinscripcion</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $diciembre = "diciembre";
+                              $datos8 = $pago->get_pago($matricula, $diciembre);   
+                              $row8 = $datos8->fetchObject();
+                              if($row8 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row8->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='diciembre'>Diciembre</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $enero = "enero";
-                     $datos10 = $pago->get_pago($matricula, $enero);   
-                     $row10 = $datos10->fetchObject();
-                     if($row10 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row10->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='enero'>Enero</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $reinscripcion = "reinscripcion";
+                              $datos9 = $pago->get_pago($matricula, $reinscripcion);   
+                              $row9 = $datos9->fetchObject();
+                              if($row9 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row9->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='reinscripcion'>Reinscripcion</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $febrero = "febrero";
-                     $datos11 = $pago->get_pago($matricula, $febrero);   
-                     $row11 = $datos11->fetchObject();
-                     if($row11 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row11->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='febrero'>Febrero</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $enero = "enero";
+                              $datos10 = $pago->get_pago($matricula, $enero);   
+                              $row10 = $datos10->fetchObject();
+                              if($row10 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row10->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='enero'>Enero</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $marzo = "marzo";
-                     $datos12 = $pago->get_pago($matricula, $marzo);   
-                     $row12 = $datos12->fetchObject();
-                     if($row12 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row12->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='marzo'>Marzo</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $febrero = "febrero";
+                              $datos11 = $pago->get_pago($matricula, $febrero);   
+                              $row11 = $datos11->fetchObject();
+                              if($row11 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row11->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='febrero'>Febrero</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $abril = "abril";
-                     $datos13 = $pago->get_pago($matricula, $abril);   
-                     $row13 = $datos13->fetchObject();
-                     if($row13 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row13->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='abril'>Abril</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $marzo = "marzo";
+                              $datos12 = $pago->get_pago($matricula, $marzo);   
+                              $row12 = $datos12->fetchObject();
+                              if($row12 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row12->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='marzo'>Marzo</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $mayo = "mayo";
-                     $datos14 = $pago->get_pago($matricula, $mayo);   
-                     $row14 = $datos14->fetchObject();
-                     if($row14 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row14->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='mayo'>Mayo</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $abril = "abril";
+                              $datos13 = $pago->get_pago($matricula, $abril);   
+                              $row13 = $datos13->fetchObject();
+                              if($row13 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row13->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='abril'>Abril</label></div></td><td>$1500.00</td></tr>";
+                              }
 
-                     $junio = "junio";
-                     $datos15 = $pago->get_pago($matricula, $junio);   
-                     $row15 = $datos15->fetchObject();
-                     if($row15 != false){                        
-                        echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row15->mes</label></div></td><td>pagado</td></tr>";
-                     }else{
-                        echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='junio'>Junio</label></div></td><td>$1500.00</td></tr>";
-                     }
+                              $mayo = "mayo";
+                              $datos14 = $pago->get_pago($matricula, $mayo);   
+                              $row14 = $datos14->fetchObject();
+                              if($row14 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row14->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='mayo'>Mayo</label></div></td><td>$1500.00</td></tr>";
+                              }
+
+                              $junio = "junio";
+                              $datos15 = $pago->get_pago($matricula, $junio);   
+                              $row15 = $datos15->fetchObject();
+                              if($row15 != false){                        
+                                 echo "<tr><td><div class='checkbox  disabled'><label class='mes_pago'>$row15->mes</label></div></td><td>pagado</td></tr>";
+                              }else{
+                                 echo "<tr><td><div class='checkbox  disabled'><label> <input type='checkbox' name='mes[]' value='junio'>Junio</label></div></td><td>$1500.00</td></tr>";
+                              }
 
 
-                     echo "</table>
+                              echo "</table>
                                                    </div>
                                                 </div>
                                              </div>
                                              ";
-                  }?>
+                           }?>
 
 
                                                       </div> <!-- /big_stats -->
@@ -423,98 +424,101 @@ CONTENIDO
                      <!-- /main-inner --> 
                   </div>
                   <!-- /main -->
-                  
-                  <table>
-                     
 
-                  <!-- ==================================================
+                  <table>
+
+
+                     <!-- ==================================================
 ANTE FOOTER 
 =================================================== -->
 
-                  <div class="extra">
-                     <div class="extra-inner">
-                        <div class="container">
-                           <div class="row">
-                              <div class="span3">
-                                 <h4>
-                                    Teresa Martin</h4>
-                                 <ul>
-                                    <li><a href="alumnos.html">Alumnos</a></li>
-                                    <li><a href="#">Pagos</a></li>
-                                    <li><a href="#">Reportes</a></li>
-                                    <li><a href="#">Becas</a></li>
-                                    <li><a href="#">Ciclo</a></li>
-                                 </ul>
+                     <div class="extra">
+                        <div class="extra-inner">
+                           <div class="container">
+                              <div class="row">
+                                 <div class="span3">
+                                    <h4>
+                                       Teresa Martin</h4>
+                                    <ul>
+                                       <li><a href="../index.php"> Inicio </a></li>
+                                       <li><a href="../Alumno/alumnos.php"> Alumnos </a></li>
+                                       <li><a href="pagos.php"> Pagos </a></li>
+                                       <li><a href="../Reportes/reportes.php"> Reportes </a></li>
+                                       <li><a href="../Beca/becas.php"> Becas </a></li>
+                                       <li><a href="../Ciclo/ciclos.php"> Ciclos </a></li>
+                                       <li><a href="../Administrador/administradores.php"> Administradores</a></li>
+                                       <li><a href="../Configuracion/configpublic.php"> Pagina Publicitaria</a></li>
+                                    </ul>
+                                 </div>
+                                 <!-- /span3 -->
+                                 <div class="span6">
+                                    <h4>
+                                       Misión</h4>
+                                    <p>
+                                       Educar a niñez, adolescencia y juventud en el dinamismo de la ciencia y valores de vida, el cultivo de su interioridad que fortalece el espíritu y dispone para el compromiso y responsabilidad consigo mismos, la familia, la saciedad y la patria.
+                                    </p>
+                                 </div>
+                                 <!-- /span6 -->
+                                 <div class="span3">
+                                    <h4>
+                                       Contacto</h4>
+                                    <ul>
+                                       <li><i class="icon-map-marker"></i><span> 1 de Mayo #123</span></li>
+                                       <li><i class="icon-phone"></i><span> Telefono</span></li>
+                                       <li><i class="icon-envelope"></i><span> contacto@teresamartin.com</span></li>
+                                       <li><i class=" icon-twitter"></i>&nbsp;<i class="icon-facebook"></i>&nbsp;<i class="icon-youtube"></i>&nbsp;<span> /teresamartin</span></li>
+                                    </ul>
+                                 </div>
+                                 <!-- /span3 -->
                               </div>
-                              <!-- /span3 -->
-                              <div class="span6">
-                                 <h4>
-                                    Somos</h4>
-                                 <p>
-                                    Somos una institución.... 
-                                 </p>
-                              </div>
-                              <!-- /span6 -->
-                              <div class="span3">
-                                 <h4>
-                                    Contacto</h4>
-                                 <ul>
-                                    <li><i class="icon-map-marker"></i><span> 1 de Mayo #123</span></li>
-                                    <li><i class="icon-phone"></i><span> Telefono</span></li>
-                                    <li><i class="icon-envelope"></i><span> contacto@teresamartin.com</span></li>
-                                    <li><i class="fa icon-twitter"></i>&nbsp;<i class="fa icon-facebook"></i>&nbsp;<i class="fa icon-youtube"></i>&nbsp;<span> /teresamartin</span></li>
-                                 </ul>
-                              </div>
-                              <!-- /span3 -->
+                              <!-- /row --> 
                            </div>
-                           <!-- /row --> 
+                           <!-- /container --> 
                         </div>
-                        <!-- /container --> 
+                        <!-- /extra-inner --> 
                      </div>
-                     <!-- /extra-inner --> 
-                  </div>
-                  <!-- /extra -->
+                     <!-- /extra -->
 
-                  <!-- ==================================================
+                     <!-- ==================================================
 FOOTER 
 =================================================== -->
-                  <div class="footer">
-                     <div class="footer-inner">
-                        <div class="container">
-                           <div class="row">
-                              <div class="span12"> &copy; 2015 <a href="#">Colegio Teresa Martin</a>. </div>
-                              <!-- /span12 --> 
+                     <div class="footer">
+                        <div class="footer-inner">
+                           <div class="container">
+                              <div class="row">
+                                 <div class="span12"> &copy; 2015 <a href="#">Colegio Teresa Martin</a>. </div>
+                                 <!-- /span12 --> 
+                              </div>
+                              <!-- /row --> 
                            </div>
-                           <!-- /row --> 
+                           <!-- /container --> 
                         </div>
-                        <!-- /container --> 
+                        <!-- /footer-inner --> 
                      </div>
-                     <!-- /footer-inner --> 
-                  </div>
-                  <!-- /footer --> 
+                     <!-- /footer --> 
 
 
-                  <!-- Le javascript
+                     <!-- Le javascript
 ================================================== --> 
-                  <!-- JAVASCRIPT DE PLANTILLA --> 
-                  <script type="text/javascript" src="../../assets/js/jquery-1.7.2.min.js"></script> 
-                  <!-- JAVASCRIPT DE BOOTSTRAP -->
-                  <script type="text/javascript" src="../../assets/js/bootstrap.js"></script>
-                  <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
-                  <!-- JAVASCRIPT DE KETCHUP -->
-                  <script type="text/javascript" src="../../assets/js/ketchup/jquery.js"></script>
-                  <script type="text/javascript" src="../../assets/js/ketchup/jquery.ketchup.js"></script>
-                  <script type="text/javascript" src="../../assets/js/ketchup/jquery.ketchup.validations.js"></script>
-                  <script type="text/javascript" src="../../assets/js/ketchup/jquery.ketchup.helpers.js"></script>
-                  <script type="text/javascript" src="../../assets/js/ketchup/jconfirmaction.jquery.js"></script>
+                     <!-- JAVASCRIPT DE PLANTILLA --> 
+                     <script type="text/javascript" src="../../assets/js/jquery-1.7.2.min.js"></script> 
+                     <!-- JAVASCRIPT DE BOOTSTRAP -->
+                     <script type="text/javascript" src="../../assets/js/bootstrap.js"></script>
+                     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
+                     <!-- JAVASCRIPT DE KETCHUP -->
+                     <script type="text/javascript" src="../../assets/js/ketchup/jquery.js"></script>
+                     <script type="text/javascript" src="../../assets/js/ketchup/jquery.ketchup.js"></script>
+                     <script type="text/javascript" src="../../assets/js/ketchup/jquery.ketchup.validations.js"></script>
+                     <script type="text/javascript" src="../../assets/js/ketchup/jquery.ketchup.helpers.js"></script>
+                     <script type="text/javascript" src="../../assets/js/ketchup/jconfirmaction.jquery.js"></script>
 
-                  <script> 
-                     $(document).ready(function(){
+                     <script> 
+                        $(document).ready(function(){
 
-                        $('.valimatricula').ketchup();
-                        $('.valipago').ketchup();
+                           $('.valimatricula').ketchup();
+                           $('.valipago').ketchup();
 
-                        <?php
+                           <?php
 
 if(!isset($_GET['matricula'])){
    echo " $('#matricula').modal(
@@ -522,11 +526,11 @@ if(!isset($_GET['matricula'])){
    );";
 } ?>
 
-                     })
-                  </script>
+                        })
+                     </script>
 
 
 
 
-                  </body>
-               </html>
+                     </body>
+                  </html>

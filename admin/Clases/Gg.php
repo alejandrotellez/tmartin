@@ -91,3 +91,5 @@ class Gg{
        } catch (PDOException $ex) {
            print "Error:". $e->getMessge();
        }
+   }
+}

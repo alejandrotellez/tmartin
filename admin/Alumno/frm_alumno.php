@@ -122,13 +122,14 @@ MENU PRINCIPAL
                   <li class="active"><a href="alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li><a href="../Pago/pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li><a href="../Reportes/reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+
                   <?php
    $root = "Root";
-   if($_SESSION['privilegios']== $root){?>
-      <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
-  <?php }
+if($_SESSION['privilegios']== $root){?>
+                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+                  <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
+                  <?php }
                   ?> 
                   <li><a href="../Configuracion/configpublic.php"><i class="icon-cog"></i><span>Pagina Publicitaria</span> </a> </li>
                </ul>
@@ -160,7 +161,7 @@ CONTENIDO
                            <div class="content">
                               <div class="pane" id="formcontrols">
                                  <form id="edit-profile" class="form-horizontal valialum" method="<?php
-   if(isset($ver)){
+if(isset($ver)){
    echo "get";
 }else{
    echo "post";

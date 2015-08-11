@@ -17,7 +17,7 @@ if(isset($_GET['matricula'])){
    $alumno = new Alumno();
    $datos = $alumno->get_alumno($matricula);
    $row = $datos->fetchObject();
-   
+
    include_once '../Clases/Tutor.php';
    $tutor = new Tutor();
    $idTutor = $row->idtutor;
@@ -26,31 +26,70 @@ if(isset($_GET['matricula'])){
    //var_dump($row1);
 }
 
-$data = array(
-   'matricula' => $row->matricula,
-   'nombre' => $row->nombre,
-   'a_paterno' => $row->a_paterno,
-   'a_materno' => $row->a_materno,
-   'sexo' => $row->idsexo,
-   'grado' => $row->idgrado,
-   'grupo' => $row->idgrupo,
-   'escolaridad' => $row->idescolaridad,
-   'beca' => $row->idbeca,
-   'nombre_tutor' => $row1->nombre,
-   'a_paterno_tutor' => $row1->a_paterno,
-   'a_materno_tutor' => $row1->a_materno,
-   'email_tutor' => $row1->email,
-   'telefono_tutor' => $row1->telefono
-);
 
-ob_start();
-extract($data);
-include 'solicitud_pdf.php';
-$html = ob_get_clean();
-//echo $html;
-//exit();
+include_once '../Clases/Grado.php';
+$grado = new Grado();
+$grado1 = $grado->get_grado();
+while ($grado2 = $grado1->fetchObject()){
+   if($row->idgrado == $grado2->idgrado)
+      $grado3 = $grado2->grado;
+}
 
-$dompdf = new DOMPDF();
-$dompdf->load_html($html);
-$dompdf->render();
-$dompdf->stream("ejemplo.pdf");
+
+include_once '../Clases/Grupo.php';
+$grupo = new Grupo();
+$grupo1 = $grupo->get_grupo();
+while ($grupo2 = $grupo1->fetchObject()){
+   if($row->idgrupo == $grupo2->idgrupo)
+      $grupo3 = $grupo2->grupo;
+}
+
+include_once '../Clases/Sexo.php';
+$sexo = new Sexo();
+$sexo1 = $sexo->get_sexo();
+while ($sexo2 = $sexo1->fetchObject()){
+   if($row->idsexo == $sexo2->idsexo)
+      $sexo3 = $sexo2->sexo;
+}
+
+include_once '../Clases/Escolaridad.php';
+$escolaridad = new Escolaridad();
+$escolaridad1 = $escolaridad->get_escolaridad();      
+while ($escolaridad2 = $escolaridad1->fetchObject()){
+         if($row->idescolaridad == $escolaridad2->idescolaridad){
+            $escolaridad3 = $escolaridad2->escolaridad;
+         }
+
+      }
+
+   $fecha_actual = date("Y-m-d", strtotime('-1 day'));
+
+   $data = array(
+      'matricula' => $row->matricula,
+      'nombre' => $row->nombre,
+      'a_paterno' => $row->a_paterno,
+      'a_materno' => $row->a_materno,
+      'sexo' => $sexo3,
+      'grado3' => $grado3,
+         'grupo3' => $grupo3,
+         'escolaridad3' => $escolaridad3,
+      'beca' => $row->idbeca,
+      'nombre_tutor' => $row1->nombre,
+      'a_paterno_tutor' => $row1->a_paterno,
+      'a_materno_tutor' => $row1->a_materno,
+      'email_tutor' => $row1->email,
+      'telefono_tutor' => $row1->telefono,
+      'fecha_actual' => $fecha_actual
+   );
+
+   ob_start();
+   extract($data);
+   include 'solicitud_pdf.php';
+   $html = ob_get_clean();
+   //echo $html;
+   //exit();
+
+   $dompdf = new DOMPDF();
+   $dompdf->load_html($html);
+   $dompdf->render();
+   $dompdf->stream("ejemplo.pdf");

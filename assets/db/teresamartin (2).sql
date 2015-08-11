@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-08-2015 a las 00:46:49
+-- Tiempo de generación: 08-08-2015 a las 15:05:36
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `administrador` (
 
 INSERT INTO `administrador` (`idadministrador`, `nombre`, `a_paterno`, `a_materno`, `password`, `idprivilegios`) VALUES
 (1, 'Alejandro', 'TÃ©llez', 'Aguilera', '1234', 1),
-(2, 'Alan ', 'Cordoba ', 'Espinosa', '1234', 2),
+(2, 'Alan ', 'Cordoba ', 'Espinosa', '1234', 4),
 (3, 'Laura', 'Acevedo', 'Zarraga', '1234', 3),
 (201522, 'miriam', 'martinez', 'jimenez', 'adf', 2);
 
@@ -71,12 +71,15 @@ CREATE TABLE IF NOT EXISTS `alumno` (
 --
 
 INSERT INTO `alumno` (`matricula`, `a_paterno`, `a_materno`, `nombre`, `idsexo`, `idestatus`, `idgg`, `idescolaridad`, `idtutor`, `idbeca`, `idgrado`, `idgrupo`) VALUES
-(2, 'Domingez', 'solis', 'Ana Alicia', 4, 1, 1, 1, 2, 3, 2, 1),
-(12000304, 'Ruiz', 'Sanchez', 'Antonio', 2, 1, 2, 2, 4, 1, 1, 1),
+(2, 'Domingez', 'solis', 'Ana Alicia', 4, 1, 1, 1, 2, 2, 2, 1),
+(12000304, 'Ruiz', 'Sanchez', 'Antonio', 2, 2, 2, 2, 4, 1, 1, 1),
 (12000309, 'Tellez', 'Aguilera', 'Jose Alejandro', 2, 1, 1, 1, 16, 1, 6, 1),
-(12000313, 'Tellez', 'Villafuerte', 'Juan', 3, 1, 1, 2, 20, 2, 3, 1),
+(12000313, 'Tellez', 'Villafuerte', 'Juan', 3, 2, 1, 2, 20, 2, 3, 1),
 (12000314, 'Tellez', 'Aguilera', 'Polet', 4, 1, 1, 2, 21, 4, 4, 1),
-(12000317, 'lk', 'lk', 'as', 4, 1, 1, 3, 27, 1, 1, 1);
+(12000317, 'lk', 'lk', 'as', 4, 1, 1, 3, 27, 1, 1, 1),
+(12000318, 's', 's', 's', 3, 3, 1, 2, 28, 1, 2, 1),
+(12000319, 'x', 'x', 'alkjlÃ±dj', 2, 1, 1, 2, 29, 1, 1, 1),
+(12000320, 't', 't', 't', 4, 3, 1, 1, 30, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -111,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `ciclo` (
 `idciclo` int(11) NOT NULL,
   `ciclo` varchar(25) NOT NULL,
   `idyear` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `ciclo`
@@ -124,7 +127,10 @@ INSERT INTO `ciclo` (`idciclo`, `ciclo`, `idyear`) VALUES
 (5, '2018-2019', 4),
 (9, '6', 3),
 (10, 'asdfsdf', 0),
-(13, 'Agosto-Junio', 0);
+(13, 'Agosto-Junio', 0),
+(14, 'Agosto-Junio', 3),
+(15, 'Agosto-Mayo', 3),
+(16, 'Mayo-Junio', 0);
 
 -- --------------------------------------------------------
 
@@ -196,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `gg` (
 `idgg` int(11) NOT NULL,
   `grado` varchar(2) NOT NULL,
   `grupo` varchar(2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `gg`
@@ -205,7 +211,8 @@ CREATE TABLE IF NOT EXISTS `gg` (
 INSERT INTO `gg` (`idgg`, `grado`, `grupo`) VALUES
 (1, '1', 'A'),
 (2, '6', 'A'),
-(8, '2', 'C');
+(8, '2', 'C'),
+(9, '6', 'a');
 
 -- --------------------------------------------------------
 
@@ -263,14 +270,15 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `fecha` varchar(25) NOT NULL,
   `urlimagen` varchar(100) NOT NULL,
   `descripcion` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `noticias`
 --
 
 INSERT INTO `noticias` (`idnoticia`, `titulo`, `autor`, `fecha`, `urlimagen`, `descripcion`) VALUES
-(5, 'Dia del NiÃ±o', 'alejandro', 'June 27, 2015', 'assets/img/noticias/19.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas dolorum, vero non magnam tempora. At in dolore cum, aliquid voluptas nam architecto expedita nostrum iusto assumenda ea natus, iure tempore praesentium reiciendis accusantium odit deleniti placeat veritatis. Sapiente iure ducimus iste error, saepe molestias accusantium praesentium placeat eius amet fuga voluptate ad repellendus dicta voluptas necessitatibus asperiores reprehenderit quam facilis molestiae non quidem impedit. Dolores, similique, voluptatum! Iusto itaque deserunt ullam, soluta quibusdam ea nesciunt harum veniam necessitatibus doloremque assumenda! Dolorum possimus nesciunt eius odio excepturi, vitae animi nulla. Ducimus ex eius adipisci qui nemo maxime consequatur nisi, labore, vel rem nostrum fugit delectus! Earum quaerat dolor debitis consequatur est facilis dolore voluptatem nihil ad, quo ut repellendus nobis asperiores saepe minus placeat perspiciatis ');
+(5, 'Dia del NiÃ±o', 'alejandro', 'June 27, 2015', 'assets/img/noticias/19.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas dolorum, vero non magnam tempora. At in dolore cum, aliquid voluptas nam architecto expedita nostrum iusto assumenda ea natus, iure tempore praesentium reiciendis accusantium odit deleniti placeat veritatis. Sapiente iure ducimus iste error, saepe molestias accusantium praesentium placeat eius amet fuga voluptate ad repellendus dicta voluptas necessitatibus asperiores reprehenderit quam facilis molestiae non quidem impedit. Dolores, similique, voluptatum! Iusto itaque deserunt ullam, soluta quibusdam ea nesciunt harum veniam necessitatibus doloremque assumenda! Dolorum possimus nesciunt eius odio excepturi, vitae animi nulla. Ducimus ex eius adipisci qui nemo maxime consequatur nisi, labore, vel rem nostrum fugit delectus! Earum quaerat dolor debitis consequatur est facilis dolore voluptatem nihil ad, quo ut repellendus nobis asperiores saepe minus placeat perspiciatis '),
+(10, 'jhdlfalskfha', 'asdÃ±lkÃ±hdkjfÃ±ai', 'August 8, 2015', 'assets/img/noticias/TU-Y-YO2.png', 'asdfkefjÃ±qihefÃ±ishdfsdafÃ±aksjdhfadjhfddakjdhflakdjhflaksdhjflakdsjh');
 
 -- --------------------------------------------------------
 
@@ -286,26 +294,38 @@ CREATE TABLE IF NOT EXISTS `pago` (
   `recargos` int(11) NOT NULL,
   `pago` int(11) NOT NULL,
   `matricula` int(11) NOT NULL,
-  `idadministrador` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+  `idadministrador` int(11) NOT NULL,
+  `nota` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pago`
 --
 
-INSERT INTO `pago` (`folio`, `mes`, `fechaactual`, `fechalimite`, `recargos`, `pago`, `matricula`, `idadministrador`) VALUES
-(1, '1', '2015-08-04', '1900-08-03', 10, 1125, 12000304, 1),
-(3, 'inscripcion', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1),
-(6, 'agosto', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1),
-(7, 'septiembre', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1),
-(8, 'octubre', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1),
-(9, 'noviembre', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1),
-(10, 'diciembre', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1),
-(38, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1),
-(39, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1),
-(40, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1),
-(41, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1),
-(42, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1);
+INSERT INTO `pago` (`folio`, `mes`, `fechaactual`, `fechalimite`, `recargos`, `pago`, `matricula`, `idadministrador`, `nota`) VALUES
+(1, '1', '2015-08-04', '1900-08-03', 10, 1125, 12000304, 1, 0),
+(3, 'inscripcion', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1, 0),
+(6, 'agosto', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1, 0),
+(7, 'septiembre', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1, 0),
+(8, 'octubre', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1, 0),
+(9, 'noviembre', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1, 0),
+(10, 'diciembre', '2015-06-17', '2015-06-10', 35, 1535, 12000304, 1, 0),
+(38, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1, 0),
+(39, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1, 0),
+(40, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1, 0),
+(41, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1, 0),
+(42, 'inscripcion', '2015-08-04', '2015-08-10', 0, 1500, 2, 1, 0),
+(43, 'inscripcion', '2015-08-06', '2015-08-10', 0, 1500, 12000318, 1, 0),
+(44, 'agosto', '2015-08-06', '2015-08-10', 0, 1500, 2, 1, 0),
+(45, 'septiembre', '2015-08-06', '2015-08-10', 0, 1500, 2, 1, 0),
+(46, 'octubre', '2015-08-07', '2015-08-10', 0, 1500, 2, 1, 0),
+(47, 'octubre', '2015-08-07', '2015-08-10', 0, 1500, 2, 1, 0),
+(48, 'octubre', '2015-08-07', '2015-08-10', 0, 1500, 2, 1, 0),
+(49, 'octubre', '2015-08-07', '2015-08-10', 0, 1500, 2, 1, 0),
+(50, 'octubre', '2015-08-07', '2015-08-10', 0, 1500, 2, 1, 0),
+(51, 'inscripcion', '2015-08-07', '2015-08-10', 0, 1500, 12000319, 2, 0),
+(52, 'noviembre', '2015-08-07', '2015-08-10', 0, 1500, 2, 1, 0),
+(53, 'noviembre', '2015-08-07', '2015-08-10', 0, 1500, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -344,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `sexo` (
 --
 
 INSERT INTO `sexo` (`idsexo`, `sexo`) VALUES
-(2, 'MASCULINO'),
+(2, 'indefinido'),
 (3, 'hombre'),
 (4, 'mujer');
 
@@ -358,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `slider` (
 `idslider` int(11) NOT NULL,
   `url` varchar(100) NOT NULL,
   `nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `slider`
@@ -383,7 +403,7 @@ CREATE TABLE IF NOT EXISTS `tutor` (
   `nombre` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `telefono` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `tutor`
@@ -415,7 +435,10 @@ INSERT INTO `tutor` (`idtutor`, `a_paterno`, `a_materno`, `nombre`, `email`, `te
 (24, 'mio', 'mio', 'mio', 'mio@mio.com', '1234'),
 (25, 'mio', 'mio', 'mio', 'mio2@mio.com', '1234'),
 (26, 'mio', 'mio', 'mio', 'mio4@mio.com', '1234567899'),
-(27, 'lk', 'lk', 'lk', 'lk@lk.com', '123879');
+(27, 'lk', 'lk', 'lk', 'lk@lk.com', '123879'),
+(28, 's', 's', 's', 's@s.com', '123456789'),
+(29, 'N', 'N', 'n', 'N@D.com', '645436543'),
+(30, 'y', 'y', 'y', 'y@y.com', '394701983');
 
 -- --------------------------------------------------------
 
@@ -558,7 +581,7 @@ MODIFY `idbeca` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT de la tabla `ciclo`
 --
 ALTER TABLE `ciclo`
-MODIFY `idciclo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+MODIFY `idciclo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `detalle`
 --
@@ -578,7 +601,7 @@ MODIFY `idestatus` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT de la tabla `gg`
 --
 ALTER TABLE `gg`
-MODIFY `idgg` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `idgg` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `grado`
 --
@@ -593,12 +616,12 @@ MODIFY `idgrupo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT de la tabla `noticias`
 --
 ALTER TABLE `noticias`
-MODIFY `idnoticia` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `idnoticia` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `pago`
 --
 ALTER TABLE `pago`
-MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT de la tabla `privilegios`
 --
@@ -613,12 +636,12 @@ MODIFY `idsexo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT de la tabla `slider`
 --
 ALTER TABLE `slider`
-MODIFY `idslider` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `idslider` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `tutor`
 --
 ALTER TABLE `tutor`
-MODIFY `idtutor` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+MODIFY `idtutor` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- Restricciones para tablas volcadas
 --

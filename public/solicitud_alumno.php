@@ -3,18 +3,39 @@
 session_start();
 
 if(isset($_GET['matricula_solicitud'])){   
-   include_once 'admin/Alumno.php';
+   include_once '../admin/Clases/Alumno.php';
    $alumno = new Alumno();
    $matricula = $_GET['matricula_solicitud'];
    $datos = $alumno->get_alumno($matricula);
    $row = $datos->fetchObject();
 
-   include_once 'admin/Tutor.php';
+   include_once '../admin/Clases/Tutor.php';
    $tutor = new Tutor();
    $idTutor = $_GET['matricula_tutor'];
    $datos1 = $tutor->get_tutor($idTutor, null);
    $row1 = $datos1->fetchObject();
 }
+
+//  -------- DATOS GENERALES --------
+include_once '../admin/Clases/Sexo.php';
+$sexo = new Sexo();
+$datos2 = $sexo->get_sexo();
+
+include_once '../admin/Clases/Grado.php';
+$grado = new Grado();
+$datos3 = $grado->get_grado();
+
+include_once '../admin/Clases/Grupo.php';
+$grupo = new Grupo();
+$datos4 = $grupo->get_grupo();
+
+include_once '../admin/Clases/Escolaridad.php';
+$escolaridad = new Escolaridad();
+$datos5 = $escolaridad->get_escolaridad();
+
+include_once '../admin/Clases/Beca.php';
+$becas = new Beca();
+$datos6 = $becas->get_beca();
 
 ?>
 <!DOCTYPE html>
@@ -86,10 +107,14 @@ if(isset($_SESSION['nombre'])){
                                  <li><a href='../admin/index.php'>Inicio</a></li>
                                  <li><a href='../admin/Alumno/alumnos.php'>Alumnos</a></li>
                                  <li><a href='../admin/Pago/pagos.php'>Pagos</a></li>
-                                 <li><a href='../admin/Reportes/reportes.php'>Reportes</a></li>
-                                 <li><a href='../admin/Beca/becas.php'>Becas</a></li>
-                                 <li><a href='../admin/Ciclo/ciclos.php'>Ciclos</a></li>
-                                 <li><a href='../admin/Administrador/administradores.php'>Administradores</a></li>
+                                 <li><a href='../admin/Reportes/reportes.php'>Reportes</a></li>";
+   $root = "Root";
+   if($_SESSION['privilegios']== $root){
+   echo "
+                                 <li><a href='admin/Beca/becas.php'>Becas</a></li>
+                                 <li><a href='admin/Ciclo/ciclos.php'>Ciclos</a></li>
+                                 <li><a href='admin/Administrador/administradores.php'>Administradores</a></li>";}
+   echo "
                                  <li><a href='../admin/Configuracion/configpublic.php'>Pagina Publica</a></li>
                               </ul>
                            </li>";
@@ -146,11 +171,12 @@ if(isset($matricula)){
                         <div class="form">
                            <div class="form-holder">
                               <div class="notification canhide"></div>
+                              <!-- ============== FORMULARIO DE ALUMNO ============== -->
                               <form id="frm_contact" name="#" action="<?php
 if(isset($matricula)){
    echo "#";
 }else{
-   echo "admin/agregar_alumno.php";
+   echo "../admin/Alumno/agregar_alumno.php";
 }
                                                                       ?>
                                                                       " method="post" class="valialum" id="form_solicitud">
@@ -201,15 +227,19 @@ if(isset($matricula)){
                                     <div class="inputs">
                                        <?php
 if(isset($matricula)){
-   if($row->idsexo == 4){
-      echo "<label>Mujer</label>";
-   }else{
-      echo "<label>Hombre</label>";
-   }
+   
+      echo "<p class='form-control-static'>";
+      while ($row2 = $datos2->fetchObject()){
+         if($row->idsexo==$row2->idsexo){
+            echo $row2->sexo;
+         }
+      }      
+      echo "</p>";
 
 }else{
-   echo " <label class='radio inline'><input type='radio' name='sexo' value='4'> Mujer</label>
-                                             <label class='radio inline'><input type='radio' name='sexo' value='3'> Hombre</label>";
+   while ($row2 = $datos2->fetchObject()){
+      echo "<label class='radio inline sexo'><input type='radio' name='sexo' value='$row2->idsexo'>$row2->sexo</label>";
+   }
 }
                                        ?>    
                                     </div>  
@@ -219,17 +249,20 @@ if(isset($matricula)){
                                     <div class="inputs">
                                        <?php 
 if(isset($matricula)){   
-   echo "<label>$row->idgrado</label>";
+   echo "<p class='form-control-static'>";
+      while ($row3 = $datos3->fetchObject()){
+         if($row->idgrado==$row3->idgrado){
+            echo $row3->grado;
+         }
+      }   
+      echo "</p>";
 
 }else{
-   echo "<select class='form-control aweform' name='grado'>
-                                                   <option value='1'> 1 </option>
-                                                   <option value='2'> 2 </option>
-                                                   <option value='3'> 3 </option>
-                                                   <option value='4'> 4 </option>
-                                                   <option value='5'> 5 </option>
-                                                   <option value='6'> 6 </option>
-                                                </select>";   
+   echo "<select class='form-control' name='grado'>";
+   while ($row3 = $datos3->fetchObject()){
+      echo "<option value='$row3->idgrado'>$row3->grado</option>";
+   }
+   echo "</select>";
 }?>
 
 
@@ -240,16 +273,19 @@ if(isset($matricula)){
                                     <div class="inputs">
                                        <?php 
 if(isset($matricula)){
-   if($row->idgrupo == "a"){echo "<label>A</label>";}
-   if($row->idgrupo == "b"){echo "<label>B</label>";}
-   if($row->idgrupo == "c"){echo "<label>C</label>";}
+   echo "<p class='form-control-static'>";
+      while ($row4 = $datos4->fetchObject()){
+         if($row->idgrupo == $row4->idgrupo)
+            echo $row4->grupo;
+      }
+      echo "</p>";
 
 }else{
-   echo "<select class='form-control aweform' name='grupo'>
-                                                   <option value='a'>A</option>
-                                                   <option value='b'>B</option>
-                                                   <option value='c'>C</option>
-                                                </select>";   
+   echo "<select class='form-control' name='grupo'>";
+   while ($row4 = $datos4->fetchObject()){
+      echo "<option value='$row4->idgrupo' class='grupo'>$row4->grupo</option>";
+   }
+   echo "</select>"; 
 }?>                                       
                                     </div>  
                                  </div>
@@ -258,10 +294,17 @@ if(isset($matricula)){
                                     <div class="inputs controls">
                                        <?php
 if(isset($matricula)){
-   if($row->idescolaridad == 2){echo "<label>Preescolar</label>";}
-   if($row->idescolaridad == 1){echo "<label>Primaria</label>";}
+   echo "<p class='form-control-static'>";
+      while ($row5 = $datos5->fetchObject()){
+         if($row->idescolaridad==$row5->idescolaridad){
+            echo $row5->escolaridad;
+         }
+      }
+      echo "</p>";
 }else{
-   echo "<label class='radio inline'><input type='radio'  name='escolaridad' value='2'> Preescolar </label><label class='radio inline'><input type='radio'  name='escolaridad' value='1'> Primaria </label>";
+   while ($row5 = $datos5->fetchObject()){
+      echo "<label class='radio inline sexo'><input type='radio' name='escolaridad' value='$row5->idescolaridad'>$row5->escolaridad</label>";
+   }
 }?>                                     
 
                                     </div>  
@@ -340,7 +383,7 @@ if(isset($matricula)){
                                  <div class="form-submit">
                                     <?php
 if(isset($matricula)){
-   echo "<a href='admin/Pdf/pdf.php?matricula=$row->matricula' type='button' class='btn btn-primary btn-sm btn-descargar'>Descargar</a>";
+   echo "<a href='../admin/Pdf/pdf.php?matricula=$row->matricula' type='button' class='btn btn-primary btn-sm btn-descargar'>Descargar</a>";
 }else{
    echo "<button type='submit' id='submit' class='btn btn-primary btn-sm' name='submit'>Enviar</button>";
 }

@@ -3,7 +3,7 @@
 //  -------- Inicio de sesión --------
 session_start();
 if(!isset($_SESSION['login'])){
-   header("Location: login.php");
+   header("Location: ../Administrador/login.php");
 }
 
 include_once '../Clases/Alumno.php';
@@ -90,17 +90,17 @@ MENU SECUNDARIO
                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                </a>
-               <a class="brand" href="index.php">TERESA MARTIN </a>
+               <a class="brand" href="../index.php">TERESA MARTIN </a>
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li>
-                        <a href="../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
+                        <a href="../../index.php" ><i class="icon-home"></i>&nbsp;Página Publicitaria<b class="caret"></b></a>
                      </li>
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>&nbsp;<?php echo $_SESSION['nombre'];?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="javascript:;"><i class="icon-cog"></i><span>   Configuración </span></a></li>
-                           <li><a href="login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
+                           <li><a href="../Administrador/login.php"><i class="icon-off"></i><span>   Cerrar Sesion </span></a></li>
 
                         </ul>
                      </li>
@@ -128,11 +128,12 @@ MENU PRINCIPAL
                   <li><a href="../Alumno/alumnos.php"><i class=" icon-user"></i><span>Alumnos</span> </a> </li>
                   <li><a href="../Pago/pagos.php"><i class=" icon-money"></i><span>Pagos</span> </a> </li>
                   <li class="active"><a href="reportes.php"><i class="icon-list-alt"></i><span>Reportes</span> </a> </li>
-                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
-                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
+
                   <?php
 $root = "Root";
 if($_SESSION['privilegios']== $root){?>
+                  <li><a href="../Beca/becas.php"><i class=" icon-bookmark"></i><span>Becas</span> </a> </li>
+                  <li><a href="../Ciclo/ciclos.php"><i class=" icon-refresh"></i><span>Ciclos</span> </a> </li>
                   <li><a href="../Administrador/administradores.php"><i class=" icon-user"></i><span>Administradores</span> </a> </li>
                   <?php }
                   ?> 
@@ -154,23 +155,23 @@ CONTENIDO
 
          <div class="row">
 
-               <div class="span6">
+            <div class="span6">
 
-                  <div class="widget">
+               <div class="widget">
 
-                     <div class="widget-header">
-                        <i class="icon-star"></i>
-                        <h3>Inscripción de alumnos</h3>
-                     </div> <!-- /widget-header -->
+                  <div class="widget-header">
+                     <i class="icon-star"></i>
+                     <h3>Inscripción de alumnos</h3>
+                  </div> <!-- /widget-header -->
 
-                     <div class="widget-content">
-                        <canvas id="pie-chart" class="chart-holder" height="250" width="538"></canvas>
-                        <table class="table table-striped table-bordered get_table">
-                           <tr>
-                              <th colspan="2">Alumnos</th>
-                           </tr>
-                           
-                                 <?php
+                  <div class="widget-content">
+                     <canvas id="pie-chart" class="chart-holder" height="250" width="538"></canvas>
+                     <table class="table table-striped table-bordered get_table">
+                        <tr>
+                           <th colspan="2">Alumnos</th>
+                        </tr>
+
+                        <?php
 $c = 0;
 for($i=0; $i < count($numer); $i++){
    $value = $numer[$i]['estatus'];
@@ -185,40 +186,40 @@ echo "<tr>
    <th> Total de Alumnos </th>
    <td> $c </td>
                            </tr>";
-                                 ?>
-                              
-
-                        </table>
-                     </div> <!-- /widget-content -->
-
-                  </div> <!-- /widget -->
+                        ?>
 
 
+                     </table>
+                  </div> <!-- /widget-content -->
+
+               </div> <!-- /widget -->
 
 
-               </div> <!-- /span6 -->
 
 
-               <div class="span6">
+            </div> <!-- /span6 -->
 
-                  <div class="widget">
 
-                     <div class="widget-header">
-                        <i class="icon-list-alt"></i>
-                        <h3>Pagos Semanales</h3>
-                     </div> <!-- /widget-header -->
+            <div class="span6">
 
-                     <div class="widget-content">
-                        <canvas id="bar-chart" class="chart-holder" height="250" width="538"></canvas>
-                        <br>
-                        <table class="table table-striped table-bordered get_table">
-                           <tr>
-                              <th>Día</th>
-                              <th>Fecha</th>
-                              <th>Ingreso</th>
-                           </tr>
+               <div class="widget">
 
-                           <?php
+                  <div class="widget-header">
+                     <i class="icon-list-alt"></i>
+                     <h3>Pagos Semanales</h3>
+                  </div> <!-- /widget-header -->
+
+                  <div class="widget-content">
+                     <canvas id="bar-chart" class="chart-holder" height="250" width="538"></canvas>
+                     <br>
+                     <table class="table table-striped table-bordered get_table">
+                        <tr>
+                           <th>Día</th>
+                           <th>Fecha</th>
+                           <th>Ingreso</th>
+                        </tr>
+
+                        <?php
 $e = 0;
 for($i=0; $i < 5; $i++){
    $numero = $i + 1;
@@ -251,13 +252,13 @@ echo "<tr>
                               <th colspan='2'>Total</th>
                               <td>$ $e2</td>
                            </tr>";
-                           ?>
-                        </table>
-                     </div> <!-- /widget-content -->
+                        ?>
+                     </table>
+                  </div> <!-- /widget-content -->
 
-                  </div> <!-- /widget -->
+               </div> <!-- /widget -->
 
-               </div> <!-- /span6 -->
+            </div> <!-- /span6 -->
 
          </div> <!-- /row -->
 
@@ -275,19 +276,22 @@ ANTE FOOTER
                      <h4>
                         Teresa Martin</h4>
                      <ul>
-                        <li><a href="alumnos.php">Alumnos</a></li>
-                        <li><a href="#">Pagos</a></li>
-                        <li><a href="#">Reportes</a></li>
-                        <li><a href="#">Becas</a></li>
-                        <li><a href="#">Ciclo</a></li>
+                        <li><a href="../index.php"> Inicio </a></li>
+                        <li><a href="../Alumno/alumnos.php"> Alumnos </a></li>
+                        <li><a href="../Pago/pagos.php"> Pagos </a></li>
+                        <li><a href="reportes.php"> Reportes </a></li>
+                        <li><a href="../Beca/becas.php"> Becas </a></li>
+                        <li><a href="../Ciclo/ciclos.php"> Ciclos </a></li>
+                        <li><a href="../Administrador/administradores.php"> Administradores</a></li>
+                        <li><a href="../Configuracion/configpublic.php"> Pagina Publicitaria</a></li>
                      </ul>
                   </div>
                   <!-- /span3 -->
                   <div class="span6">
                      <h4>
-                        Somos</h4>
+                        Misión</h4>
                      <p>
-                        Somos una institución.... 
+                        Educar a niñez, adolescencia y juventud en el dinamismo de la ciencia y valores de vida, el cultivo de su interioridad que fortalece el espíritu y dispone para el compromiso y responsabilidad consigo mismos, la familia, la saciedad y la patria.
                      </p>
                   </div>
                   <!-- /span6 -->
@@ -298,7 +302,7 @@ ANTE FOOTER
                         <li><i class="icon-map-marker"></i><span> 1 de Mayo #123</span></li>
                         <li><i class="icon-phone"></i><span> Telefono</span></li>
                         <li><i class="icon-envelope"></i><span> contacto@teresamartin.com</span></li>
-                        <li><i class="fa icon-twitter"></i>&nbsp;<i class="fa icon-facebook"></i>&nbsp;<i class="fa icon-youtube"></i>&nbsp;<span> /teresamartin</span></li>
+                        <li><i class=" icon-twitter"></i>&nbsp;<i class="icon-facebook"></i>&nbsp;<i class="icon-youtube"></i>&nbsp;<span> /teresamartin</span></li>
                      </ul>
                   </div>
                   <!-- /span3 -->

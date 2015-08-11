@@ -10,63 +10,79 @@
    </head>
    <body>
 
-      <table class="col-12">
-         <tr>
-            <td class="col-4" rowspan="2"><img id="escudo" src="../../assets/img/escudo.png" alt="Teresa Martin"></td>
-            <td class="col-8">
-               <h1>Colegio Teresa Martin</h1> 
-               <h2>Labor, Virtus y Scientia</h2> 
-            </td>
-         </tr>
-         <tr>
-            <td  colspan="2" id="title">
-               <h2>Solicitud de Ingreso</h2>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2">
-               <p>Datos del Alumno</p>
-               <span class="line"><span class="subline"></span></span>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2" class="informacion"><?php
-echo $matricula."<br>";
-echo $nombre."<br>";
-echo $a_paterno."<br>";
-echo $a_materno."<br>";
-echo $sexo."<br>";
-echo $grado."<br>";
-echo $grupo."<br>";
-echo $escolaridad."<br>";
-echo $beca."<br>";
-               ?></td>
-         </tr>
-         <tr>
-            <td colspan="2">
-               <p>Datos del Tutor</p>
-               <span class="line"><span class="subline"></span></span>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2" class="informacion">
-            <div for="" class="info-name">Nombre:</div>
-            <div for=""> <?php echo $nombre_tutor." ".$a_paterno_tutor." ".$a_materno_tutor;?></div>
-            <br>            
-            <label for=""><span class="info-name">Email:</span> <?php echo $email_tutor;?></label>
-            <br>
-            <label for=""><span class="info-name">Telefono:</span> <?php echo $telefono_tutor;?></label>
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2" id="footer">
-               <span class="line"></span>
-         <p>Colegio Teresa Matrin</p>
-         <p>1 de Mayo #123, Col. Centro</p>
-         <p>Acambaro, Gto.</p>
-            </td>
-         </tr>
-      </table>  
+ <table class="table">
+                  
+                     <tr>
+                        <th rowspan="3" colspan="2" id="escudo"> <img src="../../assets/img/escudo.png" alt="escudo"> </th>
+                        <th colspan="4" id="colegio"> Colegio Teresa Martin </th>
+                     </tr>
+                     <tr>
+                        <th colspan="4" id="labor"> Labor, Virtus y Scientia</th>
+                     </tr>
+                     <tr>
+                        <th colspan="4" id="recibo"> Recibo de Pago</th>
+                     </tr>
+                  
+                     <tr><td colspan="6">&nbsp;</td></tr>
+                     <tr><td colspan="6">&nbsp;</td></tr>
+                     <tr><td colspan="6">&nbsp;</td></tr>
+    <tr><td colspan="6">&nbsp;</td></tr>
+    
+                     <tr>
+                        <th colspan="6">Información de Alumo</th>
+                        
+
+                     </tr>
+                     <tr>
+                        <th>Nombre</th>
+                        <td colspan="3" class="table_information"><?php echo "$nombre $a_paterno $a_materno"?></td>
+                        <th>Fecha</th>
+                        <td class="table_information"><?php echo $fecha_actual;?></td>
+                        <!--th> Folio </th>
+<td> <?php //echo $new_folio;?> </td-->
+                     </tr>
+                     <tr>
+                        <th>Grado</th>
+                        <td class="table_information"><?php echo $grado3; ?></td>
+                        <th>Grupo</th>
+                        <td class="table_information"><?php echo $grupo3;?> </td>
+                        <th>Escolaridad</th>
+                        <td class="table_information"><?php echo $escolaridad3;?></td>
+                     </tr>
+                     <tr>
+                        <th>Sexo</th>
+                        <td class="table_information"><?php echo $sexo3; ?></td>
+                        
+                        <td class="table_information" colspan="4">&nbsp;</td>
+                        
+                     </tr>
+                  
+                     <tr><td colspan="6">&nbsp;</td></tr>
+                     <tr><td colspan="6">&nbsp;</td></tr>
+                     <tr><td colspan="6">&nbsp;</td></tr>
+    <tr><td colspan="6">&nbsp;</td></tr>
+                     <tr>
+                        <th colspan="6">Información de Tutor</th>
+                     </tr>
+                     <tr>
+                        <th>Nombre de Tutor</th>
+                        <td class="table_information" colspan="6"><?php echo "$nombre_tutor $a_paterno_tutor $a_materno_tutor"; ?></td>
+                        </tr>
+                     <tr>
+                        <th>Email</th>
+                        <td class="table_information"><?php echo $email_tutor;?> </td>
+                        <th>Telefono</th>
+                        <td class="table_information"><?php echo $telefono_tutor;?></td>
+                     </tr>
+                     <tr><td colspan="6">&nbsp;</td></tr>
+                     <tr><td colspan="6">&nbsp;</td></tr>
+                     <tr><td colspan="6">&nbsp;</td></tr>
+    <tr><td colspan="6">&nbsp;</td></tr>
+                     <tr>
+                        <td colspan="6"> Este formato de Solicitud es funcional para administración del colegio Teresa Martin. En caso de aclaracion o reclamos favor de comunicarse al Colegio Teresa Martin, 1 de Mayo # 123, Col. Centro, Tel. 123 456 7890</td>
+                     </tr>
+                  
+               </table>
 
    </body>
 </html>

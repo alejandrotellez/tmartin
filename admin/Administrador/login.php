@@ -47,7 +47,7 @@ MENU SECUNDARIO
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                </a>			
-               <a class="brand" href="../index.php">Teresa Martin</a>
+               <a class="brand" href="../../index.php">Teresa Martin</a>
                <div class="nav-collapse">
                   <ul class="nav pull-right">
                      <li class="">						
